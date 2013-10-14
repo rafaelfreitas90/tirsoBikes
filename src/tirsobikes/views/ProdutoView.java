@@ -4,6 +4,8 @@
  */
 package tirsobikes.views;
 
+import tirsobikes.entidades.Produto;
+
 /**
  *
  * @author Luis Henrique
@@ -15,6 +17,26 @@ public class ProdutoView extends javax.swing.JFrame {
      */
     public ProdutoView() {
         initComponents();
+    }
+
+    private void exibeCamposServico() {
+        jComboGrupo.setEnabled(false);
+        bntAddGrupo.setEnabled(false);
+        bntAddMarca.setEnabled(false);
+        jComboMarca.setEnabled(false);
+        txtFornecedor.setEnabled(false);
+        txtEstoqueAtual.setEnabled(false);
+        txtEstoqueMinimo.setEnabled(false);
+    }
+    
+    private void exibeTodosCampos() {
+        jComboGrupo.setEnabled(true);
+        bntAddGrupo.setEnabled(true);
+        bntAddMarca.setEnabled(true);
+        jComboMarca.setEnabled(true);
+        txtFornecedor.setEnabled(true);
+        txtEstoqueAtual.setEnabled(true);
+        txtEstoqueMinimo.setEnabled(true);
     }
 
     /**
@@ -37,7 +59,7 @@ public class ProdutoView extends javax.swing.JFrame {
         txtDescricao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        bntAddMarca = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtEstoqueMinimo = new javax.swing.JTextField();
@@ -57,7 +79,7 @@ public class ProdutoView extends javax.swing.JFrame {
         txtFornecedor = new javax.swing.JTextField();
         bntSalvar = new javax.swing.JButton();
         bntCancelar = new javax.swing.JToggleButton();
-        jButton3 = new javax.swing.JButton();
+        bntAddGrupo = new javax.swing.JButton();
         jComboMarca = new javax.swing.JComboBox();
         jComboGrupo = new javax.swing.JComboBox();
 
@@ -86,8 +108,8 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel6.setText("Grupo / Categoria");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/addMenor.png"))); // NOI18N
-        jButton2.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        bntAddMarca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/addMenor.png"))); // NOI18N
+        bntAddMarca.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ESTOQUE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 8))); // NOI18N
 
@@ -219,8 +241,8 @@ public class ProdutoView extends javax.swing.JFrame {
         bntCancelar.setText(" CANCELAR");
         bntCancelar.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/addMenor.png"))); // NOI18N
-        jButton3.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        bntAddGrupo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/addMenor.png"))); // NOI18N
+        bntAddGrupo.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
         jComboMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -272,14 +294,14 @@ public class ProdutoView extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jComboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2)))
+                                        .addComponent(bntAddMarca)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jComboGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3))))
+                                        .addComponent(bntAddGrupo))))
                             .addComponent(txtDescricao)
                             .addComponent(txtFornecedor))
                         .addContainerGap())))
@@ -308,8 +330,8 @@ public class ProdutoView extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
+                    .addComponent(bntAddGrupo)
+                    .addComponent(bntAddMarca)
                     .addComponent(jComboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,18 +376,23 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarQuantidadeActionPerformed
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
-        // TODO add your handling code here:
+        if (jComboTipo.getSelectedIndex() == 1) {
+            Produto produto = new Produto();
+            produto.setCodigoBarras(Integer.parseInt(txtCodigoDeBarra.getText()));
+            produto.setDescricao(txtDescricao.getText());
+            
+            
+            
+        }
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void jComboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTipoActionPerformed
         if (jComboTipo.getSelectedIndex() > 0) {
             if (jComboTipo.getSelectedIndex() == 1) {
-                jComboGrupo.setEnabled(false);
-                jComboMarca.setEnabled(true);
+                exibeTodosCampos();
             }
             if (jComboTipo.getSelectedIndex() == 2) {
-                jComboGrupo.setEnabled(true);
-                jComboMarca.setEnabled(false);
+                exibeCamposServico();
             }
         }
     }//GEN-LAST:event_jComboTipoActionPerformed
@@ -405,11 +432,11 @@ public class ProdutoView extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntAddGrupo;
+    private javax.swing.JButton bntAddMarca;
     private javax.swing.JToggleButton bntCancelar;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JButton btnAdicionarQuantidade;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboGrupo;
     private javax.swing.JComboBox jComboMarca;

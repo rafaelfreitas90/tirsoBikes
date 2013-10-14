@@ -98,7 +98,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jComboMarca" min="-2" pref="138" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="bntAddMarca" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -107,7 +107,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jComboGrupo" min="-2" pref="138" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="bntAddGrupo" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -148,8 +148,8 @@
                   </Group>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jButton3" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="bntAddGrupo" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="bntAddMarca" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboMarca" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboGrupo" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -235,7 +235,7 @@
             <Property name="text" type="java.lang.String" value="Grupo / Categoria"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="bntAddMarca">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/tirsobikes/imgs/addMenor.png"/>
@@ -475,7 +475,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="bntAddGrupo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/tirsobikes/imgs/addMenor.png"/>
