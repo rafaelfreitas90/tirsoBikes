@@ -1,6 +1,9 @@
 package tirsobikes.main;
 
+import java.util.List;
+import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.controllers.ProdutoController;
+import tirsobikes.entidades.Produto;
 
 /**
  *
@@ -8,9 +11,9 @@ import tirsobikes.controllers.ProdutoController;
  */
 public class TirsoBikes {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {      
         
-        ProdutoController.getInstancia().exibirInterfaceGrafica();
- 
+     
     }
+    
 }
