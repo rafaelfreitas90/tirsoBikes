@@ -36,9 +36,7 @@ public class ProdutoView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtGrupoCategoria = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -60,16 +58,25 @@ public class ProdutoView extends javax.swing.JFrame {
         bntSalvar = new javax.swing.JButton();
         bntCancelar = new javax.swing.JToggleButton();
         jButton3 = new javax.swing.JButton();
+        jComboMarca = new javax.swing.JComboBox();
+        jComboGrupo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produtos de Venda / Serviços");
 
         jLabel1.setText("Código");
 
+        txtCodigo.setEditable(false);
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Tipo");
 
         jComboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Produto", "Serviço" }));
+        jComboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboTipoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Código de Barras");
 
@@ -79,7 +86,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel6.setText("Grupo / Categoria");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/search.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/addMenor.png"))); // NOI18N
         jButton2.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ESTOQUE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 8))); // NOI18N
@@ -212,8 +219,12 @@ public class ProdutoView extends javax.swing.JFrame {
         bntCancelar.setText(" CANCELAR");
         bntCancelar.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/search.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/addMenor.png"))); // NOI18N
         jButton3.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
+        jComboMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboGrupo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -259,16 +270,16 @@ public class ProdutoView extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(jButton2)))
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtGrupoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jComboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3))
-                                    .addComponent(jLabel6)))
+                                        .addComponent(jButton2)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jComboGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton3))))
                             .addComponent(txtDescricao)
                             .addComponent(txtFornecedor))
                         .addContainerGap())))
@@ -298,9 +309,9 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton3)
-                    .addComponent(txtGrupoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jComboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addGap(1, 1, 1)
@@ -332,7 +343,7 @@ public class ProdutoView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -345,6 +356,19 @@ public class ProdutoView extends javax.swing.JFrame {
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bntSalvarActionPerformed
+
+    private void jComboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTipoActionPerformed
+        if (jComboTipo.getSelectedIndex() > 0) {
+            if (jComboTipo.getSelectedIndex() == 1) {
+                jComboGrupo.setEnabled(false);
+                jComboMarca.setEnabled(true);
+            }
+            if (jComboTipo.getSelectedIndex() == 2) {
+                jComboGrupo.setEnabled(true);
+                jComboMarca.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_jComboTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,6 +411,8 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox jComboGrupo;
+    private javax.swing.JComboBox jComboMarca;
     private javax.swing.JComboBox jComboTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -410,8 +436,6 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JTextField txtEstoqueAtual;
     private javax.swing.JTextField txtEstoqueMinimo;
     private javax.swing.JTextField txtFornecedor;
-    private javax.swing.JTextField txtGrupoCategoria;
-    private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtMargem;
     private javax.swing.JTextField txtValorCusto;
     private javax.swing.JTextField txtValorVenda;
