@@ -1,20 +1,15 @@
 package tirsobikes.entidades;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.util.Collection;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RFSUPORTE
+ * @author Rafael
  */
 @Entity
 @Table(name = "produto")
@@ -23,14 +18,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
     @NamedQuery(name = "Produto.findByIdproduto", query = "SELECT p FROM Produto p WHERE p.idproduto = :idproduto"),
     @NamedQuery(name = "Produto.findByDescricao", query = "SELECT p FROM Produto p WHERE p.descricao = :descricao"),
-    @NamedQuery(name = "Produto.findByCodigoBarras", query = "SELECT p FROM Produto p WHERE p.codigoBarras = :codigoBarras"),
+    @NamedQuery(name = "Produto.findByCodigoDeBarras", query = "SELECT p FROM Produto p WHERE p.codigoDeBarras = :codigoDeBarras"),
     @NamedQuery(name = "Produto.findByFornecedor", query = "SELECT p FROM Produto p WHERE p.fornecedor = :fornecedor"),
-    @NamedQuery(name = "Produto.findByMarca", query = "SELECT p FROM Produto p WHERE p.marca = :marca"),
-    @NamedQuery(name = "Produto.findByCategoria", query = "SELECT p FROM Produto p WHERE p.categoria = :categoria"),
-    @NamedQuery(name = "Produto.findByEstoqueMin", query = "SELECT p FROM Produto p WHERE p.estoqueMin = :estoqueMin"),
-    @NamedQuery(name = "Produto.findByEstoqueAtual", query = "SELECT p FROM Produto p WHERE p.estoqueAtual = :estoqueAtual"),
+    @NamedQuery(name = "Produto.findByEstoqueMinimo", query = "SELECT p FROM Produto p WHERE p.estoqueMinimo = :estoqueMinimo"),
     @NamedQuery(name = "Produto.findByValorCusto", query = "SELECT p FROM Produto p WHERE p.valorCusto = :valorCusto"),
-    @NamedQuery(name = "Produto.findByValorVenda", query = "SELECT p FROM Produto p WHERE p.valorVenda = :valorVenda")})
+    @NamedQuery(name = "Produto.findByValorVenda", query = "SELECT p FROM Produto p WHERE p.valorVenda = :valorVenda"),
+    @NamedQuery(name = "Produto.findByMargem", query = "SELECT p FROM Produto p WHERE p.margem = :margem")})
 public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,26 +34,31 @@ public class Produto implements Serializable {
     @Basic(optional = false)
     @Column(name = "descricao")
     private String descricao;
-    @Column(name = "codigoBarras")
-    private Integer codigoBarras;
+    @Column(name = "codigoDeBarras")
+    private Integer codigoDeBarras;
     @Column(name = "fornecedor")
     private String fornecedor;
-    @Column(name = "marca")
-    private String marca;
-    @Column(name = "categoria")
-    private String categoria;
     @Basic(optional = false)
-    @Column(name = "estoqueMin")
-    private int estoqueMin;
-    @Basic(optional = false)
-    @Column(name = "estoqueAtual")
-    private int estoqueAtual;
+    @Column(name = "estoqueMinimo")
+    private int estoqueMinimo;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "valorCusto")
-    private double valorCusto;
+    private BigDecimal valorCusto;
     @Basic(optional = false)
     @Column(name = "valorVenda")
-    private double valorVenda;
+    private BigDecimal valorVenda;
+    @Basic(optional = false)
+    @Column(name = "margem")
+    private BigDecimal margem;
+    @JoinColumn(name = "idmarca", referencedColumnName = "idmarca")
+    @ManyToOne(optional = false)
+    private Marca idmarca;
+    @JoinColumn(name = "idcategoria", referencedColumnName = "idcategoria")
+    @ManyToOne(optional = false)
+    private Categoria idcategoria;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idproduto")
+    private Collection<Estoque> estoqueCollection;
 
     public Produto() {
     }
@@ -69,13 +67,13 @@ public class Produto implements Serializable {
         this.idproduto = idproduto;
     }
 
-    public Produto(Integer idproduto, String descricao, int estoqueMin, int estoqueAtual, double valorCusto, double valorVenda) {
+    public Produto(Integer idproduto, String descricao, int estoqueMinimo, BigDecimal valorCusto, BigDecimal valorVenda, BigDecimal margem) {
         this.idproduto = idproduto;
         this.descricao = descricao;
-        this.estoqueMin = estoqueMin;
-        this.estoqueAtual = estoqueAtual;
+        this.estoqueMinimo = estoqueMinimo;
         this.valorCusto = valorCusto;
         this.valorVenda = valorVenda;
+        this.margem = margem;
     }
 
     public Integer getIdproduto() {
@@ -94,12 +92,12 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public Integer getCodigoBarras() {
-        return codigoBarras;
+    public Integer getCodigoDeBarras() {
+        return codigoDeBarras;
     }
 
-    public void setCodigoBarras(Integer codigoBarras) {
-        this.codigoBarras = codigoBarras;
+    public void setCodigoDeBarras(Integer codigoDeBarras) {
+        this.codigoDeBarras = codigoDeBarras;
     }
 
     public String getFornecedor() {
@@ -110,52 +108,61 @@ public class Produto implements Serializable {
         this.fornecedor = fornecedor;
     }
 
-    public String getMarca() {
-        return marca;
+    public int getEstoqueMinimo() {
+        return estoqueMinimo;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setEstoqueMinimo(int estoqueMinimo) {
+        this.estoqueMinimo = estoqueMinimo;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public int getEstoqueMin() {
-        return estoqueMin;
-    }
-
-    public void setEstoqueMin(int estoqueMin) {
-        this.estoqueMin = estoqueMin;
-    }
-
-    public int getEstoqueAtual() {
-        return estoqueAtual;
-    }
-
-    public void setEstoqueAtual(int estoqueAtual) {
-        this.estoqueAtual = estoqueAtual;
-    }
-
-    public double getValorCusto() {
+    public BigDecimal getValorCusto() {
         return valorCusto;
     }
 
-    public void setValorCusto(double valorCusto) {
+    public void setValorCusto(BigDecimal valorCusto) {
         this.valorCusto = valorCusto;
     }
 
-    public double getValorVenda() {
+    public BigDecimal getValorVenda() {
         return valorVenda;
     }
 
-    public void setValorVenda(double valorVenda) {
+    public void setValorVenda(BigDecimal valorVenda) {
         this.valorVenda = valorVenda;
+    }
+
+    public BigDecimal getMargem() {
+        return margem;
+    }
+
+    public void setMargem(BigDecimal margem) {
+        this.margem = margem;
+    }
+
+    public Marca getIdmarca() {
+        return idmarca;
+    }
+
+    public void setIdmarca(Marca idmarca) {
+        this.idmarca = idmarca;
+    }
+
+    public Categoria getIdcategoria() {
+        return idcategoria;
+    }
+
+    public void setIdcategoria(Categoria idcategoria) {
+        this.idcategoria = idcategoria;
+    }
+
+    @XmlTransient
+    public Collection<Estoque> getEstoqueCollection() {
+        return estoqueCollection;
+    }
+
+    public void setEstoqueCollection(Collection<Estoque> estoqueCollection) {
+        this.estoqueCollection = estoqueCollection;
     }
 
     @Override
@@ -182,5 +189,5 @@ public class Produto implements Serializable {
     public String toString() {
         return "tirsobikes.entidades.Produto[ idproduto=" + idproduto + " ]";
     }
-    
+
 }
