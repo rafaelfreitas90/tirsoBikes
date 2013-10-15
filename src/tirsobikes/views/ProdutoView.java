@@ -28,7 +28,7 @@ public class ProdutoView extends javax.swing.JFrame {
         txtEstoqueAtual.setEnabled(false);
         txtEstoqueMinimo.setEnabled(false);
     }
-    
+
     private void exibeTodosCampos() {
         jComboGrupo.setEnabled(true);
         bntAddGrupo.setEnabled(true);
@@ -110,6 +110,11 @@ public class ProdutoView extends javax.swing.JFrame {
 
         bntAddMarca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/addMenor.png"))); // NOI18N
         bntAddMarca.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        bntAddMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAddMarcaActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ESTOQUE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 8))); // NOI18N
 
@@ -377,12 +382,10 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         if (jComboTipo.getSelectedIndex() == 1) {
-            Produto produto = new Produto();
-            produto.setCodigoBarras(Integer.parseInt(txtCodigoDeBarra.getText()));
-            produto.setDescricao(txtDescricao.getText());
-            
-            
-            
+            salvarProduto();
+
+
+
         }
     }//GEN-LAST:event_bntSalvarActionPerformed
 
@@ -396,6 +399,9 @@ public class ProdutoView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jComboTipoActionPerformed
+
+    private void bntAddMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddMarcaActionPerformed
+    }//GEN-LAST:event_bntAddMarcaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,4 +473,10 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorCusto;
     private javax.swing.JTextField txtValorVenda;
     // End of variables declaration//GEN-END:variables
+
+    private void salvarProduto() {
+        Produto produto = new Produto();
+        produto.setCodigoBarras(Integer.parseInt(txtCodigoDeBarra.getText()));
+        produto.setDescricao(txtDescricao.getText());
+    }
 }
