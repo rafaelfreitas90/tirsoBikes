@@ -20,30 +20,30 @@ public class ProdutoDAO {
         manager = factory.createEntityManager();
     }
 
-    public Produto add(Produto produto) {
+    public Produto salvarProduto(Produto produto) {
         manager.getTransaction().begin();
         manager.persist(produto);
         manager.getTransaction().commit();
         return produto;
     }
 
-    public void update(Produto produto) {
+    public void atualizarProduto(Produto produto) {
         manager.getTransaction().begin();
         manager.merge(produto);
         manager.getTransaction().commit();
     }
 
-    public void delete(Produto produto) {
+    public void deletarProduto(Produto produto) {
         manager.getTransaction().begin();
         manager.remove(produto);
         manager.getTransaction().commit();
     }
 
-    public Produto find(int id) {
+    public Produto procurarProduto(int id) {
         return manager.find(Produto.class, id);
     }
 
-    public List<Produto> list() {
+    public List<Produto> ListarProdutos() {
         Query query = manager.createQuery("from Produto");
         return query.getResultList();
     }
