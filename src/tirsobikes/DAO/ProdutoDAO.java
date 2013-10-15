@@ -13,34 +13,38 @@ import tirsobikes.entidades.Produto;
  */
 public class ProdutoDAO {
 
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
+    private EntityManager manager;
 
-    public void salvarProduto(Object objeto) {
-
-        EntityManager manager = factory.createEntityManager();
-
-        manager.getTransaction().begin();
-        manager.persist(objeto);
-        manager.getTransaction().commit();
-
-        manager.close();
-
+    public ProdutoDAO() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
+        manager = factory.createEntityManager();
     }
 
-    public List ListarProdutos() {
-
-        EntityManager manager = factory.createEntityManager();
-
+    public Produto add(Produto produto) {
         manager.getTransaction().begin();
-
-        Query query = manager.createQuery("from Produto");
-        List<Produto> produtos = query.getResultList();
-
+        manager.persist(produto);
         manager.getTransaction().commit();
+        return produto;
+    }
 
-        manager.close();
+    public void update(Produto produto) {
+        manager.getTransaction().begin();
+        manager.merge(produto);
+        manager.getTransaction().commit();
+    }
 
-        return produtos;
+    public void delete(Produto produto) {
+        manager.getTransaction().begin();
+        manager.remove(produto);
+        manager.getTransaction().commit();
+    }
 
+    public Produto find(int id) {
+        return manager.find(Produto.class, id);
+    }
+
+    public List<Produto> list() {
+        Query query = manager.createQuery("from Produto");
+        return query.getResultList();
     }
 }

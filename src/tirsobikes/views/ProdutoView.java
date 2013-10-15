@@ -476,7 +476,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void salvarProduto() {
         Produto produto = new Produto();
-        produto.setCodigoBarras(Integer.parseInt(txtCodigoDeBarra.getText()));
+        produto.setCodigoDeBarras(Integer.parseInt(txtCodigoDeBarra.getText()));
         produto.setDescricao(txtDescricao.getText());
     }
 }
