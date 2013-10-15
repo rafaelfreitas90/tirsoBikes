@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<<<<<<< HEAD
     <persistence-unit name="TirsoBikesPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
@@ -11,4 +12,22 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
+=======
+  <persistence-unit name="TirsoBikesPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>tirsobikes.entidades.Marca</class>
+    <class>tirsobikes.entidades.Estoque</class>
+    <class>tirsobikes.entidades.Produto</class>
+    <class>tirsobikes.entidades.Servico</class>
+    <class>tirsobikes.entidades.Categoria</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tirsobikes"/>
+      <property name="javax.persistence.jdbc.password" value="rsf90"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
+>>>>>>> d61ec68fd350a12793505b848cb7e4348e15123f
 </persistence>
