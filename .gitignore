@@ -1,6 +1,19 @@
-<<<<<<< HEAD
-/build/
-=======
-/build/
-/dist/
->>>>>>> d61ec68fd350a12793505b848cb7e4348e15123f
+# Arquivos de aplicações compiladas
+*.apk
+*.ap_
+ 
+# Arquivos pra máquina virtual dex
+*.dex
+ 
+# Classes java compiladas
+*.class
+ 
+# Pastas de arquivos gerados pelo plugin
+bin/
+gen/
+ 
+# Propriedades pro seu ambiente local
+local.properties
+ 
+# Arquivos gerados em caso de conflito no git
+*.orig

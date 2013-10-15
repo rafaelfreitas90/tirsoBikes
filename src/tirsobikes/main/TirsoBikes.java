@@ -17,16 +17,7 @@ public class TirsoBikes {
         Produto p  = new Produto();
         ProdutoDAO dao = new ProdutoDAO();
         
-        p.setCategoria("te");
-        p.setCodigoBarras(0000);
-        p.setDescricao("te");
-        p.setEstoqueAtual(1);
-        p.setEstoqueMin(2);
-        p.setFornecedor("Bla");
-        p.setMarca("Marca");
-        p.setValorCusto(0.01);
-        p.setValorVenda(0.02);
-        
+                
         dao.salvarProduto(p);
         
         
