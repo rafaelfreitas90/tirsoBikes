@@ -89,7 +89,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "tirsobikes.entidades.Categoria[ idcategoria=" + idcategoria + " ]";
+        return descricao;
     }
 
 }

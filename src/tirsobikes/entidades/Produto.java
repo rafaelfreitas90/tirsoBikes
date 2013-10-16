@@ -3,6 +3,7 @@ package tirsobikes.entidades;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -44,13 +45,13 @@ public class Produto implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "valorCusto")
-    private BigDecimal valorCusto;
+    private Double valorCusto;
     @Basic(optional = false)
     @Column(name = "valorVenda")
-    private BigDecimal valorVenda;
+    private Double valorVenda;
     @Basic(optional = false)
     @Column(name = "margem")
-    private BigDecimal margem;
+    private Double margem;
     @JoinColumn(name = "idmarca", referencedColumnName = "idmarca")
     @ManyToOne(optional = false)
     private Marca idmarca;
@@ -58,7 +59,7 @@ public class Produto implements Serializable {
     @ManyToOne(optional = false)
     private Categoria idcategoria;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idproduto")
-    private Collection<Estoque> estoqueCollection;
+    private List<Estoque> estoqueCollection;
 
     public Produto() {
     }
@@ -67,14 +68,7 @@ public class Produto implements Serializable {
         this.idproduto = idproduto;
     }
 
-    public Produto(Integer idproduto, String descricao, int estoqueMinimo, BigDecimal valorCusto, BigDecimal valorVenda, BigDecimal margem) {
-        this.idproduto = idproduto;
-        this.descricao = descricao;
-        this.estoqueMinimo = estoqueMinimo;
-        this.valorCusto = valorCusto;
-        this.valorVenda = valorVenda;
-        this.margem = margem;
-    }
+    
 
     public Integer getIdproduto() {
         return idproduto;
@@ -116,29 +110,46 @@ public class Produto implements Serializable {
         this.estoqueMinimo = estoqueMinimo;
     }
 
-    public BigDecimal getValorCusto() {
+    public Double getValorCusto() {
         return valorCusto;
     }
 
-    public void setValorCusto(BigDecimal valorCusto) {
+    public void setValorCusto(Double valorCusto) {
         this.valorCusto = valorCusto;
     }
+    
+    public void setValorCusto(String valorCusto) {
+        valorCusto = valorCusto.replace(",", ".");
+        this.valorCusto = Double.parseDouble(valorCusto);
+    }
 
-    public BigDecimal getValorVenda() {
+    public Double getValorVenda() {
+        this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));        
         return valorVenda;
     }
 
-    public void setValorVenda(BigDecimal valorVenda) {
+    public void setValorVenda(Double valorVenda) {
         this.valorVenda = valorVenda;
     }
+    
+    public void setValorVenda(String valorVenda) {
+        valorVenda = valorVenda.replace(",", ".");
+        this.valorVenda = Double.parseDouble(valorVenda);
+    }
 
-    public BigDecimal getMargem() {
+    public Double getMargem() {
         return margem;
     }
 
-    public void setMargem(BigDecimal margem) {
+    public void setMargem(Double margem) {
         this.margem = margem;
     }
+    
+    public void setMargem(String margem) {
+        margem = margem.replace(",", ".");
+        this.margem = Double.parseDouble(margem);
+    }
+    
 
     public Marca getIdmarca() {
         return idmarca;
@@ -157,12 +168,12 @@ public class Produto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Estoque> getEstoqueCollection() {
+    public List<Estoque> getEstoqueCollection() {
         return estoqueCollection;
     }
 
-    public void setEstoqueCollection(Collection<Estoque> estoqueCollection) {
-        this.estoqueCollection = estoqueCollection;
+    public void setEstoqueCollection(List<Estoque> estoqueLista) {
+        this.estoqueCollection = estoqueLista;
     }
 
     @Override

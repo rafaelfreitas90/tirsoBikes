@@ -46,7 +46,7 @@ public class MarcaDAO {
         return manager.find(Marca.class, id);
     }
 
-    public List<Marca> ListaMarcas() {
+    public List<Marca> listaMarcas() {
         Query query = manager.createQuery("from Marca");
         return query.getResultList();
     }

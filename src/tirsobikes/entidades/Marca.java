@@ -89,7 +89,7 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return "tirsobikes.entidades.Marca[ idmarca=" + idmarca + " ]";
+        return descricao;
     }
 
 }
