@@ -30,7 +30,7 @@ public class Servico implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "valor")
-    private BigDecimal valor;
+    private Double valor;
 
     public Servico() {
     }
@@ -39,7 +39,7 @@ public class Servico implements Serializable {
         this.idservico = idservico;
     }
 
-    public Servico(Integer idservico, String descricao, BigDecimal valor) {
+    public Servico(Integer idservico, String descricao, Double valor) {
         this.idservico = idservico;
         this.descricao = descricao;
         this.valor = valor;
@@ -61,11 +61,11 @@ public class Servico implements Serializable {
         this.descricao = descricao;
     }
 
-    public BigDecimal getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
