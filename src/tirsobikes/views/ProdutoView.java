@@ -439,8 +439,8 @@ public class ProdutoView extends javax.swing.JFrame {
             salvarServico();
             limpaCampos();
         }
-        
-        if (jComboTipo.getSelectedIndex() == 0){
+
+        if (jComboTipo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Selecione um tipo (Serviço, Produto)");
         }
     }//GEN-LAST:event_bntSalvarActionPerformed
@@ -487,15 +487,18 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboCategoriaActionPerformed
 
     private void bntAtualizarValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtualizarValorActionPerformed
-        Produto produto = new Produto();
-        produto.setValorCusto(txtValorCusto.getText());
-        produto.setMargem(txtMargem.getText());
+        if (!(txtValorCusto.getText().isEmpty()) && (!txtMargem.getText().isEmpty())) {
+            Produto produto = new Produto();
+            produto.setValorCusto(txtValorCusto.getText());
+            produto.setMargem(txtMargem.getText());
 
-        // atualiza valor venda
-        String valorVenda = produto.getValorVenda().toString();
-        valorVenda = valorVenda.replace(".", ",");
-        txtValorVenda.setText(valorVenda);
-
+            // atualiza valor venda
+            String valorVenda = produto.getValorVenda().toString();
+            valorVenda = valorVenda.replace(".", ",");
+            txtValorVenda.setText(valorVenda);
+        } else {
+            JOptionPane.showMessageDialog(null, "O campo Valor Custo e Margem de Lucro são obrigatorios para o calculo!");
+        }
     }//GEN-LAST:event_bntAtualizarValorActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
@@ -604,10 +607,10 @@ public class ProdutoView extends javax.swing.JFrame {
         Servico servico = new Servico();
         servico.setDescricao(txtDescricao.getText());
         servico.setValor(Double.parseDouble(txtValorVenda.getText()));
-        
+
         ServicoDAO dao = new ServicoDAO();
         dao.salvarServico(servico);
-        
+
     }
 
     // preenche o dropdown com as marcas dos banco
