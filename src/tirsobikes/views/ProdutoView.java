@@ -12,6 +12,7 @@ import tirsobikes.DAO.CategoriaDAO;
 import tirsobikes.DAO.MarcaDAO;
 import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.DAO.ServicoDAO;
+import tirsobikes.controllers.MarcaGrupoController;
 import tirsobikes.entidades.Categoria;
 import tirsobikes.entidades.Marca;
 import tirsobikes.entidades.Produto;
@@ -281,6 +282,11 @@ public class ProdutoView extends javax.swing.JFrame {
 
         bntAddCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/addMenor.png"))); // NOI18N
         bntAddCategoria.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        bntAddCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAddCategoriaActionPerformed(evt);
+            }
+        });
 
         jComboMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboMarca.addActionListener(new java.awt.event.ActionListener() {
@@ -463,6 +469,7 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboTipoActionPerformed
 
     private void bntAddMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddMarcaActionPerformed
+            MarcaGrupoController.getInstancia().exibirInterfaceGrafica();
     }//GEN-LAST:event_bntAddMarcaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -508,6 +515,10 @@ public class ProdutoView extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_bntCancelarActionPerformed
+
+    private void bntAddCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddCategoriaActionPerformed
+        MarcaGrupoController.getInstancia().exibirInterfaceGrafica();
+    }//GEN-LAST:event_bntAddCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
