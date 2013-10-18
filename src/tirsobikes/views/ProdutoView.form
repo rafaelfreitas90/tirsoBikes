@@ -8,7 +8,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
@@ -481,6 +480,9 @@
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntAddCategoriaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboMarca">
           <Properties>
