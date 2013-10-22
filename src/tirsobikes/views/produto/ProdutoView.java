@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tirsobikes.views;
+package tirsobikes.views.produto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,7 +12,8 @@ import tirsobikes.DAO.CategoriaDAO;
 import tirsobikes.DAO.MarcaDAO;
 import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.DAO.ServicoDAO;
-import tirsobikes.controllers.MarcaGrupoController;
+import tirsobikes.controllers.CategoriaGrupoController;
+import tirsobikes.controllers.MarcaController;
 import tirsobikes.entidades.Categoria;
 import tirsobikes.entidades.Marca;
 import tirsobikes.entidades.Produto;
@@ -123,6 +124,9 @@ public class ProdutoView extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
@@ -469,7 +473,7 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboTipoActionPerformed
 
     private void bntAddMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddMarcaActionPerformed
-            MarcaGrupoController.getInstancia().exibirInterfaceGrafica();
+            MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
     }//GEN-LAST:event_bntAddMarcaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -482,14 +486,14 @@ public class ProdutoView extends javax.swing.JFrame {
     private void jComboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMarcaActionPerformed
         // abre view para cadastar marca
         if (jComboMarca.getSelectedItem() != null && jComboMarca.getSelectedItem().equals("+ Adicionar..")) {
-            System.out.println("abriu tela");
+            MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
         }
     }//GEN-LAST:event_jComboMarcaActionPerformed
 
     private void jComboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCategoriaActionPerformed
         // abre view para cadastar categoria/grupo
         if (jComboCategoria.getSelectedItem() != null && jComboCategoria.getSelectedItem().equals("+ Adicionar..")) {
-            System.out.println("abriu tela");
+            CategoriaGrupoController.getInstancia().exibirInterfaceGrafica("Categoria / Grupo");
         }
     }//GEN-LAST:event_jComboCategoriaActionPerformed
 
@@ -509,7 +513,6 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAtualizarValorActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
-
         Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar? Todas as informações serão perdidas!");
         if (resposta == JOptionPane.YES_OPTION) {
             this.dispose();
@@ -517,8 +520,13 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntCancelarActionPerformed
 
     private void bntAddCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddCategoriaActionPerformed
-        MarcaGrupoController.getInstancia().exibirInterfaceGrafica();
+        CategoriaGrupoController.getInstancia().exibirInterfaceGrafica("Categoria / Grupo");
     }//GEN-LAST:event_bntAddCategoriaActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        preencherJcomboCategoria();
+        preencherJcomboMarca();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -726,7 +734,7 @@ public class ProdutoView extends javax.swing.JFrame {
     // validaçao de todos os campos de Produto
     private boolean validaCamposServico() {
         if (txtDescricao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Digite o nome/descrição do produto");
+            JOptionPane.showMessageDialog(null, "Digite o nome/descrição do serviço");
             txtDescricao.requestFocus();
             return false;
         }

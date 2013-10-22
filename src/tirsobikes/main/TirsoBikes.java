@@ -1,8 +1,11 @@
 package tirsobikes.main;
 
+import java.util.Date;
 import java.util.List;
+import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.controllers.ProdutoController;
+import tirsobikes.entidades.Estoque;
 import tirsobikes.entidades.Produto;
 
 /**
@@ -11,24 +14,23 @@ import tirsobikes.entidades.Produto;
  */
 public class TirsoBikes {
 
-    public static void main(String[] args) {  
+    public static void main(String[] args) {
+
+        Estoque e = new Estoque();
+        Produto p = new Produto();
+        EstoqueDAO dao = new EstoqueDAO();
+        ProdutoDAO daop = new ProdutoDAO();
+        Date data = new Date(2013, 03, 11);
+
+        e.setData(data);
         
-       String num = "1,1";
-       Double d = Double.parseDouble(num);
-       
-        
-        Produto p  = new Produto();
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        p.setValorCusto("50,50");
-        p.setMargem("30,0");
-        
-        System.out.println(p.getValorVenda());
-                
-       
-        
-        
-     
+
+        e.setIdproduto(null);
+        dao.salvarEstoque(e);
+
+
+
+
+
     }
-    
 }

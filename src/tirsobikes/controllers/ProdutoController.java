@@ -1,6 +1,6 @@
 package tirsobikes.controllers;
 
-import tirsobikes.views.ProdutoView;
+import tirsobikes.views.produto.ProdutoView;
 
 /**
  *

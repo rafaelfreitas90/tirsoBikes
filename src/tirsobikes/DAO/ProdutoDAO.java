@@ -43,8 +43,16 @@ public class ProdutoDAO {
         return manager.find(Produto.class, id);
     }
 
-    public List<Produto> ListarProdutos() {
+    public List<Produto> listarProdutos() {
         Query query = manager.createQuery("from Produto");
         return query.getResultList();
     }
+    
+    public List<Produto> procurarProdutoNome (String descricao) {
+        Query query = manager.createQuery("SELECT * FROM return query.getResultList();Produto WHERE descricao LIKE searchKeyword");
+        query.setParameter("searchKeyword", "%"+descricao+"%");
+        return query.getResultList();
+    }
+    
+    
 }
