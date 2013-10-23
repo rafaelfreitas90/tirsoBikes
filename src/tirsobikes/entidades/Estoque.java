@@ -12,11 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "estoque")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Estoque.findAll", query = "SELECT e FROM Estoque e"),
-    @NamedQuery(name = "Estoque.findByIdestoque", query = "SELECT e FROM Estoque e WHERE e.idestoque = :idestoque"),
-    @NamedQuery(name = "Estoque.findByData", query = "SELECT e FROM Estoque e WHERE e.data = :data"),
-    @NamedQuery(name = "Estoque.findByQuantidade", query = "SELECT e FROM Estoque e WHERE e.quantidade = :quantidade")})
+   
 public class Estoque implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

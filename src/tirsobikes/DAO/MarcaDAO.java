@@ -42,8 +42,8 @@ public class MarcaDAO {
         manager.getTransaction().commit();
     }
 
-    public Marca procurarMarca(int id) {
-        return manager.find(Marca.class, id);
+    public Marca procurarMarca(int idmarca) {
+        return manager.find(Marca.class, idmarca);
     }
 
     public List<Marca> listaMarcas() {

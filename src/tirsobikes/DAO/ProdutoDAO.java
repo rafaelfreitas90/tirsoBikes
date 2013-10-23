@@ -39,8 +39,8 @@ public class ProdutoDAO {
         manager.getTransaction().commit();
     }
 
-    public Produto procurarProduto(int id) {
-        return manager.find(Produto.class, id);
+    public Produto procurarProduto(int idproduto) {
+        return manager.find(Produto.class, idproduto);
     }
 
     public List<Produto> listarProdutos() {
@@ -49,7 +49,7 @@ public class ProdutoDAO {
     }
     
     public List<Produto> procurarProdutoNome (String descricao) {
-        Query query = manager.createQuery("SELECT * FROM return query.getResultList();Produto WHERE descricao LIKE searchKeyword");
+        Query query = manager.createQuery("FROM Produto WHERE descricao LIKE (:searchKeyword)");
         query.setParameter("searchKeyword", "%"+descricao+"%");
         return query.getResultList();
     }

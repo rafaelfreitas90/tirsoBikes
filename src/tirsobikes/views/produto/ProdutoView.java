@@ -6,15 +6,18 @@ package tirsobikes.views.produto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import tirsobikes.DAO.CategoriaDAO;
+import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.DAO.MarcaDAO;
 import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.DAO.ServicoDAO;
 import tirsobikes.controllers.CategoriaGrupoController;
 import tirsobikes.controllers.MarcaController;
 import tirsobikes.entidades.Categoria;
+import tirsobikes.entidades.Estoque;
 import tirsobikes.entidades.Marca;
 import tirsobikes.entidades.Produto;
 import tirsobikes.entidades.Servico;
@@ -508,12 +511,12 @@ public class ProdutoView extends javax.swing.JFrame {
             valorVenda = valorVenda.replace(".", ",");
             txtValorVenda.setText(valorVenda);
         } else {
-            JOptionPane.showMessageDialog(null, "O campo Valor Custo e Margem de Lucro são obrigatorios para o calculo!");
+            JOptionPane.showMessageDialog(null, "O campo Valor Custo e Margem de Lucro são obrigatórios para o calculo!");
         }
     }//GEN-LAST:event_bntAtualizarValorActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
-        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar? Todas as informações serão perdidas!");
+        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
         if (resposta == JOptionPane.YES_OPTION) {
             this.dispose();
         }
@@ -619,7 +622,19 @@ public class ProdutoView extends javax.swing.JFrame {
         produto.getValorVenda();
 
         ProdutoDAO dao = new ProdutoDAO();
-        dao.salvarProduto(produto);
+        produto = dao.salvarProduto(produto);
+        
+        //salva estoque
+        Estoque estoque = new Estoque();
+        EstoqueDAO daoEstoque = new EstoqueDAO();
+        Date data = new Date();
+        
+        estoque.setData(data);
+        estoque.setIdproduto(produto);
+        estoque.setQuantidade(Integer.parseInt(txtEstoqueAtual.getText()));
+        daoEstoque.salvarEstoque(estoque);
+        
+        
     }
 
     private void salvarServico() {

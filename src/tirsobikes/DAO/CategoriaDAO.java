@@ -42,8 +42,8 @@ public class CategoriaDAO {
         manager.getTransaction().commit();
     }
 
-    public Categoria procurarCategoria(int id) {
-        return manager.find(Categoria.class, id);
+    public Categoria procurarCategoria(int idcategoria) {
+        return manager.find(Categoria.class, idcategoria);
     }
 
     public List<Categoria> listaCategorias() {

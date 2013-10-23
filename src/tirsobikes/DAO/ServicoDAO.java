@@ -42,8 +42,8 @@ public class ServicoDAO {
         manager.getTransaction().commit();
     }
 
-    public Servico procurarServico(int id) {
-        return manager.find(Servico.class, id);
+    public Servico procurarServico(int idservico) {
+        return manager.find(Servico.class, idservico);
     }
 
     public List<Servico> ListarServicos() {

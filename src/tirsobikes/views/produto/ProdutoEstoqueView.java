@@ -4,10 +4,14 @@
  */
 package tirsobikes.views.produto;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.DAO.ProdutoDAO;
+import tirsobikes.entidades.Estoque;
 import tirsobikes.entidades.Produto;
 
 /**
@@ -39,11 +43,26 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaEstoque = new javax.swing.JTable();
+        bntLancar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Estoque de Produtos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PESQUISAR PRODUTO"));
+
+        txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
+            }
+        });
 
         jLabel1.setText("Nome / Descrição:");
 
@@ -97,6 +116,14 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaEstoque);
         tabelaEstoque.getColumnModel().getColumn(1).setResizable(false);
 
+        bntLancar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/add.png"))); // NOI18N
+        bntLancar.setText(" Adicionar Quantidade");
+        bntLancar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntLancarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -105,7 +132,10 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bntLancar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -114,8 +144,10 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntLancar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,29 +160,31 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        List<Produto> produtos = new ArrayList<Produto>();
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        produtos = dao.procurarProdutoNome(txtBusca.getText());
-        
-        DefaultTableModel dtm = (DefaultTableModel) tabelaEstoque.getModel();
-        
-        dtm.setRowCount(0);
-        
-        for (Produto p : produtos){
-            
-        }
-        
+        atualizarTabela();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        atualizarTabela();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void bntLancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLancarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntLancarActionPerformed
+
+    private void txtBuscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyTyped
+       
+    }//GEN-LAST:event_txtBuscaKeyTyped
+
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+         atualizarTabela();
+    }//GEN-LAST:event_txtBuscaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -163,7 +197,7 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -187,6 +221,7 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntLancar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -195,4 +230,27 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
     private javax.swing.JTable tabelaEstoque;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
+
+    private void atualizarTabela() {
+        List<Produto> produtos = new ArrayList<Produto>();
+        ProdutoDAO dao = new ProdutoDAO();
+
+        List<Estoque> estoques = new ArrayList<Estoque>();
+        produtos = dao.procurarProdutoNome(txtBusca.getText());
+
+        DefaultTableModel dtm = (DefaultTableModel) tabelaEstoque.getModel();
+        dtm.setRowCount(0);
+
+        for (Produto p : produtos) {
+            Estoque estoque = new Estoque();
+            EstoqueDAO daoEstoque = new EstoqueDAO();
+            estoques = daoEstoque.ultimoEstoque(p.getIdproduto());
+
+            if (!estoques.isEmpty()) {
+                estoque = estoques.get(0);
+                dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdcategoria().getDescricao(), p.getEstoqueMinimo(), estoque.getQuantidade()});
+            }
+
+        }
+    }
 }
