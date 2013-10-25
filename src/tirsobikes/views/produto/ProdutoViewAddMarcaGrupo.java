@@ -120,8 +120,8 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
             if (!txtMarcaGrupo.getText().isEmpty()) {
                 Categoria categoria = new Categoria(null, txtMarcaGrupo.getText());
                 CategoriaDAO dao = new CategoriaDAO();
-                dao.salvarCategoria(categoria);                
-                
+                dao.salvarCategoria(categoria);
+                txtMarcaGrupo.setText("");
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Digite o nome da categoria / grupo!");
@@ -133,13 +133,13 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
                 Marca marca = new Marca(null, txtMarcaGrupo.getText());
                 MarcaDAO dao = new MarcaDAO();
                 dao.salvarMarca(marca);
-                
+                txtMarcaGrupo.setText("");
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Digite o nome da marca!");
             }
         }
-    
+
     }//GEN-LAST:event_bntSalvarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntCancelar;

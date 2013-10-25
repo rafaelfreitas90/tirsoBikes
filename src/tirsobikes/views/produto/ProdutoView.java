@@ -4,7 +4,6 @@
  */
 package tirsobikes.views.produto;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -454,7 +453,7 @@ public class ProdutoView extends javax.swing.JFrame {
         }
 
         if (jComboTipo.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione um tipo (Serviço, Produto)");
+            JOptionPane.showMessageDialog(null, "Selecione um tipo (Serviço ou Produto)");
         }
     }//GEN-LAST:event_bntSalvarActionPerformed
 
@@ -476,7 +475,7 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboTipoActionPerformed
 
     private void bntAddMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddMarcaActionPerformed
-            MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
+        MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
     }//GEN-LAST:event_bntAddMarcaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -623,18 +622,18 @@ public class ProdutoView extends javax.swing.JFrame {
 
         ProdutoDAO dao = new ProdutoDAO();
         produto = dao.salvarProduto(produto);
-        
+
         //salva estoque
         Estoque estoque = new Estoque();
         EstoqueDAO daoEstoque = new EstoqueDAO();
         Date data = new Date();
-        
+
         estoque.setData(data);
         estoque.setIdproduto(produto);
         estoque.setQuantidade(Integer.parseInt(txtEstoqueAtual.getText()));
         daoEstoque.salvarEstoque(estoque);
-        
-        
+
+
     }
 
     private void salvarServico() {
@@ -654,8 +653,10 @@ public class ProdutoView extends javax.swing.JFrame {
         marcas = dao.listaMarcas();
         jComboMarca.removeAllItems();
         jComboMarca.addItem("Selecione uma Marca");
-        for (Marca m : marcas) {
-            jComboMarca.addItem(m);
+        if (!marcas.isEmpty()) {
+            for (Marca m : marcas) {
+                jComboMarca.addItem(m);
+            }
         }
         jComboMarca.addItem("+ Adicionar..");
     }
@@ -667,10 +668,13 @@ public class ProdutoView extends javax.swing.JFrame {
         categorias = dao.listaCategorias();
         jComboCategoria.removeAllItems();
         jComboCategoria.addItem("Selecione uma Categoria");
-        for (Categoria m : categorias) {
-            jComboCategoria.addItem(m);
+        if (!categorias.isEmpty()) {
+            for (Categoria m : categorias) {
+                jComboCategoria.addItem(m);
+            }
         }
         jComboCategoria.addItem("+ Adicionar..");
+
     }
 
     // zera todos os campos da view

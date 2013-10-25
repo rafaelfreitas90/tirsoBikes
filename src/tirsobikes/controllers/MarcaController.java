@@ -10,7 +10,7 @@ import tirsobikes.views.produto.ProdutoViewAddMarcaGrupo;
 public class MarcaController {
     
     private static MarcaController instancia = new MarcaController();
-    private ProdutoViewAddMarcaGrupo view ;
+    private ProdutoViewAddMarcaGrupo view;
     
     public MarcaController(){
         
