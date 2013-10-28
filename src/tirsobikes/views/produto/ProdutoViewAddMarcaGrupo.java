@@ -39,6 +39,11 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
         txttipo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Novo:");
 
@@ -86,7 +91,7 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txttipo))
@@ -95,8 +100,7 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntSalvar)
-                    .addComponent(bntCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bntCancelar)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,13 +111,16 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
+        txtMarcaGrupo.setText("");
         this.dispose();
     }//GEN-LAST:event_bntCancelarActionPerformed
 
@@ -123,7 +130,7 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
                 Categoria categoria = new Categoria(null, txtMarcaGrupo.getText());
                 CategoriaDAO dao = new CategoriaDAO();
                 dao.salvarCategoria(categoria);                
-                
+                txtMarcaGrupo.setText("");
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Digite o nome da categoria / grupo!");
@@ -135,7 +142,7 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
                 Marca marca = new Marca(null, txtMarcaGrupo.getText());
                 MarcaDAO dao = new MarcaDAO();
                 dao.salvarMarca(marca);
-                
+                txtMarcaGrupo.setText("");
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Digite o nome da marca!");
@@ -145,6 +152,11 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
     
     
     }//GEN-LAST:event_bntSalvarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       bntCancelar.doClick();
+    }//GEN-LAST:event_formWindowClosing
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntCancelar;
     private javax.swing.JButton bntSalvar;
