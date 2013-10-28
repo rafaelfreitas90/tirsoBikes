@@ -25,9 +25,12 @@ public class MarcaController {
    public void exibirInterfaceGrafica(String tipo){           
         if (view == null){
             view = new ProdutoViewAddMarcaGrupo(tipo);
+            
         }
         
         view.setVisible(true);
     }
+   
+
     
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tirsobikes.DAO;
 
 import java.util.List;
@@ -16,10 +12,11 @@ import tirsobikes.entidades.Categoria;
  * @author LuisHenrique
  */
 public class CategoriaDAO {
-    private EntityManager manager;
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
+    private static EntityManager manager;
 
     public CategoriaDAO() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
+    
         manager = factory.createEntityManager();
     }
 

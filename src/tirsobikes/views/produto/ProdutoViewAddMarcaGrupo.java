@@ -3,6 +3,7 @@ package tirsobikes.views.produto;
 import javax.swing.JOptionPane;
 import tirsobikes.DAO.CategoriaDAO;
 import tirsobikes.DAO.MarcaDAO;
+import tirsobikes.controllers.MarcaController;
 import tirsobikes.entidades.Categoria;
 import tirsobikes.entidades.Marca;
 
@@ -18,6 +19,7 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
         this.tipo = tipo;
         initComponents();
         txttipo.setText(tipo);
+        txtMarcaGrupo.setText(null);
     }
 
     /**
@@ -139,6 +141,8 @@ public class ProdutoViewAddMarcaGrupo extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Digite o nome da marca!");
             }
         }
+        
+    
     
     }//GEN-LAST:event_bntSalvarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
