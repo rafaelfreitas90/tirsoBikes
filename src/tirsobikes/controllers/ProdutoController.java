@@ -1,5 +1,7 @@
 package tirsobikes.controllers;
 
+import tirsobikes.entidades.Produto;
+import tirsobikes.entidades.Servico;
 import tirsobikes.views.produto.ProdutoView;
 
 /**
@@ -27,5 +29,16 @@ public class ProdutoController {
         }
         view.setVisible(true);
     }
+
+    public void exibirInterfaceGrafica(Produto produto) {
+        view = new ProdutoView(produto);  
+        view.setAlwaysOnTop(true);
+        view.setVisible(true);
+    }
     
+       public void exibirInterfaceGrafica(Servico servico) {
+        view = new ProdutoView(servico);  
+        view.setAlwaysOnTop(true);
+        view.setVisible(true);
+    }
 }

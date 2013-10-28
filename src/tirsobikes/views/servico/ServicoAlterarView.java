@@ -2,29 +2,30 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tirsobikes.views.produto;
+package tirsobikes.views.servico;
 
-import java.awt.Color;
+import tirsobikes.views.produto.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.DAO.ProdutoDAO;
-import tirsobikes.controllers.QuantidadeController;
-import tirsobikes.entidades.Estoque;
+import tirsobikes.DAO.ServicoDAO;
+import tirsobikes.controllers.ProdutoController;
 import tirsobikes.entidades.Produto;
+import tirsobikes.entidades.Servico;
 
 /**
  *
  * @author LuisHenrique
  */
-public class ProdutoEstoqueView extends javax.swing.JFrame {
+public class ServicoAlterarView extends javax.swing.JFrame {
 
     /**
      * Creates new form ProdutoEstoqueView
      */
-    public ProdutoEstoqueView() {
+    public ServicoAlterarView() {
         initComponents();
     }
 
@@ -43,11 +44,12 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaEstoque = new javax.swing.JTable();
-        bntLancar = new javax.swing.JButton();
+        tabelaServico = new javax.swing.JTable();
+        bntAlterar = new javax.swing.JButton();
+        bntAlterar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Estoque de Produtos");
+        setTitle("Lista de Produtos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -98,19 +100,19 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                     .addComponent(jButton1)))
         );
 
-        tabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cód.", "Descrição", "Marca", "Estoque Mín.", "Estoque Atual"
+                "Cód.", "Descrição", "Custo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -121,13 +123,21 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelaEstoque);
+        jScrollPane1.setViewportView(tabelaServico);
 
-        bntLancar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/add.png"))); // NOI18N
-        bntLancar.setText(" Adicionar Quantidade");
-        bntLancar.addActionListener(new java.awt.event.ActionListener() {
+        bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
+        bntAlterar.setText(" Alterar Produto");
+        bntAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntLancarActionPerformed(evt);
+                bntAlterarActionPerformed(evt);
+            }
+        });
+
+        bntAlterar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/cancel.png"))); // NOI18N
+        bntAlterar1.setText("  Excluir Produto");
+        bntAlterar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAlterar1ActionPerformed(evt);
             }
         });
 
@@ -140,9 +150,11 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bntLancar)))
+                        .addComponent(bntAlterar)
+                        .addGap(14, 14, 14)
+                        .addComponent(bntAlterar1)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,7 +165,9 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bntLancar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(bntAlterar1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -181,20 +195,20 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
         atualizarTabela();
     }//GEN-LAST:event_formWindowActivated
 
-    private void bntLancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLancarActionPerformed
+    private void bntAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterarActionPerformed
         //verifica produto selecionado
-        int linhaTabela = tabelaEstoque.getSelectedRow();
+        int linhaTabela = tabelaServico.getSelectedRow();
         
         if (linhaTabela > -1){
-            Produto produto = new Produto();
-            produto.setIdproduto(Integer.parseInt(tabelaEstoque.getValueAt(linhaTabela, 0).toString()));
+            Servico servico = new Servico();
+            servico.setIdservico(Integer.parseInt(tabelaServico.getValueAt(linhaTabela, 0).toString()));
             
-            ProdutoDAO dao = new ProdutoDAO();
-            produto = dao.procurarProduto(produto.getIdproduto());
+            ServicoDAO dao = new ServicoDAO();
+            servico = dao.procurarServico(servico.getIdservico());
             
-            QuantidadeController.getInstancia().exibirInterfaceGrafica(produto);
+            ProdutoController.getInstancia().exibirInterfaceGrafica(servico);
         }
-    }//GEN-LAST:event_bntLancarActionPerformed
+    }//GEN-LAST:event_bntAlterarActionPerformed
 
     private void txtBuscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyTyped
        
@@ -203,6 +217,10 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
     private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
          atualizarTabela();
     }//GEN-LAST:event_txtBuscaKeyReleased
+
+    private void bntAlterar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntAlterar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,52 +239,47 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProdutoEstoqueView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoAlterarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProdutoEstoqueView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoAlterarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProdutoEstoqueView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoAlterarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProdutoEstoqueView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoAlterarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProdutoEstoqueView().setVisible(true);
+                new ProdutoAlterarView().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntLancar;
+    private javax.swing.JButton bntAlterar;
+    private javax.swing.JButton bntAlterar1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaEstoque;
+    private javax.swing.JTable tabelaServico;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 
     private void atualizarTabela() {
         List<Produto> produtos = new ArrayList<Produto>();
-        ProdutoDAO dao = new ProdutoDAO();
-
-        List<Estoque> estoques = new ArrayList<Estoque>();
+        ProdutoDAO dao = new ProdutoDAO();       
+        
         produtos = dao.procurarProdutoNome(txtBusca.getText());
 
-        DefaultTableModel dtm = (DefaultTableModel) tabelaEstoque.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) tabelaServico.getModel();
         dtm.setRowCount(0);
-
+        
+        if (!produtos.isEmpty()){
         for (Produto p : produtos) {
-            Estoque estoque = new Estoque();
-            EstoqueDAO daoEstoque = new EstoqueDAO();
-            estoques = daoEstoque.ultimoEstoque(p.getIdproduto());
-
-            if (!estoques.isEmpty()) {
-                estoque = estoques.get(0);
-                dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdmarca().getDescricao(), p.getEstoqueMinimo(), estoque.getQuantidade()});
+                dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdmarca().getDescricao(), p.getIdcategoria().getDescricao(), p.getFornecedor(), p.getValorVenda() });
             }
 
         }

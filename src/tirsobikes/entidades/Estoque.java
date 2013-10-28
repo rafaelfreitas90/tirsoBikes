@@ -33,7 +33,12 @@ public class Estoque implements Serializable {
 
     public Estoque() {
     }
-
+    
+    public void atualizaEstoque(int quantidade){
+        this.quantidade += quantidade;
+    }
+    
+    
     public Estoque(Integer idestoque) {
         this.idestoque = idestoque;
     }

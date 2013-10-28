@@ -16,6 +16,7 @@ import tirsobikes.entidades.Marca;
  * @author LuisHenrique
  */
 public class MarcaDAO {
+
     private EntityManager manager;
 
     public MarcaDAO() {
@@ -44,7 +45,7 @@ public class MarcaDAO {
 
     public Marca procurarMarca(int idmarca) {
         return manager.find(Marca.class, idmarca);
-    }
+    }    
 
     public List<Marca> listaMarcas() {
         Query query = manager.createQuery("from Marca");

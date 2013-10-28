@@ -33,6 +33,26 @@ public class ProdutoView extends javax.swing.JFrame {
      */
     public ProdutoView() {
         initComponents();
+        preencherJcomboMarca();
+        preencherJcomboCategoria();
+        desabilitaTodosCampos();
+    }
+    private Produto produto = null;
+
+    public ProdutoView(Produto produto) {
+        this.produto = produto;
+        initComponents();
+        preencherJcomboMarca();
+        preencherJcomboCategoria();
+        setarCampos(produto);
+    }
+
+    private Servico servico = null;
+
+    public ProdutoView(Servico servico) {
+        this.servico = servico;
+        initComponents();
+        setarCamposServico(servico);
     }
 
     // Habilita apenas os campos necessario para o cadastro de Serviço
@@ -203,6 +223,12 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel10.setText("( % ) Margem");
 
+        txtMargem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMargemKeyReleased(evt);
+            }
+        });
+
         jLabel11.setText("%");
 
         txtValorVenda.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -300,11 +326,21 @@ public class ProdutoView extends javax.swing.JFrame {
                 jComboMarcaActionPerformed(evt);
             }
         });
+        jComboMarca.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboMarcaFocusGained(evt);
+            }
+        });
 
         jComboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboCategoriaActionPerformed(evt);
+            }
+        });
+        jComboCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboCategoriaFocusGained(evt);
             }
         });
 
@@ -479,14 +515,10 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAddMarcaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        preencherJcomboMarca();
-        preencherJcomboCategoria();
-        desabilitaTodosCampos();
-
     }//GEN-LAST:event_formWindowOpened
 
     private void jComboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMarcaActionPerformed
-        // abre view para cadastar marca
+        // abre view para cadastar marca        
         if (jComboMarca.getSelectedItem() != null && jComboMarca.getSelectedItem().equals("+ Adicionar..")) {
             MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
         }
@@ -526,9 +558,22 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAddCategoriaActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        preencherJcomboCategoria();
-        preencherJcomboMarca();
     }//GEN-LAST:event_formWindowActivated
+
+    private void jComboMarcaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboMarcaFocusGained
+        preencherJcomboMarca();
+
+    }//GEN-LAST:event_jComboMarcaFocusGained
+
+    private void jComboCategoriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboCategoriaFocusGained
+        preencherJcomboCategoria();
+    }//GEN-LAST:event_jComboCategoriaFocusGained
+
+    private void txtMargemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMargemKeyReleased
+        if (!txtMargem.getText().isEmpty()) {
+            bntAtualizarValor.doClick();
+        }
+    }//GEN-LAST:event_txtMargemKeyReleased
 
     /**
      * @param args the command line arguments
@@ -604,6 +649,7 @@ public class ProdutoView extends javax.swing.JFrame {
         Produto produto = new Produto();
         Marca marca = new Marca();
         Categoria categoria = new Categoria();
+        ProdutoDAO dao = new ProdutoDAO();
 
         // verifica se o campo contem algum valor, pois o campos pode ser nulo
         if (!txtCodigoDeBarra.getText().isEmpty()) {
@@ -620,8 +666,12 @@ public class ProdutoView extends javax.swing.JFrame {
         produto.setMargem(txtMargem.getText());
         produto.getValorVenda();
 
-        ProdutoDAO dao = new ProdutoDAO();
-        produto = dao.salvarProduto(produto);
+        if (!txtCodigo.getText().isEmpty()) {
+            produto.setIdproduto(Integer.parseInt(txtCodigo.getText()));
+            dao.atualizarProduto(produto);
+        } else {
+            produto = dao.salvarProduto(produto);
+        }
 
         //salva estoque
         Estoque estoque = new Estoque();
@@ -633,15 +683,18 @@ public class ProdutoView extends javax.swing.JFrame {
         estoque.setQuantidade(Integer.parseInt(txtEstoqueAtual.getText()));
         daoEstoque.salvarEstoque(estoque);
 
-
     }
 
     private void salvarServico() {
         Servico servico = new Servico();
+        ServicoDAO dao = new ServicoDAO();
+
         servico.setDescricao(txtDescricao.getText());
         servico.setValor(Double.parseDouble(txtValorVenda.getText()));
 
-        ServicoDAO dao = new ServicoDAO();
+        if (txtCodigo.getText().isEmpty()) {
+            servico.setIdservico(Integer.parseInt(null));
+        }
         dao.salvarServico(servico);
 
     }
@@ -674,7 +727,6 @@ public class ProdutoView extends javax.swing.JFrame {
             }
         }
         jComboCategoria.addItem("+ Adicionar..");
-
     }
 
     // zera todos os campos da view
@@ -764,5 +816,45 @@ public class ProdutoView extends javax.swing.JFrame {
             return false;
         }
         return true;
+    }
+
+    private void setarCampos(Produto produto) {
+        jComboTipo.setSelectedIndex(1);
+        txtCodigo.setText(produto.getIdproduto().toString());
+        if (produto.getCodigoDeBarras() != null) {
+            txtCodigoDeBarra.setText(produto.getCodigoDeBarras().toString());
+        }
+        txtDescricao.setText(produto.getDescricao());
+
+        MarcaDAO daoMarca = new MarcaDAO();
+        Marca marca = daoMarca.procurarMarca(produto.getIdmarca().getIdmarca());
+        jComboMarca.getModel().setSelectedItem(marca);
+
+        CategoriaDAO daoCategoria = new CategoriaDAO();
+        Categoria categoria = daoCategoria.procurarCategoria(produto.getIdcategoria().getIdcategoria());
+        jComboCategoria.getModel().setSelectedItem(categoria);
+
+        txtFornecedor.setText(produto.getFornecedor());
+
+        EstoqueDAO daoEstoque = new EstoqueDAO();
+        List<Estoque> estoques = daoEstoque.ultimoEstoque(produto.getIdproduto());
+        if (!estoques.isEmpty()) {
+            Estoque estoque = estoques.get(0);
+            txtEstoqueAtual.setText(String.valueOf(estoque.getQuantidade()));
+        }
+
+        txtEstoqueMinimo.setText(String.valueOf(produto.getEstoqueMinimo()));
+
+        txtValorCusto.setText(String.valueOf(produto.getValorCusto()));
+        txtMargem.setText(String.valueOf(produto.getMargem()));
+        txtValorVenda.setText(String.valueOf(produto.getValorVenda()));
+
+    }
+
+    private void setarCamposServico(Servico servico) {
+        jComboTipo.setSelectedIndex(0);
+        txtCodigo.setText(servico.getIdservico().toString());
+        txtDescricao.setText(servico.getDescricao());
+        txtValorVenda.setText(servico.getValor().toString());
     }
 }
