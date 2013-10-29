@@ -19,13 +19,7 @@ public class TirsoBikes {
 
     public static void main(String[] args) {
 
-<<<<<<< HEAD
 
-
-
-
-
-=======
 //        Estoque e = new Estoque();
 //        Produto p = new Produto();
 //        EstoqueDAO dao = new EstoqueDAO();
@@ -40,6 +34,6 @@ public class TirsoBikes {
         
         
         PrincipalController.getInstancia().exibirInterfaceGrafica();
->>>>>>> 440650086568349834966d0d1e884d57c751361a
+
     }
 }

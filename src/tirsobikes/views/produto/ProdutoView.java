@@ -511,13 +511,8 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboTipoActionPerformed
 
     private void bntAddMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddMarcaActionPerformed
-<<<<<<< HEAD
         MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
-=======
-//            MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
-        ProdutoViewAddMarcaGrupo view = new ProdutoViewAddMarcaGrupo("Marca");
-        view.setVisible(true);        
->>>>>>> 440650086568349834966d0d1e884d57c751361a
+
     }//GEN-LAST:event_bntAddMarcaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -722,9 +717,9 @@ public class ProdutoView extends javax.swing.JFrame {
 
     // preenche o dropdown com as categorias dos banco
     private void preencherJcomboCategoria() {
-       
+
         CategoriaDAO dao = new CategoriaDAO();
-         List<Categoria> categorias = new ArrayList<Categoria>();
+        List<Categoria> categorias = new ArrayList<Categoria>();
         categorias = dao.listaCategorias();
         jComboCategoria.removeAllItems();
         jComboCategoria.addItem("Selecione uma Categoria");
