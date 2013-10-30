@@ -50,4 +50,10 @@ public class ServicoDAO {
         Query query = manager.createQuery("from Servico");
         return query.getResultList();
     }
+    
+    public List<Servico> procurarServicoNome (String descricao) {
+        Query query = manager.createQuery("FROM Servico WHERE descricao LIKE (:searchKeyword)");
+        query.setParameter("searchKeyword", "%"+descricao+"%");
+        return query.getResultList();
+    }
 }

@@ -46,7 +46,6 @@ public class ProdutoView extends javax.swing.JFrame {
         preencherJcomboCategoria();
         setarCampos(produto);
     }
-
     private Servico servico = null;
 
     public ProdutoView(Servico servico) {
@@ -76,7 +75,6 @@ public class ProdutoView extends javax.swing.JFrame {
         txtMargem.setEnabled(true);
         txtCodigoDeBarra.setEnabled(true);
         txtDescricao.setEnabled(true);
-        bntAtualizarValor.setEnabled(true);
 
     }
 
@@ -94,7 +92,6 @@ public class ProdutoView extends javax.swing.JFrame {
         txtMargem.setEnabled(false);
         txtCodigoDeBarra.setEnabled(false);
         txtDescricao.setEnabled(false);
-        bntAtualizarValor.setEnabled(false);
     }
 
     /**
@@ -131,7 +128,6 @@ public class ProdutoView extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtValorVenda = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        bntAtualizarValor = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         txtFornecedor = new javax.swing.JTextField();
         bntSalvar = new javax.swing.JButton();
@@ -206,7 +202,7 @@ public class ProdutoView extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtEstoqueMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,7 +210,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PREÇO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 8))); // NOI18N
@@ -236,13 +232,6 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel13.setText("Valor VENDA R$");
 
-        bntAtualizarValor.setText("Atualizar Valor VENDA");
-        bntAtualizarValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntAtualizarValorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -263,11 +252,8 @@ public class ProdutoView extends javax.swing.JFrame {
                             .addComponent(txtValorCusto)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(txtMargem, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel11))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(bntAtualizarValor, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addComponent(jLabel11)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -282,8 +268,6 @@ public class ProdutoView extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(txtMargem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bntAtualizarValor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -292,17 +276,16 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel12.setText("Fornecedor");
 
-        bntSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/save.png"))); // NOI18N
         bntSalvar.setText("   SALVAR");
         bntSalvar.setMargin(new java.awt.Insets(2, 2, 2, 14));
+        bntSalvar.setPreferredSize(new java.awt.Dimension(133, 27));
         bntSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntSalvarActionPerformed(evt);
             }
         });
 
-        bntCancelar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bntCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/cancel.png"))); // NOI18N
         bntCancelar.setText(" CANCELAR");
         bntCancelar.setMargin(new java.awt.Insets(2, 2, 2, 2));
@@ -392,15 +375,15 @@ public class ProdutoView extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(2, 2, 2)
-                                                .addComponent(bntCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
                                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bntCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -435,42 +418,76 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addGap(1, 1, 1)
                 .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bntCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(bntCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                        .addGap(9, 9, 9)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jComboCategoriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboCategoriaFocusGained
+        preencherJcomboCategoria();
+    }//GEN-LAST:event_jComboCategoriaFocusGained
+
+    private void jComboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCategoriaActionPerformed
+        // abre view para cadastar categoria/grupo
+        if (jComboCategoria.getSelectedItem() != null && jComboCategoria.getSelectedItem().equals("+ Adicionar..")) {
+            CategoriaGrupoController.getInstancia().exibirInterfaceGrafica("Categoria / Grupo");
+        }
+    }//GEN-LAST:event_jComboCategoriaActionPerformed
+
+    private void jComboMarcaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboMarcaFocusGained
+        preencherJcomboMarca();
+    }//GEN-LAST:event_jComboMarcaFocusGained
+
+    private void jComboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMarcaActionPerformed
+        // abre view para cadastar marca
+        if (jComboMarca.getSelectedItem() != null && jComboMarca.getSelectedItem().equals("+ Adicionar..")) {
+            MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
+        }
+    }//GEN-LAST:event_jComboMarcaActionPerformed
+
+    private void bntAddCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddCategoriaActionPerformed
+        CategoriaGrupoController.getInstancia().exibirInterfaceGrafica("Categoria / Grupo");
+    }//GEN-LAST:event_bntAddCategoriaActionPerformed
+
+    private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
+        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
+        if (resposta == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_bntCancelarActionPerformed
+
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         // 1 = "Produto" selecionado
         // 2 = "Serviço" selecionado
-        // 0 = "Selecione" selecionado  
+        // 0 = "Selecione" selecionado
 
         if (jComboTipo.getSelectedIndex() == 1) {
             if (!validaCamposProduto()) {
@@ -493,8 +510,18 @@ public class ProdutoView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntSalvarActionPerformed
 
+    private void txtMargemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMargemKeyReleased
+        if (!txtMargem.getText().isEmpty()) {
+            atualizaValorVenda();
+        }
+    }//GEN-LAST:event_txtMargemKeyReleased
+
+    private void bntAddMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddMarcaActionPerformed
+        MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
+    }//GEN-LAST:event_bntAddMarcaActionPerformed
+
     private void jComboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTipoActionPerformed
-        // 0 = "Selecione" selecionado  
+        // 0 = "Selecione" selecionado
         if (jComboTipo.getSelectedIndex() == 0) {
             desabilitaTodosCampos();
         }
@@ -509,72 +536,6 @@ public class ProdutoView extends javax.swing.JFrame {
             exibeCamposServico();
         }
     }//GEN-LAST:event_jComboTipoActionPerformed
-
-    private void bntAddMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddMarcaActionPerformed
-        MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
-
-    }//GEN-LAST:event_bntAddMarcaActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-    }//GEN-LAST:event_formWindowOpened
-
-    private void jComboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMarcaActionPerformed
-        // abre view para cadastar marca        
-        if (jComboMarca.getSelectedItem() != null && jComboMarca.getSelectedItem().equals("+ Adicionar..")) {
-            MarcaController.getInstancia().exibirInterfaceGrafica("Marca");
-        }
-    }//GEN-LAST:event_jComboMarcaActionPerformed
-
-    private void jComboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCategoriaActionPerformed
-        // abre view para cadastar categoria/grupo
-        if (jComboCategoria.getSelectedItem() != null && jComboCategoria.getSelectedItem().equals("+ Adicionar..")) {
-            CategoriaGrupoController.getInstancia().exibirInterfaceGrafica("Categoria / Grupo");
-        }
-    }//GEN-LAST:event_jComboCategoriaActionPerformed
-
-    private void bntAtualizarValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtualizarValorActionPerformed
-        if (!(txtValorCusto.getText().isEmpty()) && (!txtMargem.getText().isEmpty())) {
-            Produto produto = new Produto();
-            produto.setValorCusto(txtValorCusto.getText());
-            produto.setMargem(txtMargem.getText());
-
-            // atualiza valor venda
-            String valorVenda = produto.getValorVenda().toString();
-            valorVenda = valorVenda.replace(".", ",");
-            txtValorVenda.setText(valorVenda);
-        } else {
-            JOptionPane.showMessageDialog(null, "O campo Valor Custo e Margem de Lucro são obrigatórios para o calculo!");
-        }
-    }//GEN-LAST:event_bntAtualizarValorActionPerformed
-
-    private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
-        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
-        if (resposta == JOptionPane.YES_OPTION) {
-            this.dispose();
-        }
-    }//GEN-LAST:event_bntCancelarActionPerformed
-
-    private void bntAddCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddCategoriaActionPerformed
-        CategoriaGrupoController.getInstancia().exibirInterfaceGrafica("Categoria / Grupo");
-    }//GEN-LAST:event_bntAddCategoriaActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-    }//GEN-LAST:event_formWindowActivated
-
-    private void jComboMarcaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboMarcaFocusGained
-        preencherJcomboMarca();
-
-    }//GEN-LAST:event_jComboMarcaFocusGained
-
-    private void jComboCategoriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboCategoriaFocusGained
-        preencherJcomboCategoria();
-    }//GEN-LAST:event_jComboCategoriaFocusGained
-
-    private void txtMargemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMargemKeyReleased
-        if (!txtMargem.getText().isEmpty()) {
-            bntAtualizarValor.doClick();
-        }
-    }//GEN-LAST:event_txtMargemKeyReleased
 
     /**
      * @param args the command line arguments
@@ -613,7 +574,6 @@ public class ProdutoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAddCategoria;
     private javax.swing.JButton bntAddMarca;
-    private javax.swing.JButton bntAtualizarValor;
     private javax.swing.JToggleButton bntCancelar;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JComboBox jComboCategoria;
@@ -645,6 +605,21 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorCusto;
     private javax.swing.JTextField txtValorVenda;
     // End of variables declaration//GEN-END:variables
+
+    private void atualizaValorVenda() {
+        if (!(txtValorCusto.getText().isEmpty()) && (!txtMargem.getText().isEmpty())) {
+            Produto produto = new Produto();
+            produto.setValorCusto(txtValorCusto.getText());
+            produto.setMargem(txtMargem.getText());
+
+            // atualiza valor venda
+            String valorVenda = produto.getValorVenda().toString();
+            valorVenda = valorVenda.replace(".", ",");
+            txtValorVenda.setText(valorVenda);
+        } else {
+            JOptionPane.showMessageDialog(null, "O campo Valor Custo e Margem de Lucro são obrigatórios para o calculo!");
+        }
+    }
 
     private void salvarProduto() {
         Produto produto = new Produto();
@@ -691,13 +666,14 @@ public class ProdutoView extends javax.swing.JFrame {
         ServicoDAO dao = new ServicoDAO();
 
         servico.setDescricao(txtDescricao.getText());
-        servico.setValor(Double.parseDouble(txtValorVenda.getText()));
+        servico.setValor(txtValorVenda.getText());
 
-        if (txtCodigo.getText().isEmpty()) {
-            servico.setIdservico(Integer.parseInt(null));
+        if (!txtCodigo.getText().isEmpty()) {
+            servico.setIdservico(Integer.parseInt(txtCodigo.getText()));
+            dao.atualizarServico(servico);
+        } else {
+            dao.salvarServico(servico);
         }
-        dao.salvarServico(servico);
-
     }
 
     // preenche o dropdown com as marcas dos banco
@@ -812,7 +788,9 @@ public class ProdutoView extends javax.swing.JFrame {
             return false;
         }
 
-        if (txtValorVenda.getText().isEmpty() || !Validacoes.validaNumero(txtValorVenda.getText())) {
+        String valorVenda = txtValorVenda.getText();
+        valorVenda = valorVenda.replace(",", ".");
+        if (txtValorVenda.getText().isEmpty() || !Validacoes.validaNumero(valorVenda)) {
             JOptionPane.showMessageDialog(null, "Valor de venda inválido");
             txtValorVenda.requestFocus();
             return false;
@@ -847,16 +825,17 @@ public class ProdutoView extends javax.swing.JFrame {
 
         txtEstoqueMinimo.setText(String.valueOf(produto.getEstoqueMinimo()));
 
-        txtValorCusto.setText(String.valueOf(produto.getValorCusto()));
-        txtMargem.setText(String.valueOf(produto.getMargem()));
-        txtValorVenda.setText(String.valueOf(produto.getValorVenda()));
+
+        txtValorCusto.setText(produto.getValorCustoString());
+        txtMargem.setText(produto.getMargemString());
+        txtValorVenda.setText(produto.getValorVendaString());
 
     }
 
     private void setarCamposServico(Servico servico) {
-        jComboTipo.setSelectedIndex(0);
+        jComboTipo.setSelectedIndex(2);
         txtCodigo.setText(servico.getIdservico().toString());
         txtDescricao.setText(servico.getDescricao());
-        txtValorVenda.setText(servico.getValor().toString());
+        txtValorVenda.setText(servico.getValorString());
     }
 }

@@ -46,17 +46,17 @@ public class ServicoAlterarView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaServico = new javax.swing.JTable();
         bntAlterar = new javax.swing.JButton();
-        bntAlterar1 = new javax.swing.JButton();
+        bntExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Lista de Produtos");
+        setTitle("Lista de Serviços");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PESQUISAR PRODUTO"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PESQUISAR SERVIÇO"));
 
         txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -126,18 +126,18 @@ public class ServicoAlterarView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaServico);
 
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
-        bntAlterar.setText(" Alterar Produto");
+        bntAlterar.setText(" Alterar Serviço");
         bntAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntAlterarActionPerformed(evt);
             }
         });
 
-        bntAlterar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/cancel.png"))); // NOI18N
-        bntAlterar1.setText("  Excluir Produto");
-        bntAlterar1.addActionListener(new java.awt.event.ActionListener() {
+        bntExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/cancel.png"))); // NOI18N
+        bntExcluir.setText("  Excluir Serviço");
+        bntExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntAlterar1ActionPerformed(evt);
+                bntExcluirActionPerformed(evt);
             }
         });
 
@@ -152,9 +152,9 @@ public class ServicoAlterarView extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bntAlterar)
-                        .addGap(14, 14, 14)
-                        .addComponent(bntAlterar1)))
+                        .addComponent(bntAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -167,9 +167,11 @@ public class ServicoAlterarView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(bntAlterar1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                    .addComponent(bntExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        jPanel2.getAccessibleContext().setAccessibleName("PESQUISAR SERVIÇO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,9 +220,9 @@ public class ServicoAlterarView extends javax.swing.JFrame {
          atualizarTabela();
     }//GEN-LAST:event_txtBuscaKeyReleased
 
-    private void bntAlterar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterar1ActionPerformed
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bntAlterar1ActionPerformed
+    }//GEN-LAST:event_bntExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,13 +254,13 @@ public class ServicoAlterarView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProdutoAlterarView().setVisible(true);
+                new ServicoAlterarView().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAlterar;
-    private javax.swing.JButton bntAlterar1;
+    private javax.swing.JButton bntExcluir;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -269,17 +271,17 @@ public class ServicoAlterarView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void atualizarTabela() {
-        List<Produto> produtos = new ArrayList<Produto>();
-        ProdutoDAO dao = new ProdutoDAO();       
+        List<Servico> servicos = new ArrayList<Servico>();
+        ServicoDAO dao = new ServicoDAO();       
         
-        produtos = dao.procurarProdutoNome(txtBusca.getText());
+        servicos = dao.procurarServicoNome(txtBusca.getText());
 
         DefaultTableModel dtm = (DefaultTableModel) tabelaServico.getModel();
         dtm.setRowCount(0);
         
-        if (!produtos.isEmpty()){
-        for (Produto p : produtos) {
-                dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdmarca().getDescricao(), p.getIdcategoria().getDescricao(), p.getFornecedor(), p.getValorVenda() });
+        if (!servicos.isEmpty()){
+        for (Servico c : servicos) {
+                dtm.addRow(new Object[]{c.getIdservico(), c.getDescricao(), c.getValor() });
             }
 
         }

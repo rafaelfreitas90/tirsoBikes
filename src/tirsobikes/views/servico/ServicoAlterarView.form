@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Lista de Produtos"/>
+    <Property name="title" type="java.lang.String" value="Lista de Servi&#xe7;os"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -52,9 +52,9 @@
                       <Component id="jScrollPane1" alignment="1" pref="579" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="bntAlterar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                          <Component id="bntAlterar1" min="-2" max="-2" attributes="0"/>
+                          <Component id="bntAlterar" min="-2" pref="138" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="bntExcluir" min="-2" pref="137" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -71,7 +71,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="bntAlterar" alignment="3" pref="45" max="32767" attributes="0"/>
-                      <Component id="bntAlterar1" alignment="3" pref="45" max="32767" attributes="0"/>
+                      <Component id="bntExcluir" alignment="3" pref="45" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -83,10 +83,13 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="PESQUISAR PRODUTO"/>
+                <TitledBorder title="PESQUISAR SERVI&#xc7;O"/>
               </Border>
             </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="PESQUISAR SERVI&#xc7;O"/>
+          </AccessibilityProperties>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -187,21 +190,21 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/tirsobikes/imgs/alterar.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value=" Alterar Produto"/>
+            <Property name="text" type="java.lang.String" value=" Alterar Servi&#xe7;o"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntAlterarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bntAlterar1">
+        <Component class="javax.swing.JButton" name="bntExcluir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/tirsobikes/imgs/cancel.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="  Excluir Produto"/>
+            <Property name="text" type="java.lang.String" value="  Excluir Servi&#xe7;o"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntAlterar1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntExcluirActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
