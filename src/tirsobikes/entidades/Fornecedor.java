@@ -73,6 +73,16 @@ public class Fornecedor implements Serializable {
     private String im;
     @Column(name = "email")
     private String email;
+    @Column(name="cnpj")
+    private String cnpj;
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
     public Fornecedor() {
     }

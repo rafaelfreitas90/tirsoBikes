@@ -1,5 +1,7 @@
 package tirsobikes.views.fornecedor;
 
+import javax.swing.JOptionPane;
+import tirsobikes.DAO.FornecedorDAO;
 import tirsobikes.entidades.Fornecedor;
 
 /**
@@ -7,6 +9,8 @@ import tirsobikes.entidades.Fornecedor;
  * @author Rafael
  */
 public class FornecedorView extends javax.swing.JFrame {
+
+    FornecedorDAO dao = new FornecedorDAO();
 
     public FornecedorView() {
         initComponents();
@@ -48,6 +52,11 @@ public class FornecedorView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Fornecedor");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nome / Razao Social");
 
@@ -57,7 +66,7 @@ public class FornecedorView extends javax.swing.JFrame {
 
         jLabel4.setText("Cidade");
 
-        comboUF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ".", "AL", "SP", "MG", "MT", "DF", "RS", "SC", "CE" }));
+        comboUF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PR", "PB", "PA", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SE", "SP", "TO" }));
 
         jLabel5.setText("UF");
 
@@ -80,10 +89,20 @@ public class FornecedorView extends javax.swing.JFrame {
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/save.png"))); // NOI18N
         btnSalvar.setText("SALVAR");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/cancel.png"))); // NOI18N
         btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -227,7 +246,28 @@ public class FornecedorView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if(verificaCampos()){
+        dao.salvarFornecedor(sincronizarViewModel());
+        JOptionPane.showMessageDialog(null, "Fornecedor Salvo com sucesso!");
+        limpaCampos();
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
+        if (resposta == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
+        if (resposta == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
@@ -260,11 +300,98 @@ public class FornecedorView extends javax.swing.JFrame {
     private javax.swing.JTextField txtVendedor;
     // End of variables declaration//GEN-END:variables
 
-public Fornecedor sincronizarViewModel(){
-    Fornecedor model = new Fornecedor();
-    
-    model.setNomeRazao(null);
-    
-    return model;
-}
+    public Fornecedor sincronizarViewModel() {
+        Fornecedor model = new Fornecedor();
+
+        model.setNomeRazao(txtNomeRazao.getText());
+        model.setNomeFantasia(txtNomeFantasia.getText());
+        model.setEndereco(txtEndereco.getText());
+        model.setCidade(txtCidade.getText());
+        model.setUf(comboUF.getSelectedItem().toString());
+        model.setCep(txtCEP.getText());
+        model.setIe(txtIE.getText());
+        model.setIm(txtIm.getText());
+        model.setCnpj(txtCnpj.getText());
+        model.setEmail(txtEmail.getText());
+        model.setTelefone1(txtTelefone1.getText());
+        model.setTelefone2(txtTelefone2.getText());
+        model.setVendedor(txtVendedor.getText());
+
+        return model;
+    }
+
+    public boolean verificaCampos() {
+
+       if (txtNomeRazao.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Digite o nome/razão social ");
+            txtNomeRazao.requestFocus();
+            return false;
+        }
+
+        if (txtNomeFantasia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Verifique o campo Nome Fantasia !");
+            txtNomeFantasia.requestFocus();
+             return false;
+        }
+
+        if (txtEndereco.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Verifique o campo Endereço !");
+            txtEndereco.requestFocus();
+            return false;
+        }
+
+        if (txtCEP.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Verifique o campo CEP!");
+            txtCEP.requestFocus();
+            return false;
+        }
+
+        if (txtCidade.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Verifique o campo Cidade! ");
+            txtCidade.requestFocus();
+            return false;
+        }
+
+        if (txtCnpj.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Verifique o campo CNPJ!");
+            txtCnpj.requestFocus();
+            return false;
+        }
+
+        if (txtEmail.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Verifique o campo E-mail !");
+            txtEmail.requestFocus();
+            return false;
+        }
+
+        if (txtTelefone1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Verifique o campo Telefone !");
+            txtTelefone1.requestFocus();
+            return false;
+        }
+
+        if (txtVendedor.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Verifique o campo Vendedor !");
+            txtVendedor.requestFocus();
+            return false;
+        }
+            return true;
+    }
+
+    private void limpaCampos() {
+        
+        txtCEP.setText("");
+        txtCidade.setText("");
+        txtCnpj.setText("");
+        txtEmail.setText("");
+        txtEndereco.setText("");
+        txtIE.setText("");
+        txtIm.setText("");
+        txtNomeFantasia.setText("");
+        txtNomeRazao.setText("");
+        txtTelefone1.setText("");
+        txtTelefone2.setText("");
+        txtVendedor.setText("");
+
+    }
 }
