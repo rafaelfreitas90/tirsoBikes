@@ -2,8 +2,10 @@ package tirsobikes.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -16,6 +18,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "produto")
 @XmlRootElement
 public class Produto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,8 +60,6 @@ public class Produto implements Serializable {
     public Produto(Integer idproduto) {
         this.idproduto = idproduto;
     }
-
-    
 
     public Integer getIdproduto() {
         return idproduto;
@@ -104,24 +105,44 @@ public class Produto implements Serializable {
         return valorCusto;
     }
 
+    public String getValorCustoString() {
+        String valorNovo = String.valueOf(valorCusto);
+        String replace = valorNovo.replace(".", ",");
+        return replace;
+    }
+
     public void setValorCusto(Double valorCusto) {
         this.valorCusto = valorCusto;
     }
-    
+
     public void setValorCusto(String valorCusto) {
         valorCusto = valorCusto.replace(",", ".");
         this.valorCusto = Double.parseDouble(valorCusto);
     }
 
     public Double getValorVenda() {
-        this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));        
+        this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));
         return valorVenda;
+    }
+
+    public String getValorVendaString() {
+        this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));
+        String valorNovo = String.valueOf(valorVenda);
+        String replace = valorNovo.replace(".", ",");
+        return replace;
+    }
+
+    public String getValorVendaView() {
+        this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(this.valorVenda);
+        return valor;
     }
 
     public void setValorVenda(Double valorVenda) {
         this.valorVenda = valorVenda;
     }
-    
+
     public void setValorVenda(String valorVenda) {
         valorVenda = valorVenda.replace(",", ".");
         this.valorVenda = Double.parseDouble(valorVenda);
@@ -131,15 +152,20 @@ public class Produto implements Serializable {
         return margem;
     }
 
+    public String getMargemString() {
+        String valorNovo = String.valueOf(margem);
+        String replace = valorNovo.replace(".", ",");
+        return replace;
+    }
+
     public void setMargem(Double margem) {
         this.margem = margem;
     }
-    
+
     public void setMargem(String margem) {
         margem = margem.replace(",", ".");
         this.margem = Double.parseDouble(margem);
     }
-    
 
     public Marca getIdmarca() {
         return idmarca;
@@ -190,5 +216,4 @@ public class Produto implements Serializable {
     public String toString() {
         return "tirsobikes.entidades.Produto[ idproduto=" + idproduto + " ]";
     }
-
 }

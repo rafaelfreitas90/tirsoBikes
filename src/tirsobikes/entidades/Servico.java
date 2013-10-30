@@ -64,9 +64,20 @@ public class Servico implements Serializable {
     public Double getValor() {
         return valor;
     }
+    
+    public String getValorString() {
+        String valorNovo = String.valueOf(valor);
+        String replace = valorNovo.replace(".", ",");
+        return replace;
+    }
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+    
+    public void setValor(String valor) {
+        valor = valor.replace(",", ".");
+        this.valor = Double.parseDouble(valor);
     }
 
     @Override

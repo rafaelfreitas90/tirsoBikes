@@ -7,6 +7,7 @@ package tirsobikes.views.produto;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import tirsobikes.DAO.CategoriaDAO;
@@ -156,7 +157,7 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bntAlterar)
+                        .addComponent(bntAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
                         .addComponent(bntAlterar1)))
                 .addContainerGap())
@@ -202,28 +203,44 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
     private void bntAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterarActionPerformed
         //verifica produto selecionado
         int linhaTabela = tabelaProduto.getSelectedRow();
-        
-        if (linhaTabela > -1){
+
+        if (linhaTabela > -1) {
             Produto produto = new Produto();
             produto.setIdproduto(Integer.parseInt(tabelaProduto.getValueAt(linhaTabela, 0).toString()));
-            
+
             ProdutoDAO dao = new ProdutoDAO();
             produto = dao.procurarProduto(produto.getIdproduto());
-            
+
             ProdutoController.getInstancia().exibirInterfaceGrafica(produto);
         }
     }//GEN-LAST:event_bntAlterarActionPerformed
 
     private void txtBuscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyTyped
-       
     }//GEN-LAST:event_txtBuscaKeyTyped
 
     private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
-         atualizarTabela();
+        atualizarTabela();
     }//GEN-LAST:event_txtBuscaKeyReleased
 
     private void bntAlterar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterar1ActionPerformed
-        // TODO add your handling code here:
+        //verifica produto selecionado
+        int linhaTabela = tabelaProduto.getSelectedRow();
+
+        if (linhaTabela > -1) {
+            Produto produto = new Produto();
+
+            ProdutoDAO dao = new ProdutoDAO();
+            produto = dao.procurarProduto(Integer.parseInt(tabelaProduto.getValueAt(linhaTabela, 0).toString()));
+
+            Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja\n excluir o produto: " + produto.getDescricao() + "?");
+            if (resposta == JOptionPane.YES_OPTION) {
+                if (produto != null) {
+                    dao.deletarProduto(produto);
+                    JOptionPane.showMessageDialog(null, "Produto apagado com sucesso!");
+                }
+            }
+
+        }
     }//GEN-LAST:event_bntAlterar1ActionPerformed
 
     /**
@@ -274,16 +291,16 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
 
     private void atualizarTabela() {
         List<Produto> produtos = new ArrayList<Produto>();
-        ProdutoDAO dao = new ProdutoDAO();       
-        
+        ProdutoDAO dao = new ProdutoDAO();
+
         produtos = dao.procurarProdutoNome(txtBusca.getText());
 
         DefaultTableModel dtm = (DefaultTableModel) tabelaProduto.getModel();
         dtm.setRowCount(0);
-        
-        if (!produtos.isEmpty()){
-        for (Produto p : produtos) {
-                dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdmarca().getDescricao(), p.getIdcategoria().getDescricao(), p.getFornecedor(), p.getValorVenda() });
+
+        if (!produtos.isEmpty()) {
+            for (Produto p : produtos) {
+                dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdmarca().getDescricao(), p.getIdcategoria().getDescricao(), p.getFornecedor(), p.getValorVendaView()});
             }
 
         }
