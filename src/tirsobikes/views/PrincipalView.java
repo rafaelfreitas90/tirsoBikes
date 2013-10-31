@@ -1,6 +1,5 @@
 package tirsobikes.views;
 
-import java.awt.BorderLayout;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,18 +15,9 @@ import tirsobikes.controllers.ProdutoController;
 public class PrincipalView extends javax.swing.JFrame {
 
     public PrincipalView() {
-        initComponents();
-        jPanel1.setLayout(new BorderLayout());
-        jPanel1.add(jLabel2, BorderLayout.CENTER);
-        jPanel1.add(jLabel1, BorderLayout.LINE_END);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        initComponents();        
+       setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-//    
-//public Tela() {    
-//    ...    
-//    panel.setLayout(new BorderLayout());    
-//    panel.add(label, BorderLayput.CENTER);    
-//}  
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,7 +29,6 @@ public class PrincipalView extends javax.swing.JFrame {
         btnNovoProduto = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -94,10 +83,6 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jLabel1.setText("Usuario");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/logo tirso em curva corew 11.png"))); // NOI18N
-        jLabel2.setAlignmentY(0.0F);
-        jLabel2.setAutoscrolls(true);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,18 +92,12 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(193, 193, 193))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
                 .addComponent(jLabel1))
         );
 
@@ -173,14 +152,14 @@ public class PrincipalView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        ProdutoController.getInstancia().exibirInterfaceGrafica();
+       ProdutoController.getInstancia().exibirInterfaceGrafica();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -188,14 +167,16 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdutoActionPerformed
-        ProdutoController.getInstancia().exibirInterfaceGrafica();
+       ProdutoController.getInstancia().exibirInterfaceGrafica();
     }//GEN-LAST:event_btnNovoProdutoActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+        
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Sair do Sistema ?");
+      Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Sair do Sistema ?");
         if (resposta == JOptionPane.YES_OPTION) {
             this.dispose();
         }
@@ -208,11 +189,11 @@ public class PrincipalView extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         FornecedorAlterarController.getInstancia().exibirInterfaceGrafica();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoProduto;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
