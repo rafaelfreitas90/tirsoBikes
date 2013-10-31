@@ -31,8 +31,7 @@ public class ProdutoController {
     }
 
     public void exibirInterfaceGrafica(Produto produto) {
-        view = new ProdutoView(produto);  
-        view.setAlwaysOnTop(true);
+        view = new ProdutoView(produto);          
         view.setVisible(true);
     }
     

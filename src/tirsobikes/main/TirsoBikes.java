@@ -10,6 +10,7 @@ import tirsobikes.controllers.ProdutoController;
 import tirsobikes.entidades.Estoque;
 import tirsobikes.entidades.Marca;
 import tirsobikes.entidades.Produto;
+import tirsobikes.views.PrincipalView;
 
 /**
  *
@@ -19,20 +20,23 @@ public class TirsoBikes {
 
     public static void main(String[] args) {
 
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 
-//        Estoque e = new Estoque();
-//        Produto p = new Produto();
-//        EstoqueDAO dao = new EstoqueDAO();
-//        ProdutoDAO daop = new ProdutoDAO();
-//        Date data = new Date(2013, 03, 11);
-//
-//        e.setData(data);
-//        
-//
-//        e.setIdproduto(null);
-//        dao.salvarEstoque(e);
-        
-        
         PrincipalController.getInstancia().exibirInterfaceGrafica();
 
     }
