@@ -1,15 +1,7 @@
 package tirsobikes.main;
 
-import java.util.Date;
-import java.util.List;
-import tirsobikes.DAO.EstoqueDAO;
-import tirsobikes.DAO.MarcaDAO;
-import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.controllers.PrincipalController;
-import tirsobikes.controllers.ProdutoController;
-import tirsobikes.entidades.Estoque;
-import tirsobikes.entidades.Marca;
-import tirsobikes.entidades.Produto;
+import tirsobikes.controllers.UsuarioController;
 import tirsobikes.views.PrincipalView;
 
 /**
@@ -37,7 +29,7 @@ public class TirsoBikes {
             java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        PrincipalController.getInstancia().exibirInterfaceGrafica();
+        UsuarioController.getInstancia().exibirInterfaceGrafica();
 
     }
 }
