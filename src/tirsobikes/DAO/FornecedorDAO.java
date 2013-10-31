@@ -45,12 +45,12 @@ public class FornecedorDAO {
     }
 
     public List<Fornecedor> listarFornecedor() {
-        Query query = manager.createQuery("from fornecedor");
+        Query query = manager.createQuery("from Fornecedor");
         return query.getResultList();
     }
     
     public List<Fornecedor> procurarFornecedorNome (String nomeRazao) {
-        Query query = manager.createQuery("FROM fornecedor WHERE nomeRazao LIKE (:searchKeyword)");
+        Query query = manager.createQuery("FROM Fornecedor WHERE nomeRazao LIKE (:searchKeyword)");
         query.setParameter("searchKeyword", "%"+nomeRazao+"%");
         return query.getResultList();
     }

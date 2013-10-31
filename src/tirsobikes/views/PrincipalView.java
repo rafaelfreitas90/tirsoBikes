@@ -1,7 +1,9 @@
 package tirsobikes.views;
 
+import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.LookAndFeel;
 import tirsobikes.controllers.FornecedorAlterarController;
 import tirsobikes.controllers.FornecedorController;
 import tirsobikes.controllers.ProdutoController;
@@ -13,7 +15,7 @@ import tirsobikes.controllers.ProdutoController;
 public class PrincipalView extends javax.swing.JFrame {
 
     public PrincipalView() {
-        initComponents();
+        initComponents();        
        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
