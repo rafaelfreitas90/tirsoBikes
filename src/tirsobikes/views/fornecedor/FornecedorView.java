@@ -50,8 +50,9 @@ public class FornecedorView extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Fornecedor");
+        setBounds(new java.awt.Rectangle(250, 150, 0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

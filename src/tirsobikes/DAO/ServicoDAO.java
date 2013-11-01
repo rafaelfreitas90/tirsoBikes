@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tirsobikes.DAO;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import tirsobikes.entidades.Servico;
 
@@ -18,9 +12,9 @@ import tirsobikes.entidades.Servico;
 public class ServicoDAO {
     private EntityManager manager;
 
-    public ServicoDAO() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
-        manager = factory.createEntityManager();
+    public ServicoDAO(EntityManager manager) {
+//        EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
+        this.manager = manager;
     }
 
     public Servico salvarServico(Servico servico) {

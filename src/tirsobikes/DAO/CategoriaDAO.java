@@ -12,12 +12,12 @@ import tirsobikes.entidades.Categoria;
  * @author LuisHenrique
  */
 public class CategoriaDAO {
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
+
     private static EntityManager manager;
 
-    public CategoriaDAO() {
+    public CategoriaDAO(EntityManager manager) {
     
-        manager = factory.createEntityManager();
+        this.manager = manager;
     }
 
     public Categoria salvarCategoria(Categoria categoria) {

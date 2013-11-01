@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.entidades.Estoque;
 import tirsobikes.entidades.Produto;
+import tirsobikes.main.TirsoBikes;
 import tirsobikes.views.validacoes.Validacoes;
 
 /**
@@ -156,7 +157,7 @@ public class ProdutoAddQtdeView extends javax.swing.JDialog {
 
     private void salvarEstoque() {
         List<Estoque> estoques = new ArrayList<Estoque>();
-        EstoqueDAO dao = new EstoqueDAO();
+        EstoqueDAO dao = new EstoqueDAO(TirsoBikes.getEntityManager());
         estoques = dao.ultimoEstoque(produto.getIdproduto());
         Estoque estoque = estoques.get(0);
 

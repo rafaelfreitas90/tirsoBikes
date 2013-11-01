@@ -8,6 +8,7 @@ import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.controllers.ProdutoController;
 import tirsobikes.entidades.Fornecedor;
 import tirsobikes.entidades.Produto;
+import tirsobikes.main.TirsoBikes;
 
 /**
  *
@@ -195,7 +196,7 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
             Produto produto = new Produto();
             produto.setIdproduto(Integer.parseInt(tabelaFornecedor.getValueAt(linhaTabela, 0).toString()));
             
-            ProdutoDAO dao = new ProdutoDAO();
+            ProdutoDAO dao = new ProdutoDAO(TirsoBikes.getEntityManager());
             produto = dao.procurarProduto(produto.getIdproduto());
             
             ProdutoController.getInstancia().exibirInterfaceGrafica(produto);

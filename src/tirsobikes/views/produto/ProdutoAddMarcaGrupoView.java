@@ -6,6 +6,7 @@ import tirsobikes.DAO.MarcaDAO;
 import tirsobikes.controllers.MarcaController;
 import tirsobikes.entidades.Categoria;
 import tirsobikes.entidades.Marca;
+import tirsobikes.main.TirsoBikes;
 
 /**
  *
@@ -121,7 +122,7 @@ public class ProdutoAddMarcaGrupoView extends javax.swing.JDialog {
         if (txttipo.getText().equals("Categoria / Grupo")) {
             if (!txtMarcaGrupo.getText().isEmpty()) {
                 Categoria categoria = new Categoria(null, txtMarcaGrupo.getText());
-                CategoriaDAO dao = new CategoriaDAO();
+                CategoriaDAO dao = new CategoriaDAO(TirsoBikes.getEntityManager());
                 dao.salvarCategoria(categoria);                
                 
                 this.dispose();
@@ -133,7 +134,7 @@ public class ProdutoAddMarcaGrupoView extends javax.swing.JDialog {
         if (txttipo.getText().equals("Marca")) {
             if (!txtMarcaGrupo.getText().isEmpty()) {
                 Marca marca = new Marca(null, txtMarcaGrupo.getText());
-                MarcaDAO dao = new MarcaDAO();
+                MarcaDAO dao = new MarcaDAO(TirsoBikes.getEntityManager());
                 dao.salvarMarca(marca);
                 
                 this.dispose();

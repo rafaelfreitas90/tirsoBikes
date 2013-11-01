@@ -1,19 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tirsobikes.views.produto;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.controllers.QuantidadeController;
 import tirsobikes.entidades.Estoque;
 import tirsobikes.entidades.Produto;
+import tirsobikes.main.TirsoBikes;
 
 /**
  *
@@ -21,9 +16,7 @@ import tirsobikes.entidades.Produto;
  */
 public class ProdutoEstoqueView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ProdutoEstoqueView
-     */
+  
     public ProdutoEstoqueView() {
         initComponents();
     }
@@ -46,7 +39,7 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
         tabelaEstoque = new javax.swing.JTable();
         bntLancar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Estoque de Produtos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -110,7 +103,7 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -122,6 +115,16 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabelaEstoque);
+        tabelaEstoque.getColumnModel().getColumn(0).setResizable(false);
+        tabelaEstoque.getColumnModel().getColumn(0).setPreferredWidth(8);
+        tabelaEstoque.getColumnModel().getColumn(1).setResizable(false);
+        tabelaEstoque.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tabelaEstoque.getColumnModel().getColumn(2).setResizable(false);
+        tabelaEstoque.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tabelaEstoque.getColumnModel().getColumn(3).setResizable(false);
+        tabelaEstoque.getColumnModel().getColumn(3).setPreferredWidth(20);
+        tabelaEstoque.getColumnModel().getColumn(4).setResizable(false);
+        tabelaEstoque.getColumnModel().getColumn(4).setPreferredWidth(20);
 
         bntLancar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/add.png"))); // NOI18N
         bntLancar.setText(" Adicionar Quantidade");
@@ -189,7 +192,7 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
             Produto produto = new Produto();
             produto.setIdproduto(Integer.parseInt(tabelaEstoque.getValueAt(linhaTabela, 0).toString()));
             
-            ProdutoDAO dao = new ProdutoDAO();
+            ProdutoDAO dao = new ProdutoDAO(TirsoBikes.getEntityManager());
             produto = dao.procurarProduto(produto.getIdproduto());
             
             QuantidadeController.getInstancia().exibirInterfaceGrafica(produto);
@@ -204,40 +207,6 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
          atualizarTabela();
     }//GEN-LAST:event_txtBuscaKeyReleased
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProdutoEstoqueView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProdutoEstoqueView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProdutoEstoqueView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProdutoEstoqueView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProdutoEstoqueView().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntLancar;
     private javax.swing.JButton jButton1;
@@ -251,7 +220,7 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
 
     private void atualizarTabela() {
         List<Produto> produtos = new ArrayList<Produto>();
-        ProdutoDAO dao = new ProdutoDAO();
+        ProdutoDAO dao = new ProdutoDAO(TirsoBikes.getEntityManager());
 
         List<Estoque> estoques = new ArrayList<Estoque>();
         produtos = dao.procurarProdutoNome(txtBusca.getText());
@@ -261,7 +230,7 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
 
         for (Produto p : produtos) {
             Estoque estoque = new Estoque();
-            EstoqueDAO daoEstoque = new EstoqueDAO();
+            EstoqueDAO daoEstoque = new EstoqueDAO(TirsoBikes.getEntityManager());
             estoques = daoEstoque.ultimoEstoque(p.getIdproduto());
 
             if (!estoques.isEmpty()) {

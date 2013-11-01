@@ -1,15 +1,9 @@
 package tirsobikes.main;
 
-import java.util.Date;
-import java.util.List;
-import tirsobikes.DAO.EstoqueDAO;
-import tirsobikes.DAO.MarcaDAO;
-import tirsobikes.DAO.ProdutoDAO;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import tirsobikes.controllers.PrincipalController;
-import tirsobikes.controllers.ProdutoController;
-import tirsobikes.entidades.Estoque;
-import tirsobikes.entidades.Marca;
-import tirsobikes.entidades.Produto;
 import tirsobikes.views.PrincipalView;
 
 /**
@@ -17,6 +11,17 @@ import tirsobikes.views.PrincipalView;
  * @author RFSUPORTE
  */
 public class TirsoBikes {
+    
+    private static EntityManager manager;
+   
+    static {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
+        manager = factory.createEntityManager();
+    }
+    
+    public static EntityManager getEntityManager() {
+        return manager;
+    }
 
     public static void main(String[] args) {
 
