@@ -210,6 +210,12 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel9.setText("Valor CUSTO R$");
 
+        txtValorCusto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtValorCustoKeyReleased(evt);
+            }
+        });
+
         jLabel10.setText("( % ) Margem");
 
         txtMargem.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -473,6 +479,7 @@ public class ProdutoView extends javax.swing.JFrame {
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
         Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
         if (resposta == JOptionPane.YES_OPTION) {
+           limpaCampos();
             this.dispose();
         }
     }//GEN-LAST:event_bntCancelarActionPerformed
@@ -529,6 +536,12 @@ public class ProdutoView extends javax.swing.JFrame {
             exibeCamposServico();
         }
     }//GEN-LAST:event_jComboTipoActionPerformed
+
+    private void txtValorCustoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorCustoKeyReleased
+        if (!txtMargem.getText().isEmpty()) {
+            atualizaValorVenda();
+        }
+    }//GEN-LAST:event_txtValorCustoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -669,6 +682,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     // zera todos os campos da view
     private void limpaCampos() {
+        jComboTipo.setSelectedIndex(0);
         jComboCategoria.setSelectedIndex(0);
         jComboMarca.setSelectedIndex(0);
         txtFornecedor.setText("");
