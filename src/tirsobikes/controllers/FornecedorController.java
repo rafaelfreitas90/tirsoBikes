@@ -1,5 +1,6 @@
 package tirsobikes.controllers;
 
+import tirsobikes.entidades.Fornecedor;
 import tirsobikes.views.fornecedor.FornecedorView;
 
 /**
@@ -27,5 +28,14 @@ public class FornecedorController {
         }
         view.setVisible(true);
     }
+   
+    public void exibirInterfaceGrafica2(Fornecedor fornecedor){
+        
+            view = new FornecedorView(fornecedor);
+        
+        view.setVisible(true);
+    }
+    
+
 
 }

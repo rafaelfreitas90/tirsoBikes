@@ -2,9 +2,11 @@ package tirsobikes.views.fornecedor;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tirsobikes.DAO.FornecedorDAO;
 import tirsobikes.DAO.ProdutoDAO;
+import tirsobikes.controllers.FornecedorController;
 import tirsobikes.controllers.ProdutoController;
 import tirsobikes.entidades.Fornecedor;
 import tirsobikes.entidades.Produto;
@@ -16,12 +18,10 @@ import tirsobikes.main.TirsoBikes;
  */
 public class FornecedorAlterarView extends javax.swing.JFrame {
 
-
     public FornecedorAlterarView() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,7 +36,7 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
         bntAlterar = new javax.swing.JButton();
         bntAlterar1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Produtos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -113,9 +113,15 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaFornecedor);
         tabelaFornecedor.getColumnModel().getColumn(0).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tabelaFornecedor.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tabelaFornecedor.getColumnModel().getColumn(1).setResizable(false);
+        tabelaFornecedor.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabelaFornecedor.getColumnModel().getColumn(2).setResizable(false);
         tabelaFornecedor.getColumnModel().getColumn(3).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(3).setPreferredWidth(25);
+        tabelaFornecedor.getColumnModel().getColumn(3).setPreferredWidth(30);
+        tabelaFornecedor.getColumnModel().getColumn(4).setResizable(false);
+        tabelaFornecedor.getColumnModel().getColumn(5).setResizable(false);
+        tabelaFornecedor.getColumnModel().getColumn(5).setPreferredWidth(50);
 
         bntAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
@@ -189,34 +195,46 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void bntAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterarActionPerformed
-        //verifica produto selecionado
-        int linhaTabela = tabelaFornecedor.getSelectedRow();
         
-        if (linhaTabela > -1){
-            Produto produto = new Produto();
-            produto.setIdproduto(Integer.parseInt(tabelaFornecedor.getValueAt(linhaTabela, 0).toString()));
-            
-            ProdutoDAO dao = new ProdutoDAO(TirsoBikes.getEntityManager());
-            produto = dao.procurarProduto(produto.getIdproduto());
-            
-            ProdutoController.getInstancia().exibirInterfaceGrafica(produto);
+        int linhaTabela = tabelaFornecedor.getSelectedRow();
+
+        if (linhaTabela > -1) {
+            Fornecedor fornecedor = new Fornecedor();
+            fornecedor.setIdfornecedor(Integer.parseInt(tabelaFornecedor.getValueAt(linhaTabela, 0).toString()));
+
+            FornecedorDAO dao = new FornecedorDAO(TirsoBikes.getEntityManager());
+            fornecedor = dao.procurarFornecedor(fornecedor.getIdfornecedor());
+
+            FornecedorController.getInstancia().exibirInterfaceGrafica2(fornecedor);
         }
     }//GEN-LAST:event_bntAlterarActionPerformed
 
     private void txtBuscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyTyped
-       
     }//GEN-LAST:event_txtBuscaKeyTyped
 
     private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
-         atualizarTabela();
+        atualizarTabela();
     }//GEN-LAST:event_txtBuscaKeyReleased
 
     private void bntAlterar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterar1ActionPerformed
-        // TODO add your handling code here:
+    int linhaTabela = tabelaFornecedor.getSelectedRow();
+
+        if (linhaTabela > -1) {
+            Fornecedor fornecedor = new Fornecedor();
+
+            FornecedorDAO dao = new FornecedorDAO(TirsoBikes.getEntityManager());
+            fornecedor = dao.procurarFornecedor(Integer.parseInt(tabelaFornecedor.getValueAt(linhaTabela, 0).toString()));
+
+            Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja\n excluir o fornecedor: " + fornecedor.getNomeRazao()+ "?");
+            if (resposta == JOptionPane.YES_OPTION) {
+                if (fornecedor != null) {
+                    dao.deletarForncedor(fornecedor);
+                    JOptionPane.showMessageDialog(null, "Fornecedor deletado com sucesso!");
+                }
+            }
+
+        }       
     }//GEN-LAST:event_bntAlterar1ActionPerformed
-
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAlterar;
     private javax.swing.JButton bntAlterar1;
@@ -231,19 +249,18 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
 
     private void atualizarTabela() {
         List<Fornecedor> fornecedor = new ArrayList<Fornecedor>();
-        FornecedorDAO dao = new FornecedorDAO();       
-        
-//        fornecedor = dao.procurarFornecedorNome(txtBusca.getText());
-            fornecedor = dao.listarFornecedor();
+        FornecedorDAO dao = new FornecedorDAO(TirsoBikes.getEntityManager());
+
+        fornecedor = dao.procurarFornecedorNome(txtBusca.getText());
+        fornecedor = dao.listarFornecedor();
         DefaultTableModel dtm = (DefaultTableModel) tabelaFornecedor.getModel();
         dtm.setRowCount(0);
-        
-        if (!fornecedor.isEmpty()){
-        for (Fornecedor f : fornecedor) {
-                dtm.addRow(new Object[]{f.getIdfornecedor(), f.getNomeRazao(), f.getNomeFantasia(),f.getTelefone1(), f.getEmail(),f.getVendedor() });
+
+        if (!fornecedor.isEmpty()) {
+            for (Fornecedor f : fornecedor) {
+                dtm.addRow(new Object[]{f.getIdfornecedor(), f.getNomeRazao(), f.getNomeFantasia(), f.getTelefone1(), f.getEmail(), f.getVendedor()});
             }
 
         }
     }
-    
 }

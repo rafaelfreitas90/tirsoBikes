@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import tirsobikes.controllers.PrincipalController;
+import tirsobikes.controllers.UsuarioController;
 import tirsobikes.views.PrincipalView;
 
 /**
@@ -43,6 +44,7 @@ public class TirsoBikes {
         }
 
         PrincipalController.getInstancia().exibirInterfaceGrafica();
+//        UsuarioController.getInstancia().exibirInterfaceGrafica();
 
     }
 }

@@ -37,6 +37,7 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Produtos");
+        setBounds(new java.awt.Rectangle(200, 100, 0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -87,6 +88,7 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
                     .addComponent(jButton1)))
         );
 
+        tabelaProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -111,6 +113,7 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabelaProduto);
+        tabelaProduto.getColumnModel().getColumn(0).setPreferredWidth(5);
 
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
         bntAlterar.setText(" Alterar Produto");

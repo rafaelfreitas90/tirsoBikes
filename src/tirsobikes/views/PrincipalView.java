@@ -1,6 +1,5 @@
 package tirsobikes.views;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tirsobikes.controllers.*;
@@ -12,8 +11,6 @@ import tirsobikes.controllers.*;
 public class PrincipalView extends javax.swing.JFrame {
     
     public PrincipalView() {
-//        ImageIcon icon = new ImageIcon(getClass().getResource("/imgs/icon.png"));
-//        super.setIconImage(icon.getImage());
         initComponents();        
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -34,6 +31,8 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -91,7 +90,7 @@ public class PrincipalView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +110,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem3.setText("Alterar");
+        jMenuItem3.setText("Listar / Alterar");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -130,6 +129,23 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Serviços");
+
+        jMenuItem7.setText("Cadastrar Novo");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
+
+        jMenuItem8.setText("Listar / Alterar");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Fornecedor");
@@ -177,7 +193,7 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
     
     private void btnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdutoActionPerformed
-        ProdutoController.getInstancia().exibirInterfaceGrafica();
+        ProdutoAlterarController.getInstancia().exibirInterfaceGrafica();
     }//GEN-LAST:event_btnNovoProdutoActionPerformed
     
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -207,6 +223,15 @@ public class PrincipalView extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         ProdutoEstoqueController.getInstancia().exibirInterfaceGrafica();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        ProdutoController.getInstancia().exibirInterfaceGrafica();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        ServicoAlterarController.getInstancia().exibirInterfaceGrafica();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoProduto;
     private javax.swing.JButton btnSair;
@@ -221,6 +246,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
