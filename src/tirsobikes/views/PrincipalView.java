@@ -1,5 +1,6 @@
 package tirsobikes.views;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tirsobikes.controllers.*;
@@ -11,6 +12,8 @@ import tirsobikes.controllers.*;
 public class PrincipalView extends javax.swing.JFrame {
     
     public PrincipalView() {
+//        ImageIcon icon = new ImageIcon(getClass().getResource("/imgs/icon.png"));
+//        super.setIconImage(icon.getImage());
         initComponents();        
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }

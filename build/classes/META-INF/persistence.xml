@@ -10,7 +10,7 @@
         <class>tirsobikes.entidades.Produto</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tirsobikes"/>
-            <property name="javax.persistence.jdbc.password" value="rsf90"/>
+            <property name="javax.persistence.jdbc.password" value="senha"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
