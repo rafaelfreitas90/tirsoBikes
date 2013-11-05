@@ -40,8 +40,9 @@ public class ServicoAlterarView extends javax.swing.JFrame {
         bntAlterar = new javax.swing.JButton();
         bntExcluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Serviços");
+        setBounds(new java.awt.Rectangle(200, 100, 0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -162,8 +163,6 @@ public class ServicoAlterarView extends javax.swing.JFrame {
                     .addComponent(bntExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        jPanel2.getAccessibleContext().setAccessibleName("PESQUISAR SERVIÇO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

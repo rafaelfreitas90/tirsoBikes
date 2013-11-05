@@ -2,8 +2,6 @@ package tirsobikes.DAO;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import tirsobikes.entidades.Fornecedor;
 import tirsobikes.entidades.Produto;
@@ -16,9 +14,9 @@ public class FornecedorDAO {
 
     private EntityManager manager;
 
-    public FornecedorDAO() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
-        manager = factory.createEntityManager();
+    public FornecedorDAO(EntityManager manager) {
+        
+        this.manager = manager;
     }
 
     public Fornecedor salvarFornecedor(Fornecedor fornecedor) {
@@ -40,8 +38,8 @@ public class FornecedorDAO {
         manager.getTransaction().commit();
     }
 
-    public Produto procurarFornecedor(int idfornecedor) {
-        return manager.find(Produto.class, idfornecedor);
+    public Fornecedor procurarFornecedor(int idfornecedor) {
+        return manager.find(Fornecedor.class, idfornecedor);
     }
 
     public List<Fornecedor> listarFornecedor() {

@@ -3,6 +3,7 @@ package tirsobikes.views.fornecedor;
 import javax.swing.JOptionPane;
 import tirsobikes.DAO.FornecedorDAO;
 import tirsobikes.entidades.Fornecedor;
+import tirsobikes.main.TirsoBikes;
 
 /**
  *
@@ -10,10 +11,17 @@ import tirsobikes.entidades.Fornecedor;
  */
 public class FornecedorView extends javax.swing.JFrame {
 
-    FornecedorDAO dao = new FornecedorDAO();
+    FornecedorDAO dao = new FornecedorDAO(TirsoBikes.getEntityManager());
 
     public FornecedorView() {
         initComponents();
+    }
+    private Fornecedor fornecedor = null;
+
+    public FornecedorView(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+        initComponents();
+        setarCamposFornecedor(fornecedor);
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +57,8 @@ public class FornecedorView extends javax.swing.JFrame {
         txtVendedor = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        txtCodigo = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Fornecedor");
@@ -105,6 +115,10 @@ public class FornecedorView extends javax.swing.JFrame {
             }
         });
 
+        txtCodigo.setEditable(false);
+
+        jLabel14.setText("Cod.");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,14 +128,16 @@ public class FornecedorView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeRazao, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtNomeFantasia)))
+                            .addComponent(txtNomeRazao, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txtNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -156,8 +172,8 @@ public class FornecedorView extends javax.swing.JFrame {
                                 .addComponent(txtTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtTelefone2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -186,11 +202,13 @@ public class FornecedorView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel14))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeRazao))
+                    .addComponent(txtNomeRazao)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -248,11 +266,9 @@ public class FornecedorView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if(verificaCampos()){
-        dao.salvarFornecedor(sincronizarViewModel());
-        JOptionPane.showMessageDialog(null, "Fornecedor Salvo com sucesso!");
-        limpaCampos();
-        }
+     
+            salvarAtualizar();
+            limpaCampos();        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -263,12 +279,11 @@ public class FornecedorView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
+        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
         if (resposta == JOptionPane.YES_OPTION) {
             this.dispose();
         }
     }//GEN-LAST:event_formWindowClosing
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
@@ -278,6 +293,7 @@ public class FornecedorView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -290,6 +306,7 @@ public class FornecedorView extends javax.swing.JFrame {
     private javax.swing.JTextField txtCEP;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCnpj;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtIE;
@@ -301,8 +318,9 @@ public class FornecedorView extends javax.swing.JFrame {
     private javax.swing.JTextField txtVendedor;
     // End of variables declaration//GEN-END:variables
 
-    public Fornecedor sincronizarViewModel() {
+    private void salvarAtualizar() {
         Fornecedor model = new Fornecedor();
+        FornecedorDAO dao = new FornecedorDAO(TirsoBikes.getEntityManager());
 
         model.setNomeRazao(txtNomeRazao.getText());
         model.setNomeFantasia(txtNomeFantasia.getText());
@@ -318,12 +336,19 @@ public class FornecedorView extends javax.swing.JFrame {
         model.setTelefone2(txtTelefone2.getText());
         model.setVendedor(txtVendedor.getText());
 
-        return model;
+          
+            if (!txtCodigo.getText().isEmpty()) {
+            model.setIdfornecedor(Integer.parseInt(txtCodigo.getText()));
+            dao.atualizarFornecedor(model);
+            JOptionPane.showMessageDialog(null, "Fornecedor Salvo com sucesso!");
+        } else {
+            dao.salvarFornecedor(model);
+        }
     }
 
     public boolean verificaCampos() {
 
-       if (txtNomeRazao.getText().isEmpty()) {
+        if (txtNomeRazao.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Digite o nome/razão social ");
             txtNomeRazao.requestFocus();
             return false;
@@ -332,7 +357,7 @@ public class FornecedorView extends javax.swing.JFrame {
         if (txtNomeFantasia.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Verifique o campo Nome Fantasia !");
             txtNomeFantasia.requestFocus();
-             return false;
+            return false;
         }
 
         if (txtEndereco.getText().isEmpty()) {
@@ -376,11 +401,11 @@ public class FornecedorView extends javax.swing.JFrame {
             txtVendedor.requestFocus();
             return false;
         }
-            return true;
+        return true;
     }
 
     private void limpaCampos() {
-        
+
         txtCEP.setText("");
         txtCidade.setText("");
         txtCnpj.setText("");
@@ -394,5 +419,22 @@ public class FornecedorView extends javax.swing.JFrame {
         txtTelefone2.setText("");
         txtVendedor.setText("");
 
+    }
+
+    private void setarCamposFornecedor(Fornecedor fornecedor) {
+        txtCodigo.setText(fornecedor.getIdfornecedor().toString());
+       txtNomeRazao.setText(fornecedor.getNomeRazao());
+        txtNomeFantasia.setText(fornecedor.getNomeFantasia());
+        txtEndereco.setText(fornecedor.getEndereco());
+        txtCidade.setText(fornecedor.getCidade());
+        txtCEP.setText(fornecedor.getCep());
+        txtCnpj.setText(fornecedor.getCnpj());
+        txtIE.setText(fornecedor.getIe());
+        txtIm.setText(fornecedor.getIm());
+        txtEmail.setText(fornecedor.getEmail());
+        txtTelefone1.setText(fornecedor.getTelefone1());
+        txtTelefone2.setText(fornecedor.getTelefone2());
+        txtVendedor.setText(fornecedor.getVendedor());
+        comboUF.setSelectedItem(fornecedor.getUf());
     }
 }

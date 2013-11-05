@@ -40,6 +40,7 @@ public class ProdutoAddMarcaGrupoView extends javax.swing.JDialog {
         txttipo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(200, 100, 0, 0));
 
         jLabel1.setText("Novo:");
 

@@ -25,6 +25,8 @@ import tirsobikes.views.validacoes.Validacoes;
  */
 public class ProdutoView extends javax.swing.JFrame {
 
+  
+   
     public ProdutoView() {
         initComponents();
         preencherJcomboMarca();
@@ -88,6 +90,7 @@ public class ProdutoView extends javax.swing.JFrame {
         txtDescricao.setEnabled(false);
     }
 
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -130,14 +133,11 @@ public class ProdutoView extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(200, 100, 0, 0));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
@@ -479,7 +479,7 @@ public class ProdutoView extends javax.swing.JFrame {
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
         Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
         if (resposta == JOptionPane.YES_OPTION) {
-            limpaCampos();
+           limpaCampos();
             this.dispose();
         }
     }//GEN-LAST:event_bntCancelarActionPerformed
@@ -543,9 +543,7 @@ public class ProdutoView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtValorCustoKeyReleased
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        limpaCampos();
-    }//GEN-LAST:event_formWindowClosed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAddCategoria;
     private javax.swing.JButton bntAddMarca;
@@ -687,6 +685,7 @@ public class ProdutoView extends javax.swing.JFrame {
         jComboTipo.setSelectedIndex(0);
         jComboCategoria.setSelectedIndex(0);
         jComboMarca.setSelectedIndex(0);
+        txtCodigo.setText("");
         txtFornecedor.setText("");
         txtEstoqueAtual.setText("");
         txtEstoqueMinimo.setText("");
