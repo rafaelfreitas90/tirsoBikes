@@ -88,6 +88,7 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
                     .addComponent(btnPesquisar)))
         );
 
+        tabelaFornecedor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tabelaFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -113,15 +114,17 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaFornecedor);
         tabelaFornecedor.getColumnModel().getColumn(0).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tabelaFornecedor.getColumnModel().getColumn(0).setPreferredWidth(2);
         tabelaFornecedor.getColumnModel().getColumn(1).setResizable(false);
         tabelaFornecedor.getColumnModel().getColumn(1).setPreferredWidth(100);
         tabelaFornecedor.getColumnModel().getColumn(2).setResizable(false);
+        tabelaFornecedor.getColumnModel().getColumn(2).setPreferredWidth(80);
         tabelaFornecedor.getColumnModel().getColumn(3).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(3).setPreferredWidth(30);
+        tabelaFornecedor.getColumnModel().getColumn(3).setPreferredWidth(40);
         tabelaFornecedor.getColumnModel().getColumn(4).setResizable(false);
+        tabelaFornecedor.getColumnModel().getColumn(4).setPreferredWidth(80);
         tabelaFornecedor.getColumnModel().getColumn(5).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(5).setPreferredWidth(50);
+        tabelaFornecedor.getColumnModel().getColumn(5).setPreferredWidth(40);
 
         bntAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N

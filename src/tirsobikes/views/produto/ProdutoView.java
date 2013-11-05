@@ -494,6 +494,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 return;
             }
             salvarProduto();
+            JOptionPane.showMessageDialog(null, "Produto Salvo com sucesso!");
             limpaCampos();
         }
 

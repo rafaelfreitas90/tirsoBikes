@@ -266,23 +266,23 @@ public class FornecedorView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-     
-            salvarAtualizar();
-            limpaCampos();        
+
+        salvarAtualizar();
+        limpaCampos();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
         if (resposta == JOptionPane.YES_OPTION) {
+            limpaCampos();
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
-        if (resposta == JOptionPane.YES_OPTION) {
-            this.dispose();
-        }
+        limpaCampos();
+        this.dispose();
+
     }//GEN-LAST:event_formWindowClosing
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -336,8 +336,8 @@ public class FornecedorView extends javax.swing.JFrame {
         model.setTelefone2(txtTelefone2.getText());
         model.setVendedor(txtVendedor.getText());
 
-          
-            if (!txtCodigo.getText().isEmpty()) {
+
+        if (!txtCodigo.getText().isEmpty()) {
             model.setIdfornecedor(Integer.parseInt(txtCodigo.getText()));
             dao.atualizarFornecedor(model);
             JOptionPane.showMessageDialog(null, "Fornecedor Salvo com sucesso!");
@@ -405,7 +405,7 @@ public class FornecedorView extends javax.swing.JFrame {
     }
 
     private void limpaCampos() {
-
+        txtCodigo.setText("");
         txtCEP.setText("");
         txtCidade.setText("");
         txtCnpj.setText("");
@@ -423,7 +423,7 @@ public class FornecedorView extends javax.swing.JFrame {
 
     private void setarCamposFornecedor(Fornecedor fornecedor) {
         txtCodigo.setText(fornecedor.getIdfornecedor().toString());
-       txtNomeRazao.setText(fornecedor.getNomeRazao());
+        txtNomeRazao.setText(fornecedor.getNomeRazao());
         txtNomeFantasia.setText(fornecedor.getNomeFantasia());
         txtEndereco.setText(fornecedor.getEndereco());
         txtCidade.setText(fornecedor.getCidade());
