@@ -12,8 +12,8 @@ import tirsobikes.controllers.*;
 public class PrincipalView extends javax.swing.JFrame {
     
     public PrincipalView() {
-//        ImageIcon icon = new ImageIcon(getClass().getResource("/imgs/icon.png"));
-//        super.setIconImage(icon.getImage());
+        ImageIcon icon = new ImageIcon(getClass().getResource("/tirsobikes/imgs/icon.png"));
+        super.setIconImage(icon.getImage());
         initComponents();        
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
