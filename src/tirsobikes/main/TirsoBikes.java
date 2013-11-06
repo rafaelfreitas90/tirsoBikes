@@ -43,8 +43,8 @@ public class TirsoBikes {
             java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        PrincipalController.getInstancia().exibirInterfaceGrafica();
-//        UsuarioController.getInstancia().exibirInterfaceGrafica();
+//      PrincipalController.getInstancia().exibirInterfaceGrafica();
+       UsuarioController.getInstancia().exibirInterfaceGrafica();
 
     }
 }

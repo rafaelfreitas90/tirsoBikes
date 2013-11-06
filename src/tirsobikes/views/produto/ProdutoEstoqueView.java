@@ -92,6 +92,7 @@ public class ProdutoEstoqueView extends javax.swing.JFrame {
                     .addComponent(jButton1)))
         );
 
+        tabelaEstoque.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

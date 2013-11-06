@@ -485,7 +485,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 return;
             }
             salvarProduto();
-            JOptionPane.showMessageDialog(null, "Produto salvo com sucesso");
+            JOptionPane.showMessageDialog(null, "Produto Salvo com sucesso!");
         }
 
         if (jComboTipo.getSelectedIndex() == 2) {
@@ -501,7 +501,6 @@ public class ProdutoView extends javax.swing.JFrame {
         }
         limpaCampos();
     }//GEN-LAST:event_bntSalvarActionPerformed
-
     private void txtMargemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMargemKeyReleased
         if (!txtMargem.getText().isEmpty()) {
             atualizaValorVenda();
