@@ -25,15 +25,13 @@ import tirsobikes.views.validacoes.Validacoes;
  */
 public class ProdutoView extends javax.swing.JFrame {
 
-  
-   
     public ProdutoView() {
         initComponents();
         preencherJcomboMarca();
         preencherJcomboCategoria();
         desabilitaTodosCampos();
     }
-    private Produto produto = null;
+    private Produto produto;
 
     public ProdutoView(Produto produto) {
         this.produto = produto;
@@ -42,7 +40,7 @@ public class ProdutoView extends javax.swing.JFrame {
         preencherJcomboCategoria();
         setarCampos(produto);
     }
-    private Servico servico = null;
+    private Servico servico;
 
     public ProdutoView(Servico servico) {
         this.servico = servico;
@@ -90,7 +88,6 @@ public class ProdutoView extends javax.swing.JFrame {
         txtDescricao.setEnabled(false);
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -135,9 +132,6 @@ public class ProdutoView extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
-            }
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
             }
         });
 
@@ -447,9 +441,6 @@ public class ProdutoView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     }//GEN-LAST:event_formWindowOpened
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-    }//GEN-LAST:event_formWindowActivated
-
     private void jComboCategoriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboCategoriaFocusGained
         preencherJcomboCategoria();
     }//GEN-LAST:event_jComboCategoriaFocusGained
@@ -479,7 +470,7 @@ public class ProdutoView extends javax.swing.JFrame {
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
         Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
         if (resposta == JOptionPane.YES_OPTION) {
-           limpaCampos();
+            limpaCampos();
             this.dispose();
         }
     }//GEN-LAST:event_bntCancelarActionPerformed
@@ -494,7 +485,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 return;
             }
             salvarProduto();
-            limpaCampos();
+            JOptionPane.showMessageDialog(null, "Produto salvo com sucesso");
         }
 
         if (jComboTipo.getSelectedIndex() == 2) {
@@ -502,12 +493,13 @@ public class ProdutoView extends javax.swing.JFrame {
                 return;
             }
             salvarServico();
-            limpaCampos();
+            JOptionPane.showMessageDialog(null, "Serviço salvo com sucesso");
         }
 
         if (jComboTipo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Selecione um tipo (Serviço ou Produto)");
         }
+        limpaCampos();
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void txtMargemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMargemKeyReleased
@@ -542,8 +534,6 @@ public class ProdutoView extends javax.swing.JFrame {
             atualizaValorVenda();
         }
     }//GEN-LAST:event_txtValorCustoKeyReleased
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAddCategoria;
     private javax.swing.JButton bntAddMarca;

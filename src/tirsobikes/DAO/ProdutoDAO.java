@@ -2,6 +2,8 @@ package tirsobikes.DAO;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import tirsobikes.entidades.Produto;
 
@@ -14,16 +16,16 @@ public class ProdutoDAO {
     private EntityManager manager;
 
     public ProdutoDAO(EntityManager manager) {
-        //EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
-        //manager = factory.createEntityManager();
+//        EntityManagerFactory factory = Persistence.createEntityManagerFactory("TirsoBikesPU");
+//        manager = factory.createEntityManager();
         this.manager = manager;
     }
 
     public Produto salvarProduto(Produto produto) {
         manager.getTransaction().begin();
         manager.persist(produto);
-        manager.getTransaction().commit();
-        return produto;
+        manager.getTransaction().commit();        
+        return produto;        
     }
 
     public void atualizarProduto(Produto produto) {

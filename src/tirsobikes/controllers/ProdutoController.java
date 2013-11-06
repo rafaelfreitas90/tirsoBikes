@@ -13,8 +13,7 @@ public class ProdutoController {
     private static ProdutoController instancia = new ProdutoController();
     private ProdutoView view = new ProdutoView();
     
-    public ProdutoController(){
-        
+    public ProdutoController(){        
     }
     
     //Método para instanciar o controller.
