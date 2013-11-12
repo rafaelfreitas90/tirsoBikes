@@ -577,7 +577,6 @@ public class ProdutoView extends javax.swing.JFrame {
     private void txtValorCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorCustoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorCustoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAddCategoria;
     private javax.swing.JButton bntAddMarca;
@@ -631,16 +630,18 @@ public class ProdutoView extends javax.swing.JFrame {
     }
 
     private void atualizaMargem() {
-        if (!(txtValorCusto.getText().isEmpty()) && (!txtValorVenda.getText().isEmpty())) {
-            Produto produto = new Produto();
-            produto.setValorCusto(txtValorCusto.getText());
-            produto.setValorVenda(txtValorVenda.getText());
-            produto.setMargem(((produto.getValorVenda() * 100) / produto.getValorCusto()) - 100);
+        if (Validacoes.validaNumero(txtValorVenda.getText()) && Validacoes.validaNumero(txtMargem.getText())) {
+            if (!(txtValorCusto.getText().isEmpty()) && (!txtValorVenda.getText().isEmpty())) {
+                Produto produto = new Produto();
+                produto.setValorCusto(txtValorCusto.getText());
+                produto.setValorVenda(txtValorVenda.getText());
+                produto.setMargem(((produto.getValorVenda() * 100) / produto.getValorCusto()) - 100);
 
-            // atualiza valor venda                        
-            txtMargem.setText(produto.getMargemString());
-        } else {
-            JOptionPane.showMessageDialog(null, "O campo Valor Custo e Venda são obrigatórios para o calculo!");
+                // atualiza valor venda                        
+                txtMargem.setText(produto.getMargemString());
+            } else {
+                JOptionPane.showMessageDialog(null, "O campo Valor Custo e Venda são obrigatórios para o calculo!");
+            }
         }
     }
 
