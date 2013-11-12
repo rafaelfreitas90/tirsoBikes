@@ -26,6 +26,7 @@ public class ProdutoEstoqueController {
         if (view == null){
             view = new ProdutoEstoqueView();
         }
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
 

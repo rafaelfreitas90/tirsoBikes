@@ -25,6 +25,7 @@ public class ProdutoAlterarController {
         if (view == null){
             view = new ProdutoAlterarView();
         }
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
 

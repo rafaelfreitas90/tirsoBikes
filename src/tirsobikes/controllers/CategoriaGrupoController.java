@@ -22,6 +22,7 @@ public class CategoriaGrupoController {
     // Método para chamar a interface.    
     public void exibirInterfaceGrafica(String tipo) {
         view = new ProdutoAddMarcaGrupoView(tipo);
+        view.setAlwaysOnTop(true);
         view.setModal(true);
         view.setVisible(true);
     }

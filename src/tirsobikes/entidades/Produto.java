@@ -2,6 +2,7 @@ package tirsobikes.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Locale;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import tirsobikes.funcoes.Converter;
 
 /**
  *
@@ -51,7 +53,7 @@ public class Produto implements Serializable {
     @JoinColumn(name = "idcategoria", referencedColumnName = "idcategoria")
     @ManyToOne(optional = false)
     private Categoria idcategoria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idproduto", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idproduto")
     private List<Estoque> estoqueCollection;
 
     public Produto() {
@@ -106,9 +108,11 @@ public class Produto implements Serializable {
     }
 
     public String getValorCustoString() {
-        String valorNovo = String.valueOf(valorCusto);
-        String replace = valorNovo.replace(".", ",");
-        return replace;
+        DecimalFormat myformat = new DecimalFormat();
+        myformat.setMaximumFractionDigits(2);
+        myformat.setMinimumFractionDigits(2);
+        String valorNovo = myformat.format(valorCusto);        
+        return valorNovo;
     }
 
     public void setValorCusto(Double valorCusto) {
@@ -116,24 +120,23 @@ public class Produto implements Serializable {
     }
 
     public void setValorCusto(String valorCusto) {
-        valorCusto = valorCusto.replace(",", ".");
+        valorCusto = Converter.banco(valorCusto);
         this.valorCusto = Double.parseDouble(valorCusto);
     }
 
     public Double getValorVenda() {
-        this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));
         return valorVenda;
     }
 
     public String getValorVendaString() {
-        this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));
-        String valorNovo = String.valueOf(valorVenda);
-        String replace = valorNovo.replace(".", ",");
-        return replace;
+        DecimalFormat myformat = new DecimalFormat();
+        myformat.setMaximumFractionDigits(2);
+        myformat.setMinimumFractionDigits(2);
+        String valorNovo = myformat.format(valorVenda);                 
+        return valorNovo;
     }
 
     public String getValorVendaView() {
-        this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         String valor = nf.format(this.valorVenda);
         return valor;
@@ -144,7 +147,7 @@ public class Produto implements Serializable {
     }
 
     public void setValorVenda(String valorVenda) {
-        valorVenda = valorVenda.replace(",", ".");
+        valorVenda = Converter.banco(valorVenda);
         this.valorVenda = Double.parseDouble(valorVenda);
     }
 
@@ -153,9 +156,11 @@ public class Produto implements Serializable {
     }
 
     public String getMargemString() {
-        String valorNovo = String.valueOf(margem);
-        String replace = valorNovo.replace(".", ",");
-        return replace;
+        DecimalFormat myformat = new DecimalFormat();
+        myformat.setMaximumFractionDigits(2);
+        myformat.setMinimumFractionDigits(2);
+        String valorNovo = myformat.format(margem);        
+        return valorNovo;
     }
 
     public void setMargem(Double margem) {
@@ -163,7 +168,7 @@ public class Produto implements Serializable {
     }
 
     public void setMargem(String margem) {
-        margem = margem.replace(",", ".");
+        margem = Converter.banco(margem);
         this.margem = Double.parseDouble(margem);
     }
 

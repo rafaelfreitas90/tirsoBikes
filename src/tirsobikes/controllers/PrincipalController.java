@@ -24,7 +24,7 @@ public class PrincipalController {
     public void exibirInterfaceGrafica() {
         if (view == null) {
             view = new PrincipalView();
-        }
+        }        
         view.setVisible(true);
     }
 }

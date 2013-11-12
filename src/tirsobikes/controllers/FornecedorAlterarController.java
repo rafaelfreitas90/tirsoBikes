@@ -26,6 +26,7 @@ public class FornecedorAlterarController {
         if (view == null){
             view = new FornecedorAlterarView();
         }
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
 

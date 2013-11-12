@@ -25,6 +25,7 @@ public class ServicoAlterarController {
         if (view == null){
             view = new ServicoAlterarView();
         }
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
 

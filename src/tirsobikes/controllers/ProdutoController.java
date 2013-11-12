@@ -26,16 +26,19 @@ public class ProdutoController {
         if (view == null){
             view = new ProdutoView();
         }
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
 
     public void exibirInterfaceGrafica(Produto produto) {
-        view = new ProdutoView(produto);          
+        view = new ProdutoView(produto);   
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
     
        public void exibirInterfaceGrafica(Servico servico) {
         view = new ProdutoView(servico);          
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
 }

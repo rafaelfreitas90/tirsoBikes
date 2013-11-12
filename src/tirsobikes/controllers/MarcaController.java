@@ -24,6 +24,7 @@ public class MarcaController {
     public void exibirInterfaceGrafica(String tipo) {
         view = new ProdutoAddMarcaGrupoView(tipo);
         view.setModal(true);
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
 

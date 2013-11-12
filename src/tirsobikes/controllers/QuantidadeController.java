@@ -26,8 +26,9 @@ public class QuantidadeController {
 
     // Método para chamar a interface.    
     public void exibirInterfaceGrafica(Produto produto) {
-        view = new ProdutoAddQtdeView(produto);
-        view.setModal(true);
+        view = new ProdutoAddQtdeView(produto);        
+        view.setModal(true);        
+        view.setAlwaysOnTop(true);
         view.setVisible(true);
     }
 }
