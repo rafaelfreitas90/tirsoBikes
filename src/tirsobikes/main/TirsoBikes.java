@@ -1,12 +1,11 @@
+
 package tirsobikes.main;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import tirsobikes.controllers.PrincipalController;
 import tirsobikes.controllers.ProdutoController;
 import tirsobikes.controllers.UsuarioController;
-import tirsobikes.entidades.Produto;
 import tirsobikes.views.PrincipalView;
 
 /**
@@ -44,9 +43,9 @@ public class TirsoBikes {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        ProdutoController.getInstancia();
-        PrincipalController.getInstancia().exibirInterfaceGrafica();
+//        ProdutoController.getInstancia();
+//        PrincipalController.getInstancia().exibirInterfaceGrafica();
 
-//       UsuarioController.getInstancia().exibirInterfaceGrafica();
+       UsuarioController.getInstancia().exibirInterfaceGrafica();
     }
 }

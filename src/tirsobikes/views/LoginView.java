@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import tirsobikes.DAO.UsuarioDAO;
 import tirsobikes.controllers.PrincipalController;
 import tirsobikes.entidades.Usuario;
+import tirsobikes.views.validacoes.Session;
 
 /**
  *
@@ -58,6 +59,11 @@ public class LoginView extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/delete (1).png"))); // NOI18N
         jButton2.setText("CANCELAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/icon.png"))); // NOI18N
 
@@ -122,7 +128,8 @@ public class LoginView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String usuario = txtUsuario.getText();
         String senha = passwordSenha.getText();
-
+        Session logado = new Session();
+        
         List<Usuario> usuarios = dao.listaUsuario();
 
         String usuarioValido = null;
@@ -131,7 +138,8 @@ public class LoginView extends javax.swing.JFrame {
         for (Usuario objeto : usuarios) {
             if (objeto.getNome().equals(usuario) && (objeto.getSenha().equals(senha))) {
                 usuarioValido = objeto.getNome();
-                senhaValida = objeto.getSenha();
+                senhaValida = objeto.getSenha();                
+                logado.setUsuario(objeto);
             }
 
         }
@@ -141,13 +149,17 @@ public class LoginView extends javax.swing.JFrame {
             txtUsuario.setText(null);
             passwordSenha.setText(null);
 
-        } else {
-
+        } else{
+            
             PrincipalController.getInstancia().exibirInterfaceGrafica();
             this.dispose();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

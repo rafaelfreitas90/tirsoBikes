@@ -498,7 +498,7 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAddCategoriaActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
-        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
+        Integer resposta = JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja cancelar?");
         if (resposta == JOptionPane.YES_OPTION) {
             limpaCampos();
             this.dispose();
@@ -515,7 +515,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 return;
             }
             salvarProduto();
-            JOptionPane.showMessageDialog(null, "Produto Salvo com sucesso!");
+            JOptionPane.showMessageDialog(rootPane, "Produto Salvo com sucesso!");
         }
 
         if (jComboTipo.getSelectedIndex() == 2) {
@@ -523,11 +523,11 @@ public class ProdutoView extends javax.swing.JFrame {
                 return;
             }
             salvarServico();
-            JOptionPane.showMessageDialog(null, "Serviço salvo com sucesso");
+            JOptionPane.showMessageDialog(rootPane, "Serviço salvo com sucesso");
         }
 
         if (jComboTipo.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione um tipo (Serviço ou Produto)");
+            JOptionPane.showMessageDialog(rootPane, "Selecione um tipo (Serviço ou Produto)");
         }
         limpaCampos();
     }//GEN-LAST:event_bntSalvarActionPerformed

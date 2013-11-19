@@ -4,6 +4,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tirsobikes.controllers.*;
+import tirsobikes.entidades.Usuario;
+import tirsobikes.views.validacoes.Session;
 
 /**
  *
@@ -11,13 +13,17 @@ import tirsobikes.controllers.*;
  */
 public class PrincipalView extends javax.swing.JFrame {
 
-    public PrincipalView() {
+    Session log = new Session();
+    Usuario user = new Usuario();
 
+    public PrincipalView() {
         ImageIcon icon = new ImageIcon(getClass().getResource("/tirsobikes/imgs/icon.png"));
-        super.setIconImage(icon.getImage());
-        initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        super.setIconImage(icon.getImage());        
+        initComponents();        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);         
     }
+    
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -27,8 +33,9 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanel1 = new BackgroundJPanel();
         jToolBar1 = new javax.swing.JToolBar();
         btnNovoProduto = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        labelUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -69,6 +76,18 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jToolBar1.add(btnNovoProduto);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/tools.png"))); // NOI18N
+        jButton1.setText("Serviço");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
+
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/Sair.png"))); // NOI18N
         btnSair.setText("Sair");
         btnSair.setFocusable(false);
@@ -84,7 +103,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jToolBar1.add(btnSair);
 
-        jLabel1.setText("Usuario");
+        labelUsuario.setText("Usuario");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,7 +112,7 @@ public class PrincipalView extends javax.swing.JFrame {
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addComponent(labelUsuario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,7 +120,7 @@ public class PrincipalView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+                .addComponent(labelUsuario))
         );
 
         jMenu1.setText("Produtos");
@@ -233,10 +252,14 @@ public class PrincipalView extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         ServicoAlterarController.getInstancia().exibirInterfaceGrafica();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ServicoAlterarController.getInstancia().exibirInterfaceGrafica();
+    }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoProduto;
     private javax.swing.JButton btnSair;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -251,5 +274,11 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel labelUsuario;
     // End of variables declaration//GEN-END:variables
+
+private void usuarioLogado(){
+   user =  log.usuarioLogado();
+   labelUsuario.setText(user.getNome());
+}
 }
