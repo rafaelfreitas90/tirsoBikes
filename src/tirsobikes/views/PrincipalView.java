@@ -223,7 +223,7 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Sair do Sistema ?");
+        Integer resposta = JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja Sair do Sistema ?");
         if (resposta == JOptionPane.YES_OPTION) {
             this.dispose();
         }

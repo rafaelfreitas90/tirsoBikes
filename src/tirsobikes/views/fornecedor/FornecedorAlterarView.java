@@ -116,17 +116,17 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaFornecedor);
         tabelaFornecedor.getColumnModel().getColumn(0).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(0).setPreferredWidth(2);
+        tabelaFornecedor.getColumnModel().getColumn(0).setPreferredWidth(4);
         tabelaFornecedor.getColumnModel().getColumn(1).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabelaFornecedor.getColumnModel().getColumn(1).setPreferredWidth(150);
         tabelaFornecedor.getColumnModel().getColumn(2).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(2).setPreferredWidth(80);
+        tabelaFornecedor.getColumnModel().getColumn(2).setPreferredWidth(150);
         tabelaFornecedor.getColumnModel().getColumn(3).setResizable(false);
         tabelaFornecedor.getColumnModel().getColumn(3).setPreferredWidth(40);
         tabelaFornecedor.getColumnModel().getColumn(4).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(4).setPreferredWidth(80);
+        tabelaFornecedor.getColumnModel().getColumn(4).setPreferredWidth(100);
         tabelaFornecedor.getColumnModel().getColumn(5).setResizable(false);
-        tabelaFornecedor.getColumnModel().getColumn(5).setPreferredWidth(40);
+        tabelaFornecedor.getColumnModel().getColumn(5).setPreferredWidth(60);
 
         bntAlterar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
@@ -152,15 +152,13 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(bntAlterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bntAlterar1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 957, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,7 +181,7 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,11 +230,11 @@ public class FornecedorAlterarView extends javax.swing.JFrame {
             FornecedorDAO dao = new FornecedorDAO(TirsoBikes.getEntityManager());
             fornecedor = dao.procurarFornecedor(Integer.parseInt(tabelaFornecedor.getValueAt(linhaTabela, 0).toString()));
 
-            Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja\n excluir o fornecedor: " + fornecedor.getNomeRazao()+ "?");
+            Integer resposta = JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja\n excluir o fornecedor: " + fornecedor.getNomeRazao()+ "?");
             if (resposta == JOptionPane.YES_OPTION) {
                 if (fornecedor != null) {
                     dao.deletarForncedor(fornecedor);
-                    JOptionPane.showMessageDialog(null, "Fornecedor deletado com sucesso!");
+                    JOptionPane.showMessageDialog(rootPane, "Fornecedor deletado com sucesso!");
                 }
             }
 

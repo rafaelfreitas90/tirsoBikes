@@ -43,13 +43,31 @@ public class FornecedorView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtIE = new javax.swing.JTextField();
+        try{ 
+            javax.swing.text.MaskFormatter ie = new javax.swing.text.MaskFormatter("###.###.###.###"); 
+            txtIE = new javax.swing.JFormattedTextField(ie); 
+        } 
+        catch (Exception e){ 
+        }
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtIm = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtTelefone1 = new javax.swing.JTextField();
+        try{ 
+            javax.swing.text.MaskFormatter telefone1 = new javax.swing.text.MaskFormatter("(##)####-####"); 
+            txtTelefone1 = new javax.swing.JFormattedTextField(telefone1); 
+        } 
+        catch (Exception e){ 
+        }
         txtTelefone2 = new javax.swing.JTextField();
+        try{ 
+            javax.swing.text.MaskFormatter telefone2 = new javax.swing.text.MaskFormatter("(##)####-####"); 
+            txtTelefone2 = new javax.swing.JFormattedTextField(telefone2); 
+        } 
+        catch (Exception e){ 
+        }
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -59,7 +77,19 @@ public class FornecedorView extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtCEP = new javax.swing.JFormattedTextField();
+        try{ 
+            javax.swing.text.MaskFormatter cpf= new javax.swing.text.MaskFormatter("#####-###"); 
+            txtCEP = new javax.swing.JFormattedTextField(cpf); 
+        } 
+        catch (Exception e){ 
+        }
         txtCnpj = new javax.swing.JFormattedTextField();
+        try{ 
+            javax.swing.text.MaskFormatter cnpj = new javax.swing.text.MaskFormatter("##.###.###/####-##"); 
+            txtCnpj = new javax.swing.JFormattedTextField(cnpj); 
+        } 
+        catch (Exception e){ 
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Fornecedor");
@@ -71,21 +101,21 @@ public class FornecedorView extends javax.swing.JFrame {
             }
         });
 
-        txtNomeRazao.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtNomeRazao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel1.setText("Nome / Razao Social");
 
         jLabel2.setText("Nome Fantasia");
 
-        txtNomeFantasia.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtNomeFantasia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel3.setText("Endereço");
 
-        txtEndereco.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtEndereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setText("Cidade");
 
-        txtCidade.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         comboUF.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         comboUF.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PR", "PB", "PA", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SE", "SP", "TO" }));
@@ -96,21 +126,21 @@ public class FornecedorView extends javax.swing.JFrame {
 
         jLabel7.setText("CNPJ");
 
-        txtIE.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtIE.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel8.setText("I.E");
 
         jLabel9.setText("I.M");
 
-        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtIm.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtIm.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel10.setText("E-mail");
 
-        txtTelefone1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtTelefone1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtTelefone2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtTelefone2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel11.setText("Telefone");
 
@@ -118,7 +148,7 @@ public class FornecedorView extends javax.swing.JFrame {
 
         jLabel13.setText("Vendedor / Representante");
 
-        txtVendedor.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        txtVendedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/save.png"))); // NOI18N
@@ -142,6 +172,10 @@ public class FornecedorView extends javax.swing.JFrame {
         txtCodigo.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
         jLabel14.setText("Cod.");
+
+        txtCEP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtCnpj.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -312,7 +346,7 @@ public class FornecedorView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Integer resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar?");
+        Integer resposta = JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja cancelar?");
         if (resposta == JOptionPane.YES_OPTION) {
             limpaCampos();
             this.dispose();
@@ -380,7 +414,7 @@ public class FornecedorView extends javax.swing.JFrame {
         if (!txtCodigo.getText().isEmpty()) {
             model.setIdfornecedor(Integer.parseInt(txtCodigo.getText()));
             dao.atualizarFornecedor(model);
-            JOptionPane.showMessageDialog(null, "Fornecedor Salvo com sucesso!");
+            JOptionPane.showMessageDialog(rootPane, "Fornecedor Salvo com sucesso!");
         } else {
             dao.salvarFornecedor(model);
         }
@@ -389,55 +423,55 @@ public class FornecedorView extends javax.swing.JFrame {
     public boolean verificaCampos() {
 
         if (txtNomeRazao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Digite o nome/razão social ");
+            JOptionPane.showMessageDialog(rootPane, "Digite o nome/razão social ");
             txtNomeRazao.requestFocus();
             return false;
         }
 
         if (txtNomeFantasia.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Verifique o campo Nome Fantasia !");
+            JOptionPane.showMessageDialog(rootPane, "Verifique o campo Nome Fantasia !");
             txtNomeFantasia.requestFocus();
             return false;
         }
 
         if (txtEndereco.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Verifique o campo Endereço !");
+            JOptionPane.showMessageDialog(rootPane, "Verifique o campo Endereço !");
             txtEndereco.requestFocus();
             return false;
         }
 
         if (txtCEP.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Verifique o campo CEP!");
+            JOptionPane.showMessageDialog(rootPane, "Verifique o campo CEP!");
             txtCEP.requestFocus();
             return false;
         }
 
         if (txtCidade.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Verifique o campo Cidade! ");
+            JOptionPane.showMessageDialog(rootPane, "Verifique o campo Cidade! ");
             txtCidade.requestFocus();
             return false;
         }
 
         if (txtCnpj.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Verifique o campo CNPJ!");
+            JOptionPane.showMessageDialog(rootPane, "Verifique o campo CNPJ!");
             txtCnpj.requestFocus();
             return false;
         }
 
         if (txtEmail.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Verifique o campo E-mail !");
+            JOptionPane.showMessageDialog(rootPane, "Verifique o campo E-mail !");
             txtEmail.requestFocus();
             return false;
         }
 
         if (txtTelefone1.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Verifique o campo Telefone !");
+            JOptionPane.showMessageDialog(rootPane, "Verifique o campo Telefone !");
             txtTelefone1.requestFocus();
             return false;
         }
 
         if (txtVendedor.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Verifique o campo Vendedor !");
+            JOptionPane.showMessageDialog(rootPane, "Verifique o campo Vendedor !");
             txtVendedor.requestFocus();
             return false;
         }

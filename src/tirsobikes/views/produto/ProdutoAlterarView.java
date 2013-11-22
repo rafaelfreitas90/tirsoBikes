@@ -2,6 +2,7 @@ package tirsobikes.views.produto;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tirsobikes.DAO.ProdutoDAO;
@@ -17,7 +18,7 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
 
 
     public ProdutoAlterarView() {
-        initComponents();
+        initComponents();       
     }
 
 
@@ -74,7 +75,7 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtBusca)
+                .addComponent(txtBusca, javax.swing.GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -91,7 +92,7 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabelaProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        tabelaProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -117,6 +118,8 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaProduto);
         tabelaProduto.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tabelaProduto.getColumnModel().getColumn(1).setPreferredWidth(500);
+        tabelaProduto.getColumnModel().getColumn(5).setPreferredWidth(40);
 
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
         bntAlterar.setText(" Alterar Produto");
@@ -141,13 +144,12 @@ public class ProdutoAlterarView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(bntAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bntAlterar1))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
