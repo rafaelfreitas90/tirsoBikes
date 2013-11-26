@@ -616,13 +616,13 @@ public class ProdutoView extends javax.swing.JFrame {
         if (Validacoes.validaNumero(txtValorCusto.getText()) && Validacoes.validaNumero(txtMargem.getText())) {
             if (!(txtValorCusto.getText().isEmpty()) && (!txtMargem.getText().isEmpty())) {
                 Produto produto = new Produto();
-                produto.setValorCusto(txtValorCusto.getText());
-                produto.setMargem(txtMargem.getText());
+                produto.setValorCusto(Double.parseDouble(txtValorCusto.getText()));
+                produto.setMargem(Double.parseDouble(txtMargem.getText()));
 
                 produto.setValorVenda((produto.getValorCusto() * produto.getMargem() / 100) + produto.getValorCusto());
 
                 // atualiza valor venda                        
-                txtValorVenda.setText(produto.getValorVendaString());
+                
             } else {
                 JOptionPane.showMessageDialog(null, "O campo Valor Custo e Margem de Lucro são obrigatórios para o calculo!");
             }
