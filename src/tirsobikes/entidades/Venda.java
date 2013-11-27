@@ -1,14 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tirsobikes.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,12 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -54,17 +46,9 @@ public class Venda implements Serializable {
     private double valorTotal;
     @Column(name = "desconto")
     private Integer desconto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idvenda")
-    private Collection<Itensvenda> itensvendaCollection;
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
     @ManyToOne(optional = false)
     private Cliente idcliente;
-    @JoinColumn(name = "idservico", referencedColumnName = "idservico")
-    @ManyToOne
-    private Servico idservico;
-    @JoinColumn(name = "idproduto", referencedColumnName = "idproduto")
-    @ManyToOne
-    private Produto idproduto;
 
     public Venda() {
     }
@@ -111,37 +95,12 @@ public class Venda implements Serializable {
         this.desconto = desconto;
     }
 
-    @XmlTransient
-    public Collection<Itensvenda> getItensvendaCollection() {
-        return itensvendaCollection;
-    }
-
-    public void setItensvendaCollection(Collection<Itensvenda> itensvendaCollection) {
-        this.itensvendaCollection = itensvendaCollection;
-    }
-
     public Cliente getIdcliente() {
         return idcliente;
     }
 
     public void setIdcliente(Cliente idcliente) {
         this.idcliente = idcliente;
-    }
-
-    public Servico getIdservico() {
-        return idservico;
-    }
-
-    public void setIdservico(Servico idservico) {
-        this.idservico = idservico;
-    }
-
-    public Produto getIdproduto() {
-        return idproduto;
-    }
-
-    public void setIdproduto(Produto idproduto) {
-        this.idproduto = idproduto;
     }
 
     @Override

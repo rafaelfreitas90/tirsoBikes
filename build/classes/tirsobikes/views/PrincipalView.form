@@ -78,10 +78,25 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Alterar"/>
+                <Property name="text" type="java.lang.String" value="Listar / Alterar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cliente"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar Novo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -137,7 +152,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jToolBar1" alignment="0" pref="608" max="32767" attributes="0"/>
+              <Component id="jToolBar1" alignment="0" pref="723" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="labelUsuario" min="-2" max="-2" attributes="0"/>
