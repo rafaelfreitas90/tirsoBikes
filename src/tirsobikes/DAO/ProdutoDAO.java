@@ -50,7 +50,7 @@ public class ProdutoDAO {
     }
     
     public List<Produto> procurarProdutoNome (String descricao) {
-        Query query = manager.createQuery("FROM Produto WHERE descricao LIKE (:searchKeyword)");
+        Query query = manager.createQuery("FROM Produto WHERE descricao LIKE (:searchKeyword) ORDER BY descricao");
         query.setParameter("searchKeyword", "%"+descricao+"%");
         return query.getResultList();
     }
