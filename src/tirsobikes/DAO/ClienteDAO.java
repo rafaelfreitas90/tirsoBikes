@@ -42,12 +42,13 @@ public class ClienteDAO {
     }
 
     public List<Cliente> listarCliente() {
-        Query query = manager.createQuery("from Cliente");
+        Query query = manager.createQuery("from Cliente ORDER BY nomeCompleto");
         return query.getResultList();
     }
     
     public List<Cliente> procurarClienteNome (String nomeCompleto) {
-        Query query = manager.createQuery("FROM Cliente WHERE nomeCompleto LIKE (:searchKeyword)");
+        Query query;
+        query = manager.createQuery("FROM Cliente WHERE nomeCompleto LIKE (:searchKeyword)");
         query.setParameter("searchKeyword", "%"+nomeCompleto+"%");
         return query.getResultList();
     }

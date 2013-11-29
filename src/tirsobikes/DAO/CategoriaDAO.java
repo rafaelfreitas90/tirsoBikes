@@ -44,7 +44,7 @@ public class CategoriaDAO {
     }
 
     public List<Categoria> listaCategorias() {
-        Query query = manager.createQuery("from Categoria");
+        Query query = manager.createQuery("from Categoria ORDER BY descricao");
         return query.getResultList();
     }
 }

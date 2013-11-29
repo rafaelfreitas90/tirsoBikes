@@ -30,7 +30,7 @@ public class ClienteController {
     }
 
     public void exibirInterfaceGrafica2(Cliente cliente) {
-        view = new ClienteView();
+        view = new ClienteView(cliente);
         view.setAlwaysOnTop(true);
         view.setVisible(true);
     }

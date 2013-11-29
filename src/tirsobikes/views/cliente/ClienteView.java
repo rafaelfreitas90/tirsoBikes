@@ -1,5 +1,11 @@
 package tirsobikes.views.cliente;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import tirsobikes.DAO.ClienteDAO;
@@ -44,11 +50,17 @@ public class ClienteView extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtDataNasc = new javax.swing.JTextField();
+        try{ 
+            javax.swing.text.MaskFormatter dn= new javax.swing.text.MaskFormatter("##/##/####"); 
+            txtDataNasc = new javax.swing.JFormattedTextField(dn); 
+        } 
+        catch (Exception e){ 
+        }
         jLabel10 = new javax.swing.JLabel();
         TxtCpf = new javax.swing.JTextField();
         try{ 
-            javax.swing.text.MaskFormatter telefone1 = new javax.swing.text.MaskFormatter("(##)####-####"); 
-            TxtCpf = new javax.swing.JFormattedTextField(telefone1); 
+            javax.swing.text.MaskFormatter cpf = new javax.swing.text.MaskFormatter("###.###.###-##"); 
+            TxtCpf = new javax.swing.JFormattedTextField(cpf); 
         } 
         catch (Exception e){ 
         }
@@ -75,18 +87,12 @@ public class ClienteView extends javax.swing.JFrame {
         txtTelefone1 = new javax.swing.JTextField();
         try{ 
             javax.swing.text.MaskFormatter telefone1 = new javax.swing.text.MaskFormatter("(##)####-####"); 
-            TxtCpf = new javax.swing.JFormattedTextField(telefone1); 
+            txtTelefone1 = new javax.swing.JFormattedTextField(telefone1); 
         } 
         catch (Exception e){ 
         }
         jLabel13 = new javax.swing.JLabel();
         txtRg = new javax.swing.JTextField();
-        try{ 
-            javax.swing.text.MaskFormatter telefone1 = new javax.swing.text.MaskFormatter("(##)####-####"); 
-            TxtCpf = new javax.swing.JFormattedTextField(telefone1); 
-        } 
-        catch (Exception e){ 
-        }
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
@@ -397,7 +403,16 @@ public class ClienteView extends javax.swing.JFrame {
         model.setUf(comboUF.getSelectedItem().toString());
         model.setCep(txtCEP.getText());
         model.setCpf(TxtCpf.getText());
-        model.setRg(txtRg.getText());       
+        model.setRg(txtRg.getText());     
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dn = txtDataNasc.getText();
+        Date date = null;
+        try {
+            date = formatter.parse(txtDataNasc.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(ClienteView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        model.setDataNascimento(date);
         model.setEmail(txtEmail.getText());
         model.setTelefone1(txtTelefone1.getText());
         model.setTelefone2(txtTelefone2.getText());
@@ -486,7 +501,7 @@ public class ClienteView extends javax.swing.JFrame {
         txtBairro.setText(cliente.getBairro());
         txtCidade.setText(cliente.getCidade());
         txtCEP.setText(cliente.getCep());        
-        txtDataNasc.setText(cliente.getDataNascimento().toString());
+        txtDataNasc.setText(cliente.getDataNascimentoString());
         txtEmail.setText(cliente.getEmail());
         TxtCpf.setText(cliente.getCpf());
         txtRg.setText(cliente.getRg());

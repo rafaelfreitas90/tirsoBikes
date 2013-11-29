@@ -42,7 +42,7 @@ public class MarcaDAO {
     }    
 
     public List<Marca> listaMarcas() {
-        Query query = manager.createQuery("from Marca");
+        Query query = manager.createQuery("from Marca ORDER BY descricao");
         return query.getResultList();
     }
 }

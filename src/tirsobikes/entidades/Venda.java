@@ -29,7 +29,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Venda.findByIdvenda", query = "SELECT v FROM Venda v WHERE v.idvenda = :idvenda"),
     @NamedQuery(name = "Venda.findByDataHora", query = "SELECT v FROM Venda v WHERE v.dataHora = :dataHora"),
     @NamedQuery(name = "Venda.findByValorTotal", query = "SELECT v FROM Venda v WHERE v.valorTotal = :valorTotal"),
-    @NamedQuery(name = "Venda.findByDesconto", query = "SELECT v FROM Venda v WHERE v.desconto = :desconto")})
+    @NamedQuery(name = "Venda.findByDesconto", query = "SELECT v FROM Venda v WHERE v.desconto = :desconto"),
+    @NamedQuery(name = "Venda.findByFormaPagamento", query = "SELECT v FROM Venda v WHERE v.formaPagamento = :formaPagamento"),
+    @NamedQuery(name = "Venda.findByDataPagamento", query = "SELECT v FROM Venda v WHERE v.dataPagamento = :dataPagamento"),
+    @NamedQuery(name = "Venda.findByStatusPagamento", query = "SELECT v FROM Venda v WHERE v.statusPagamento = :statusPagamento")})
 public class Venda implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,6 +49,15 @@ public class Venda implements Serializable {
     private double valorTotal;
     @Column(name = "desconto")
     private Integer desconto;
+    @Basic(optional = false)
+    @Column(name = "formaPagamento")
+    private String formaPagamento;
+    @Column(name = "dataPagamento")
+    @Temporal(TemporalType.DATE)
+    private Date dataPagamento;
+    @Basic(optional = false)
+    @Column(name = "statusPagamento")
+    private char statusPagamento;
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
     @ManyToOne(optional = false)
     private Cliente idcliente;
@@ -57,10 +69,12 @@ public class Venda implements Serializable {
         this.idvenda = idvenda;
     }
 
-    public Venda(Integer idvenda, Date dataHora, double valorTotal) {
+    public Venda(Integer idvenda, Date dataHora, double valorTotal, String formaPagamento, char statusPagamento) {
         this.idvenda = idvenda;
         this.dataHora = dataHora;
         this.valorTotal = valorTotal;
+        this.formaPagamento = formaPagamento;
+        this.statusPagamento = statusPagamento;
     }
 
     public Integer getIdvenda() {
@@ -93,6 +107,30 @@ public class Venda implements Serializable {
 
     public void setDesconto(Integer desconto) {
         this.desconto = desconto;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public Date getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(Date dataPagamento) {
+        this.dataPagamento = dataPagamento;
+    }
+
+    public char getStatusPagamento() {
+        return statusPagamento;
+    }
+
+    public void setStatusPagamento(char statusPagamento) {
+        this.statusPagamento = statusPagamento;
     }
 
     public Cliente getIdcliente() {

@@ -325,6 +325,9 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;javax.swing.text.MaskFormatter dn= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;); &#xd;&#xa;txtDataNasc = new javax.swing.JFormattedTextField(dn); &#xd;&#xa;} &#xd;&#xa;catch (Exception e){ &#xd;&#xa;} "/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
@@ -338,7 +341,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;javax.swing.text.MaskFormatter telefone1 = new javax.swing.text.MaskFormatter(&quot;(##)####-####&quot;); &#xd;&#xa;TxtCpf = new javax.swing.JFormattedTextField(telefone1); &#xd;&#xa;} &#xd;&#xa;catch (Exception e){ &#xd;&#xa;} "/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;javax.swing.text.MaskFormatter cpf = new javax.swing.text.MaskFormatter(&quot;###.###.###-##&quot;); &#xd;&#xa;TxtCpf = new javax.swing.JFormattedTextField(cpf); &#xd;&#xa;} &#xd;&#xa;catch (Exception e){ &#xd;&#xa;} "/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTelefone2">
@@ -424,7 +427,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;javax.swing.text.MaskFormatter telefone1 = new javax.swing.text.MaskFormatter(&quot;(##)####-####&quot;); &#xd;&#xa;TxtCpf = new javax.swing.JFormattedTextField(telefone1); &#xd;&#xa;} &#xd;&#xa;catch (Exception e){ &#xd;&#xa;} "/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;javax.swing.text.MaskFormatter telefone1 = new javax.swing.text.MaskFormatter(&quot;(##)####-####&quot;); &#xd;&#xa;txtTelefone1 = new javax.swing.JFormattedTextField(telefone1); &#xd;&#xa;} &#xd;&#xa;catch (Exception e){ &#xd;&#xa;} "/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
@@ -438,9 +441,6 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;javax.swing.text.MaskFormatter telefone1 = new javax.swing.text.MaskFormatter(&quot;(##)####-####&quot;); &#xd;&#xa;TxtCpf = new javax.swing.JFormattedTextField(telefone1); &#xd;&#xa;} &#xd;&#xa;catch (Exception e){ &#xd;&#xa;} "/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>

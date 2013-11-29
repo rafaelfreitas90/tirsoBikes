@@ -1,12 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tirsobikes.entidades;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -177,6 +177,18 @@ public class Cliente implements Serializable {
 
     public Date getDataNascimento() {
         return dataNascimento;
+    }
+    
+    public String getDataNascimentoString(){
+        SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd");  
+        SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");  
+           String data = null;
+        try {
+          data = out.format(in.parse(dataNascimento.toString()));  
+        } catch (ParseException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
     }
 
     public void setDataNascimento(Date dataNascimento) {
