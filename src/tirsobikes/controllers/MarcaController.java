@@ -1,7 +1,6 @@
 package tirsobikes.controllers;
 
 import tirsobikes.views.produto.ProdutoAddMarcaGrupoView;
-import tirsobikes.views.produto.ProdutoView;
 
 /**
  *
@@ -23,8 +22,8 @@ public class MarcaController {
     // Método para chamar a interface.    
     public void exibirInterfaceGrafica(String tipo) {
         view = new ProdutoAddMarcaGrupoView(tipo);
-        view.setModal(true);
         view.setAlwaysOnTop(true);
+        view.setModal(true);
         view.setVisible(true);
     }
 

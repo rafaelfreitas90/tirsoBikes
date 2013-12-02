@@ -616,15 +616,15 @@ public class ProdutoView extends javax.swing.JFrame {
         if (Validacoes.validaNumero(txtValorCusto.getText()) && Validacoes.validaNumero(txtMargem.getText())) {
             if (!(txtValorCusto.getText().isEmpty()) && (!txtMargem.getText().isEmpty())) {
                 Produto produto = new Produto();
-                produto.setValorCusto(Double.parseDouble(txtValorCusto.getText()));
-                produto.setMargem(Double.parseDouble(txtMargem.getText()));
-
+                produto.setValorCusto(Double.parseDouble(Converter.banco(txtValorCusto.getText())));
+                produto.setMargem(Double.parseDouble(Converter.banco(txtMargem.getText())));
                 produto.setValorVenda((produto.getValorCusto() * produto.getMargem() / 100) + produto.getValorCusto());
 
-                // atualiza valor venda                        
+                // atualiza valor venda 
+                txtValorVenda.setText(produto.getValorVendaString());
                 
             } else {
-                JOptionPane.showMessageDialog(null, "O campo Valor Custo e Margem de Lucro são obrigatórios para o calculo!");
+                JOptionPane.showMessageDialog(rootPane, "O campo Valor Custo e Margem de Lucro são obrigatórios para o calculo!");
             }
         }
     }
@@ -633,14 +633,14 @@ public class ProdutoView extends javax.swing.JFrame {
         if (Validacoes.validaNumero(txtValorVenda.getText()) && Validacoes.validaNumero(txtMargem.getText())) {
             if (!(txtValorCusto.getText().isEmpty()) && (!txtValorVenda.getText().isEmpty())) {
                 Produto produto = new Produto();
-                produto.setValorCusto(txtValorCusto.getText());
-                produto.setValorVenda(txtValorVenda.getText());
+                produto.setValorCusto(Converter.banco(txtValorCusto.getText()));
+                produto.setValorVenda(Converter.banco(txtValorVenda.getText()));
                 produto.setMargem(((produto.getValorVenda() * 100) / produto.getValorCusto()) - 100);
 
                 // atualiza valor venda                        
                 txtMargem.setText(produto.getMargemString());
             } else {
-                JOptionPane.showMessageDialog(null, "O campo Valor Custo e Venda são obrigatórios para o calculo!");
+                JOptionPane.showMessageDialog(rootPane, "O campo Valor Custo e Venda são obrigatórios para o calculo!");
             }
         }
     }
@@ -751,59 +751,59 @@ public class ProdutoView extends javax.swing.JFrame {
     private boolean validaCamposProduto() {
         if (!txtCodigoDeBarra.getText().isEmpty()) {
             if (!Validacoes.validaNumero(txtCodigoDeBarra.getText())) {
-                JOptionPane.showMessageDialog(null, "Código de Barras inválido");
+                JOptionPane.showMessageDialog(rootPane, "Código de Barras inválido");
                 txtCodigoDeBarra.requestFocus();
                 return false;
             }
         }
 
         if (txtDescricao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Digite o nome/descrição do produto");
+            JOptionPane.showMessageDialog(rootPane, "Digite o nome/descrição do produto");
             txtDescricao.requestFocus();
             return false;
         }
 
         if (jComboMarca.getSelectedItem().equals("Selecione uma Marca") || jComboMarca.getSelectedItem().equals("+ Adicionar..")) {
-            JOptionPane.showMessageDialog(null, "Selecione uma marca!");
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma marca!");
             jComboMarca.requestFocus();
             return false;
         }
 
         if (jComboCategoria.getSelectedItem().equals("Selecione uma Categoria") || jComboCategoria.getSelectedItem().equals("+ Adicionar..")) {
-            JOptionPane.showMessageDialog(null, "Selecione uma categoria!");
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma categoria!");
             jComboCategoria.requestFocus();
             return false;
         }
 
         if (!Validacoes.validaNumero(txtEstoqueMinimo.getText())) {
-            JOptionPane.showMessageDialog(null, "Estoque minimo inválido");
+            JOptionPane.showMessageDialog(rootPane, "Estoque minimo inválido");
             txtEstoqueMinimo.requestFocus();
             return false;
         }
 
         if (!Validacoes.validaNumero(txtEstoqueAtual.getText())) {
-            JOptionPane.showMessageDialog(null, "Estoque atual inválido");
+            JOptionPane.showMessageDialog(rootPane, "Estoque atual inválido");
             txtEstoqueAtual.requestFocus();
             return false;
         }
 
         String valorCusto = Converter.banco(txtValorCusto.getText());
         if (!Validacoes.validaNumero(valorCusto)) {
-            JOptionPane.showMessageDialog(null, "Valor Custo inválido");
+            JOptionPane.showMessageDialog(rootPane, "Valor Custo inválido");
             txtValorCusto.requestFocus();
             return false;
         }
 
         String margem = Converter.banco(txtMargem.getText());
         if (!Validacoes.validaNumero(margem)) {
-            JOptionPane.showMessageDialog(null, "Margem de lucro inválida");
+            JOptionPane.showMessageDialog(rootPane, "Margem de lucro inválida");
             txtMargem.requestFocus();
             return false;
         }
 
         String valorVenda = Converter.banco(txtValorVenda.getText());
         if (txtValorVenda.getText().isEmpty() || !Validacoes.validaNumero(valorVenda)) {
-            JOptionPane.showMessageDialog(null, "Valor de venda inválido");
+            JOptionPane.showMessageDialog(rootPane, "Valor de venda inválido");
             txtValorVenda.requestFocus();
             return false;
         }
@@ -814,14 +814,14 @@ public class ProdutoView extends javax.swing.JFrame {
     // validaçao de todos os campos de Serviço
     private boolean validaCamposServico() {
         if (txtDescricao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Digite o nome/descrição do serviço");
+            JOptionPane.showMessageDialog(rootPane, "Digite o nome/descrição do serviço");
             txtDescricao.requestFocus();
             return false;
         }
 
         String valorVenda = Converter.banco(txtValorVenda.getText());
         if (txtValorVenda.getText().isEmpty() || !Validacoes.validaNumero(valorVenda)) {
-            JOptionPane.showMessageDialog(null, "Valor de venda inválido");
+            JOptionPane.showMessageDialog(rootPane, "Valor de venda inválido");
             txtValorVenda.requestFocus();
             return false;
         }

@@ -5,6 +5,8 @@
 package tirsobikes.entidades;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Itensvenda.findByPrecoUnitario", query = "SELECT i FROM Itensvenda i WHERE i.precoUnitario = :precoUnitario"),
     @NamedQuery(name = "Itensvenda.findByQuantidade", query = "SELECT i FROM Itensvenda i WHERE i.quantidade = :quantidade")})
 public class Itensvenda implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,6 +81,12 @@ public class Itensvenda implements Serializable {
         return precoUnitario;
     }
 
+    public String getPrecoUnitarioView() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(this.precoUnitario);
+        return valor;
+    }
+
     public void setPrecoUnitario(double precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
@@ -114,6 +123,18 @@ public class Itensvenda implements Serializable {
         this.idproduto = idproduto;
     }
 
+    public Double getTotal() {
+        Double total = this.quantidade * this.precoUnitario;
+        return total;
+    }
+
+    public String getTotalView() {
+        Double total = this.quantidade * this.precoUnitario;
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(total);
+        return valor;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -138,5 +159,4 @@ public class Itensvenda implements Serializable {
     public String toString() {
         return "tirsobikes.entidades.Itensvenda[ iditensVenda=" + iditensVenda + " ]";
     }
-    
 }
