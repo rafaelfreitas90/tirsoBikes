@@ -177,14 +177,14 @@ public class Produto implements Serializable {
     public String getValorVendaString() {
         this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));
         String valorNovo = String.valueOf(valorVenda);
-        String replace = valorNovo.replace(".", ",");
+        String replace = valorNovo.replace(".", ",");      
         return replace;
     }
 
     public String getValorVendaView() {
         this.valorVenda = this.valorCusto + (this.valorCusto * (this.margem / 100));
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        String valor = nf.format(this.valorVenda);
+        String valor = nf.format(this.valorVenda);        
         return valor;
     }
 
