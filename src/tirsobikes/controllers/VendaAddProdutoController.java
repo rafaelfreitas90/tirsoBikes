@@ -1,6 +1,7 @@
 package tirsobikes.controllers;
 
 import tirsobikes.entidades.Produto;
+import tirsobikes.entidades.Servico;
 import tirsobikes.views.venda.VendaAddProdutoView;
 import tirsobikes.views.venda.VendaView;
 
@@ -24,6 +25,13 @@ public class VendaAddProdutoController {
     // Método para chamar a interface.    
     public void exibirInterfaceGrafica(Produto produto, VendaView aThis) {
         view = new VendaAddProdutoView(produto, aThis);
+        view.setModal(true);
+        view.setAlwaysOnTop(true);
+        view.setVisible(true);
+    }
+    
+    public void exibirInterfaceGrafica(Servico servico, VendaView aThis) {
+        view = new VendaAddProdutoView(servico, aThis);
         view.setModal(true);
         view.setAlwaysOnTop(true);
         view.setVisible(true);

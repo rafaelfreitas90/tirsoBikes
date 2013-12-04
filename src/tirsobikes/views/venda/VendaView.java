@@ -1,5 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
+
+/* To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package tirsobikes.views.venda;
@@ -11,11 +11,20 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import tirsobikes.DAO.ProdutoDAO;
+import tirsobikes.DAO.ServicoDAO;
 import tirsobikes.controllers.ProdutoListaController;
+import tirsobikes.controllers.ServicoListaController;
+import tirsobikes.controllers.VendaAddProdutoController;
+import tirsobikes.controllers.VendaAlterarProdutoController;
 import tirsobikes.entidades.Itensvenda;
 import tirsobikes.entidades.Produto;
+import tirsobikes.entidades.Servico;
+import tirsobikes.entidades.Venda;
+import tirsobikes.funcoes.Converter;
 import tirsobikes.funcoes.FormatarData;
 import tirsobikes.funcoes.FormatarHora;
+import tirsobikes.main.TirsoBikes;
 import tirsobikes.views.validacoes.Validacoes;
 
 /**
@@ -60,9 +69,9 @@ public class VendaView extends javax.swing.JFrame {
         bntBuscarCliente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVendas = new javax.swing.JTable();
-        bntExcluirProduto = new javax.swing.JButton();
+        bntAlterar = new javax.swing.JButton();
         bntAddProduto = new javax.swing.JButton();
-        bntExcluirProduto1 = new javax.swing.JButton();
+        bntExcluir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtTotalItens = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -230,14 +239,14 @@ public class VendaView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cód.", "Descrição", "Quantidade", "Valor Unit.", "Valor Total"
+                "Item", "Tipo", "Cód.", "Descrição", "Quant.", "Valor Unit.", "Valor Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -248,20 +257,25 @@ public class VendaView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelaVendas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabelaVendas);
-        tabelaVendas.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tabelaVendas.getColumnModel().getColumn(1).setPreferredWidth(250);
-        tabelaVendas.getColumnModel().getColumn(2).setPreferredWidth(30);
-        tabelaVendas.getColumnModel().getColumn(3).setPreferredWidth(50);
-        tabelaVendas.getColumnModel().getColumn(4).setPreferredWidth(60);
+        if (tabelaVendas.getColumnModel().getColumnCount() > 0) {
+            tabelaVendas.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tabelaVendas.getColumnModel().getColumn(1).setPreferredWidth(20);
+            tabelaVendas.getColumnModel().getColumn(2).setPreferredWidth(30);
+            tabelaVendas.getColumnModel().getColumn(3).setPreferredWidth(350);
+            tabelaVendas.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tabelaVendas.getColumnModel().getColumn(5).setPreferredWidth(90);
+            tabelaVendas.getColumnModel().getColumn(6).setPreferredWidth(150);
+        }
 
-        bntExcluirProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
-        bntExcluirProduto.setText(" Alterar");
-        bntExcluirProduto.setMargin(new java.awt.Insets(2, 2, 2, 14));
-        bntExcluirProduto.setPreferredSize(new java.awt.Dimension(133, 27));
-        bntExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
+        bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
+        bntAlterar.setText(" Alterar");
+        bntAlterar.setMargin(new java.awt.Insets(2, 2, 2, 14));
+        bntAlterar.setPreferredSize(new java.awt.Dimension(133, 27));
+        bntAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntExcluirProdutoActionPerformed(evt);
+                bntAlterarActionPerformed(evt);
             }
         });
 
@@ -275,13 +289,13 @@ public class VendaView extends javax.swing.JFrame {
             }
         });
 
-        bntExcluirProduto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/delete (1).png"))); // NOI18N
-        bntExcluirProduto1.setText(" Excluir");
-        bntExcluirProduto1.setMargin(new java.awt.Insets(2, 2, 2, 14));
-        bntExcluirProduto1.setPreferredSize(new java.awt.Dimension(133, 27));
-        bntExcluirProduto1.addActionListener(new java.awt.event.ActionListener() {
+        bntExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/delete (1).png"))); // NOI18N
+        bntExcluir.setText(" Excluir");
+        bntExcluir.setMargin(new java.awt.Insets(2, 2, 2, 14));
+        bntExcluir.setPreferredSize(new java.awt.Dimension(133, 27));
+        bntExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntExcluirProduto1ActionPerformed(evt);
+                bntExcluirActionPerformed(evt);
             }
         });
 
@@ -307,6 +321,11 @@ public class VendaView extends javax.swing.JFrame {
 
         txtDesconto.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         txtDesconto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDescontoKeyReleased(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
@@ -413,8 +432,8 @@ public class VendaView extends javax.swing.JFrame {
                                         .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(bntExcluirProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bntExcluirProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(bntAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGap(85, 85, 85)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -451,11 +470,11 @@ public class VendaView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bntExcluirProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bntAddServico, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bntExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(bntAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -499,17 +518,40 @@ public class VendaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bntSalvarActionPerformed
 
-    private void bntExcluirProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirProduto1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntExcluirProduto1ActionPerformed
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
 
+        int linhaTabela = tabelaVendas.getSelectedRow();
+        if (linhaTabela > -1) {
+            int codigo = Integer.parseInt(tabelaVendas.getValueAt(linhaTabela, 0).toString());
+            Itensvenda itemAux = new Itensvenda();
+            for (Itensvenda item : this.itens) {
+                if (item.getIditensVenda() == codigo) {
+                    itemAux = item;
+                }
+            }
+
+            itens.remove(itemAux);
+            atualizaTabela();
+        }
+    }//GEN-LAST:event_bntExcluirActionPerformed
     private void bntAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddProdutoActionPerformed
         ProdutoListaController.getInstancia().exibirInterfaceGrafica(this);
     }//GEN-LAST:event_bntAddProdutoActionPerformed
 
-    private void bntExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntExcluirProdutoActionPerformed
+    private void bntAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterarActionPerformed
+        int linhaTabela = tabelaVendas.getSelectedRow();
+
+        if (linhaTabela > -1) {
+            int codigo = Integer.parseInt(tabelaVendas.getValueAt(linhaTabela, 0).toString());
+            Itensvenda itemAux = new Itensvenda();
+            for (Itensvenda item : this.itens) {
+                if (item.getIditensVenda() == codigo) {
+                    itemAux = item;
+                }
+            }
+            VendaAlterarProdutoController.getInstancia().exibirInterfaceGrafica(itemAux, this);
+        }
+    }//GEN-LAST:event_bntAlterarActionPerformed
 
     private void bntBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarClienteActionPerformed
     }//GEN-LAST:event_bntBuscarClienteActionPerformed
@@ -519,8 +561,22 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntCancelarActionPerformed
 
     private void bntAddServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddServicoActionPerformed
-        // TODO add your handling code here:
+        ServicoListaController.getInstancia().exibirInterfaceGrafica(this);
     }//GEN-LAST:event_bntAddServicoActionPerformed
+
+    private void txtDescontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoKeyReleased
+         if (!txtDesconto.getText().isEmpty() && Validacoes.validaNumero(txtDesconto.getText()) && !txtValorTotalItens.getText().isEmpty()){
+             Venda venda = new Venda();
+             venda.setDesconto(Double.parseDouble(Converter.banco(txtDesconto.getText())));
+             venda.setValorTotal(Double.parseDouble(Converter.banco(txtValorTotalItens.getText())));
+             venda.setValorTotal(venda.getValorTotal() - venda.getDesconto());
+             
+             txtTotal.setText(String.valueOf(venda.getValorTotalView().replace("R$ ", "")));
+         }
+         else {
+             atualizaTabela();
+         }
+    }//GEN-LAST:event_txtDescontoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -536,16 +592,21 @@ public class VendaView extends javax.swing.JFrame {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaView.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -564,12 +625,20 @@ public class VendaView extends javax.swing.JFrame {
         String horaFormatada = FormatarHora.forUser(data);
         txtHoraVenda.setText(horaFormatada);
     }
+    int contadorItens = 0;
 
-    public void addProduto(Itensvenda item) {
+    public void addProdutoServico(Itensvenda item) {
+        //verifica se ja existe o item na lista
+        if (item.getIditensVenda() == null) {
+            contadorItens += 1;
+            item.setIditensVenda(contadorItens);
+        } else {
+            //remove registro anterior, antes de adicionar o atualizado
+            this.itens.remove(item);
+        }
         this.itens.add(item);
         atualizaTabela();
     }
-    
     NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
     private void atualizaTabela() {
@@ -579,29 +648,37 @@ public class VendaView extends javax.swing.JFrame {
         Integer totalItens = 0;
         if (!this.itens.isEmpty()) {
             for (Itensvenda i : this.itens) {
-                dtm.addRow(new Object[]{i.getIdproduto().getIdproduto(), i.getIdproduto().getDescricao(), i.getQuantidade(), i.getPrecoUnitarioView(), i.getTotalView()});
-            total += i.getTotal();
-            totalItens += i.getQuantidade();
+                if (i.getIdproduto() != null) {
+                    dtm.addRow(new Object[]{i.getIditensVenda(), i.getTipo(), i.getIdproduto().getIdproduto(), i.getIdproduto().getDescricao(), i.getQuantidade(), i.getPrecoUnitarioView(), i.getTotalView()});
+                } else {
+                    dtm.addRow(new Object[]{i.getIditensVenda(), i.getTipo(), i.getIdservico().getIdservico(), i.getIdservico().getDescricao(), i.getQuantidade(), i.getPrecoUnitarioView(), i.getTotalView()});
+                }
+                total += i.getTotal();
+                totalItens += i.getQuantidade();
             }
         }
-        
+
         txtTotalItens.setText(totalItens.toString());
+
+        Double totalValorItens = total;
         
-        if (!txtDesconto.getText().isEmpty() && Validacoes.validaNumero(txtDesconto.getText())){
+        if (!txtDesconto.getText().isEmpty() && Validacoes.validaNumero(txtDesconto.getText())) {
             total -= Double.parseDouble(txtDesconto.getText());
         }
         
+        String totalItensFormatado = nf.format(totalValorItens);
+        txtValorTotalItens.setText(totalItensFormatado.replace("R$ ", ""));
+        
         String totalFormatado = nf.format(total);
         txtTotal.setText(totalFormatado.replace("R$ ", ""));
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAddProduto;
     private javax.swing.JButton bntAddServico;
+    private javax.swing.JButton bntAlterar;
     private javax.swing.JButton bntBuscarCliente;
     private javax.swing.JButton bntCancelar;
-    private javax.swing.JButton bntExcluirProduto;
-    private javax.swing.JButton bntExcluirProduto1;
+    private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JComboBox jComboVendedor;
     private javax.swing.JComboBox jComboVendedor1;

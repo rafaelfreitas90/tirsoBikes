@@ -12,30 +12,31 @@ import tirsobikes.entidades.Servico;
  *
  * @author LuisHenrique
  */
-public class VendaAddProdutoView extends javax.swing.JDialog {
+public class VendaAlterarProdutoView extends javax.swing.JDialog {
 
     /**
      * Creates new form ProdutoAddQuantidade
      */
-    public VendaAddProdutoView() {
+    public VendaAlterarProdutoView() {
         initComponents();
     }
-    Produto produto = null;
+   
     private VendaView refVenda;
+    Itensvenda item = null;
 
-    public VendaAddProdutoView(Produto produto, VendaView aThis) {
+    public VendaAlterarProdutoView(Itensvenda item, VendaView aThis) {
         initComponents();
         this.refVenda = aThis;
-        this.produto = produto;
-        txtProdutoServico.setText(produto.getDescricao());
+        this.item = item;
+        if (item.getTipo().equals("P")){
+            txtProdutoServico.setText(item.getIdproduto().getDescricao());        
+        } else {
+            txtProdutoServico.setText(item.getIdservico().getDescricao());
+        }
+        
+        txtQuantidade.setValue(item.getQuantidade());
     }
-    Servico servico = null;
-    public VendaAddProdutoView(Servico servico, VendaView aThis) {
-        initComponents();
-        this.refVenda = aThis;
-        this.servico = servico;
-        txtProdutoServico.setText(servico.getDescricao());
-    }
+    
    
     
 
@@ -130,16 +131,6 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOKActionPerformed
-        Itensvenda item = new Itensvenda();
-        if (produto != null) {            
-            item.setIdproduto(produto);
-            item.setPrecoUnitario(produto.getValorVenda());
-            item.setTipo("P");
-        } else {
-            item.setIdservico(servico);
-            item.setPrecoUnitario(servico.getValor());
-            item.setTipo("S");
-        }
 
         item.setQuantidade(Integer.parseInt(txtQuantidade.getValue().toString()));
         refVenda.addProdutoServico(item);

@@ -2,6 +2,8 @@ package tirsobikes.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -18,6 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Servico.findByDescricao", query = "SELECT s FROM Servico s WHERE s.descricao = :descricao"),
     @NamedQuery(name = "Servico.findByValor", query = "SELECT s FROM Servico s WHERE s.valor = :valor")})
 public class Servico implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,7 +67,13 @@ public class Servico implements Serializable {
     public Double getValor() {
         return valor;
     }
-    
+
+    public String getValorView() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(this.valor);
+        return valor;
+    }
+
     public String getValorString() {
         String valorNovo = String.valueOf(valor);
         String replace = valorNovo.replace(".", ",");
@@ -74,7 +83,7 @@ public class Servico implements Serializable {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-    
+
     public void setValor(String valor) {
         valor = valor.replace(",", ".");
         this.valor = Double.parseDouble(valor);
@@ -104,5 +113,4 @@ public class Servico implements Serializable {
     public String toString() {
         return "tirsobikes.entidades.Servico[ idservico=" + idservico + " ]";
     }
-
 }

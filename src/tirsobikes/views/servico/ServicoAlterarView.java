@@ -241,7 +241,7 @@ public class ServicoAlterarView extends javax.swing.JFrame {
         
         if (!servicos.isEmpty()){
         for (Servico c : servicos) {
-                dtm.addRow(new Object[]{c.getIdservico(), c.getDescricao(), c.getValor() });
+                dtm.addRow(new Object[]{c.getIdservico(), c.getDescricao(), c.getValorView()});
             }
 
         }

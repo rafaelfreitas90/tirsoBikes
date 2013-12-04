@@ -55,7 +55,18 @@ public class Itensvenda implements Serializable {
     @JoinColumn(name = "idproduto", referencedColumnName = "idproduto")
     @ManyToOne
     private Produto idproduto;
+    @Basic(optional = false)
+    @Column(name = "tipo")
+    private String tipo;
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }    
+    
     public Itensvenda() {
     }
 
@@ -157,6 +168,6 @@ public class Itensvenda implements Serializable {
 
     @Override
     public String toString() {
-        return "tirsobikes.entidades.Itensvenda[ iditensVenda=" + iditensVenda + " ]";
+        return "tirsobikes.entidades.Itensvenda[ iditensVenda=" + getQuantidade() +  " ]";
     }
 }

@@ -7,20 +7,22 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tirsobikes.DAO.ProdutoDAO;
+import tirsobikes.DAO.ServicoDAO;
 import tirsobikes.controllers.ProdutoController;
 import tirsobikes.controllers.VendaAddProdutoController;
 import tirsobikes.entidades.Produto;
+import tirsobikes.entidades.Servico;
 import tirsobikes.main.TirsoBikes;
 
 /**
  *
  * @author LuisHenrique
  */
-public class ProdutoListaView extends javax.swing.JFrame {
+public class ServicoListaView extends javax.swing.JFrame {
 
     private VendaView refVenda;
 
-    public ProdutoListaView(VendaView aThis) {
+    public ServicoListaView(VendaView aThis) {
         initComponents();       
         this.refVenda = aThis;
     }
@@ -36,7 +38,7 @@ public class ProdutoListaView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaProduto = new javax.swing.JTable();
+        tabelaServico = new javax.swing.JTable();
         bntAlterar = new javax.swing.JButton();
         bntAlterar1 = new javax.swing.JButton();
 
@@ -49,7 +51,7 @@ public class ProdutoListaView extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PESQUISAR PRODUTO"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PESQUISAR SERVIÇO"));
 
         txtBusca.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -94,20 +96,20 @@ public class ProdutoListaView extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
         );
 
-        tabelaProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaServico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tabelaServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cód.", "Descrição", "Marca", "Categoria", "Fornecedor", "Preço Venda"
+                "Cód.", "Descrição", "Preço "
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -118,13 +120,13 @@ public class ProdutoListaView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelaProduto);
-        tabelaProduto.getColumnModel().getColumn(0).setPreferredWidth(5);
-        tabelaProduto.getColumnModel().getColumn(1).setPreferredWidth(500);
-        tabelaProduto.getColumnModel().getColumn(5).setPreferredWidth(40);
+        jScrollPane1.setViewportView(tabelaServico);
+        tabelaServico.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tabelaServico.getColumnModel().getColumn(1).setPreferredWidth(500);
+        tabelaServico.getColumnModel().getColumn(2).setPreferredWidth(40);
 
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/add.png"))); // NOI18N
-        bntAlterar.setText("     Adicionar Produto");
+        bntAlterar.setText("     Adicionar Serviço");
         bntAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntAlterarActionPerformed(evt);
@@ -199,21 +201,6 @@ public class ProdutoListaView extends javax.swing.JFrame {
         atualizarTabela();
     }//GEN-LAST:event_formWindowActivated
 
-    private void bntAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterarActionPerformed
-        //verifica produto selecionado
-        int linhaTabela = tabelaProduto.getSelectedRow();
-
-        if (linhaTabela > -1) {
-            Produto produto = new Produto();
-            produto.setIdproduto(Integer.parseInt(tabelaProduto.getValueAt(linhaTabela, 0).toString()));
-
-            ProdutoDAO dao = new ProdutoDAO(TirsoBikes.getEntityManager());
-            produto = dao.procurarProduto(produto.getIdproduto());
-
-            VendaAddProdutoController.getInstancia().exibirInterfaceGrafica(produto, refVenda);
-        }
-    }//GEN-LAST:event_bntAlterarActionPerformed
-
     private void txtBuscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyTyped
     }//GEN-LAST:event_txtBuscaKeyTyped
 
@@ -225,6 +212,21 @@ public class ProdutoListaView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_bntAlterar1ActionPerformed
 
+    private void bntAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterarActionPerformed
+        //verifica produto selecionado
+        int linhaTabela = tabelaServico.getSelectedRow();
+
+        if (linhaTabela > -1) {
+            Servico servico = new Servico();
+            servico.setIdservico(Integer.parseInt(tabelaServico.getValueAt(linhaTabela, 0).toString()));
+
+            ServicoDAO dao = new ServicoDAO(TirsoBikes.getEntityManager());
+            servico = dao.procurarServico(servico.getIdservico());
+
+            VendaAddProdutoController.getInstancia().exibirInterfaceGrafica(servico, refVenda);
+        }
+    }//GEN-LAST:event_bntAlterarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAlterar;
@@ -234,22 +236,22 @@ public class ProdutoListaView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaProduto;
+    private javax.swing.JTable tabelaServico;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 
     private void atualizarTabela() {
-        List<Produto> produtos = new ArrayList<Produto>();
-        ProdutoDAO dao = new ProdutoDAO(TirsoBikes.getEntityManager());
+        List<Servico> servicos = new ArrayList<Servico>();
+        ServicoDAO dao = new ServicoDAO(TirsoBikes.getEntityManager());
 
-        produtos = dao.procurarProdutoNome(txtBusca.getText());
+        servicos = dao.procurarServicoNome(txtBusca.getText());
 
-        DefaultTableModel dtm = (DefaultTableModel) tabelaProduto.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) tabelaServico.getModel();
         dtm.setRowCount(0);
 
-        if (!produtos.isEmpty()) {
-            for (Produto p : produtos) {
-                dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdmarca().getDescricao(), p.getIdcategoria().getDescricao(), p.getFornecedor(), p.getValorVendaView()});
+        if (!servicos.isEmpty()) {
+            for (Servico s : servicos) {
+                dtm.addRow(new Object[]{s.getIdservico(), s.getDescricao(), s.getValorView()});
             }
 
         }

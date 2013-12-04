@@ -1,7 +1,9 @@
 package tirsobikes.entidades;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.Date;
+import java.util.Locale;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Venda.findByDataPagamento", query = "SELECT v FROM Venda v WHERE v.dataPagamento = :dataPagamento"),
     @NamedQuery(name = "Venda.findByStatusPagamento", query = "SELECT v FROM Venda v WHERE v.statusPagamento = :statusPagamento")})
 public class Venda implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +51,7 @@ public class Venda implements Serializable {
     @Column(name = "valorTotal")
     private double valorTotal;
     @Column(name = "desconto")
-    private Integer desconto;
+    private Double desconto;
     @Basic(optional = false)
     @Column(name = "formaPagamento")
     private String formaPagamento;
@@ -97,15 +100,21 @@ public class Venda implements Serializable {
         return valorTotal;
     }
 
+    public String getValorTotalView() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(this.valorTotal);
+        return valor;
+    }
+
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    public Integer getDesconto() {
+    public Double getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(Integer desconto) {
+    public void setDesconto(Double desconto) {
         this.desconto = desconto;
     }
 
@@ -165,5 +174,5 @@ public class Venda implements Serializable {
     public String toString() {
         return "tirsobikes.entidades.Venda[ idvenda=" + idvenda + " ]";
     }
-    
+
 }
