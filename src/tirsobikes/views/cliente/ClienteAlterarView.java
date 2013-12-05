@@ -252,7 +252,7 @@ public class ClienteAlterarView extends javax.swing.JFrame {
         ClienteDAO dao = new ClienteDAO(TirsoBikes.getEntityManager());
 
         cliente = dao.procurarClienteNome(txtBuscaNomeCliente.getText());
-        cliente = dao.listarCliente();
+        
         DefaultTableModel dtm = (DefaultTableModel) tabelaCliente.getModel();
         dtm.setRowCount(0);
 
