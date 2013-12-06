@@ -48,7 +48,7 @@ public class ClienteDAO {
     
     public List<Cliente> procurarClienteNome (String nomeCompleto) {
         Query query;
-        query = manager.createQuery("FROM Cliente WHERE nomeCompleto LIKE (:searchKeyword)");
+        query = manager.createQuery("FROM Cliente WHERE nomeCompleto LIKE (:searchKeyword) ORDER BY nomeCompleto");
         query.setParameter("searchKeyword", "%"+nomeCompleto+"%");
         return query.getResultList();
     }

@@ -1,7 +1,3 @@
-
-/* To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tirsobikes.views.venda;
 
 import java.text.NumberFormat;
@@ -13,14 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.DAO.ServicoDAO;
-import tirsobikes.controllers.ProdutoListaController;
-import tirsobikes.controllers.ServicoListaController;
-import tirsobikes.controllers.VendaAddProdutoController;
-import tirsobikes.controllers.VendaAlterarProdutoController;
-import tirsobikes.entidades.Itensvenda;
-import tirsobikes.entidades.Produto;
-import tirsobikes.entidades.Servico;
-import tirsobikes.entidades.Venda;
+import tirsobikes.controllers.*;
+import tirsobikes.entidades.*;
 import tirsobikes.funcoes.Converter;
 import tirsobikes.funcoes.FormatarData;
 import tirsobikes.funcoes.FormatarHora;
@@ -554,6 +544,7 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAlterarActionPerformed
 
     private void bntBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarClienteActionPerformed
+        ClienteListarController.getInstancia().exibirInterfaceGrafica(this);
     }//GEN-LAST:event_bntBuscarClienteActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
@@ -711,4 +702,8 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTextField txtTotalItens;
     private javax.swing.JTextField txtValorTotalItens;
     // End of variables declaration//GEN-END:variables
+
+public void addCliente (Cliente cli){
+    txtNomeCliente.setText(cli.getNomeCompleto());
+}
 }
