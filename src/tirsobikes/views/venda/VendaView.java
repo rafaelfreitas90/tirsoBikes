@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import tirsobikes.DAO.ProdutoDAO;
@@ -67,7 +68,7 @@ public class VendaView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtValorTotalItens = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtDesconto = new javax.swing.JTextField();
+        txtDescontoValor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         bntSalvar = new javax.swing.JButton();
@@ -78,6 +79,8 @@ public class VendaView extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtDataPagamento = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtDescontoPorcentagem = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PEDIDO DE VENDAS");
@@ -154,6 +157,8 @@ public class VendaView extends javax.swing.JFrame {
 
         jLabel10.setText("Nome");
 
+        txtNomeCliente.setEditable(false);
+        txtNomeCliente.setBackground(new java.awt.Color(255, 255, 255));
         txtNomeCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
         jLabel11.setText("Contato / Outras informações");
@@ -249,15 +254,13 @@ public class VendaView extends javax.swing.JFrame {
         });
         tabelaVendas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabelaVendas);
-        if (tabelaVendas.getColumnModel().getColumnCount() > 0) {
-            tabelaVendas.getColumnModel().getColumn(0).setPreferredWidth(20);
-            tabelaVendas.getColumnModel().getColumn(1).setPreferredWidth(20);
-            tabelaVendas.getColumnModel().getColumn(2).setPreferredWidth(30);
-            tabelaVendas.getColumnModel().getColumn(3).setPreferredWidth(350);
-            tabelaVendas.getColumnModel().getColumn(4).setPreferredWidth(50);
-            tabelaVendas.getColumnModel().getColumn(5).setPreferredWidth(90);
-            tabelaVendas.getColumnModel().getColumn(6).setPreferredWidth(150);
-        }
+        tabelaVendas.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tabelaVendas.getColumnModel().getColumn(1).setPreferredWidth(20);
+        tabelaVendas.getColumnModel().getColumn(2).setPreferredWidth(30);
+        tabelaVendas.getColumnModel().getColumn(3).setPreferredWidth(350);
+        tabelaVendas.getColumnModel().getColumn(4).setPreferredWidth(50);
+        tabelaVendas.getColumnModel().getColumn(5).setPreferredWidth(90);
+        tabelaVendas.getColumnModel().getColumn(6).setPreferredWidth(150);
 
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
         bntAlterar.setText(" Alterar");
@@ -309,11 +312,11 @@ public class VendaView extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 153, 0));
         jLabel3.setText("( - ) DESCONTO R$");
 
-        txtDesconto.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        txtDesconto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDescontoValor.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtDescontoValor.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtDescontoValor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtDescontoKeyReleased(evt);
+                txtDescontoValorKeyReleased(evt);
             }
         });
 
@@ -400,6 +403,18 @@ public class VendaView extends javax.swing.JFrame {
             txtDataPagamento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascara));
         }   catch (java.text.ParseException ex) {  ex.printStackTrace();  }
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel5.setText("( - ) DESCONTO %");
+
+        txtDescontoPorcentagem.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtDescontoPorcentagem.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtDescontoPorcentagem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDescontoPorcentagemKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -414,32 +429,39 @@ public class VendaView extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(bntAddServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(bntAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(85, 85, 85)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(bntAddServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(bntAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(36, 36, 36)
+                                    .addGap(85, 85, 85)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGap(6, 6, 6)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addGap(8, 8, 8))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDesconto, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(txtValorTotalItens, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtTotalItens, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtTotalItens)
+                                .addComponent(txtTotal)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(125, 125, 125)
+                                    .addComponent(jLabel5))
+                                .addComponent(jLabel3))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtDescontoValor, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                                .addComponent(txtDescontoPorcentagem))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -466,7 +488,11 @@ public class VendaView extends javax.swing.JFrame {
                             .addComponent(bntAddServico, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bntAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bntCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(txtTotalItens, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -477,16 +503,16 @@ public class VendaView extends javax.swing.JFrame {
                             .addComponent(txtValorTotalItens, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDescontoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDescontoPorcentagem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -505,7 +531,9 @@ public class VendaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
-        // TODO add your handling code here:
+        if (!validaCamposProduto()) {
+            return;
+        }
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
@@ -555,19 +583,41 @@ public class VendaView extends javax.swing.JFrame {
         ServicoListaController.getInstancia().exibirInterfaceGrafica(this);
     }//GEN-LAST:event_bntAddServicoActionPerformed
 
-    private void txtDescontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoKeyReleased
-         if (!txtDesconto.getText().isEmpty() && Validacoes.validaNumero(txtDesconto.getText()) && !txtValorTotalItens.getText().isEmpty()){
-             Venda venda = new Venda();
-             venda.setDesconto(Double.parseDouble(Converter.banco(txtDesconto.getText())));
-             venda.setValorTotal(Double.parseDouble(Converter.banco(txtValorTotalItens.getText())));
-             venda.setValorTotal(venda.getValorTotal() - venda.getDesconto());
-             
-             txtTotal.setText(String.valueOf(venda.getValorTotalView().replace("R$ ", "")));
-         }
-         else {
-             atualizaTabela();
-         }
-    }//GEN-LAST:event_txtDescontoKeyReleased
+    private void txtDescontoValorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoValorKeyReleased
+        if (!txtDescontoValor.getText().isEmpty() && Validacoes.validaNumero(txtDescontoValor.getText()) && !txtValorTotalItens.getText().isEmpty()) {
+            Venda venda = new Venda();
+            venda.setDesconto(Double.parseDouble(Converter.banco(txtDescontoValor.getText())));
+            venda.setValorTotal(Double.parseDouble(Converter.banco(txtValorTotalItens.getText())));
+
+            // seta percentual de desconto
+            Double percentual = (venda.getDesconto() * 100) / venda.getValorTotal();
+            txtDescontoPorcentagem.setText(percentual.toString());
+
+            // seta valor atualizado com desconto
+            venda.setValorTotal(venda.getValorTotal() - venda.getDesconto());
+            txtTotal.setText(String.valueOf(venda.getValorTotalView().replace("R$ ", "")));
+        } else {
+            atualizaTabela();
+        }
+    }//GEN-LAST:event_txtDescontoValorKeyReleased
+
+    private void txtDescontoPorcentagemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoPorcentagemKeyReleased
+        if (!txtDescontoPorcentagem.getText().isEmpty() && Validacoes.validaNumero(txtDescontoPorcentagem.getText()) && !txtValorTotalItens.getText().isEmpty()) {
+            Venda venda = new Venda();
+            Double percentual = Double.parseDouble(Converter.banco(txtDescontoPorcentagem.getText()));
+            venda.setValorTotal(Double.parseDouble(Converter.banco(txtValorTotalItens.getText())));
+
+            // seta percentual de desconto
+            venda.setDesconto((percentual * venda.getValorTotal()) / 100);
+            txtDescontoValor.setText(venda.getDescontoView().replace("R$ ", ""));
+
+            // seta valor atualizado com desconto
+            venda.setValorTotal(venda.getValorTotal() - venda.getDesconto());
+            txtTotal.setText(String.valueOf(venda.getValorTotalView().replace("R$ ", "")));
+        } else {
+            atualizaTabela();
+        }
+    }//GEN-LAST:event_txtDescontoPorcentagemKeyReleased
 
     /**
      * @param args the command line arguments
@@ -645,21 +695,24 @@ public class VendaView extends javax.swing.JFrame {
                     dtm.addRow(new Object[]{i.getIditensVenda(), i.getTipo(), i.getIdservico().getIdservico(), i.getIdservico().getDescricao(), i.getQuantidade(), i.getPrecoUnitarioView(), i.getTotalView()});
                 }
                 total += i.getTotal();
-                totalItens += i.getQuantidade();
+
+                if (i.getTipo().equals("P")) {
+                    totalItens += i.getQuantidade();
+                }
             }
         }
 
         txtTotalItens.setText(totalItens.toString());
 
         Double totalValorItens = total;
-        
-        if (!txtDesconto.getText().isEmpty() && Validacoes.validaNumero(txtDesconto.getText())) {
-            total -= Double.parseDouble(txtDesconto.getText());
+
+        if (!txtDescontoValor.getText().isEmpty() && Validacoes.validaNumero(txtDescontoValor.getText())) {
+            total -= Double.parseDouble(txtDescontoValor.getText());
         }
-        
+
         String totalItensFormatado = nf.format(totalValorItens);
         txtValorTotalItens.setText(totalItensFormatado.replace("R$ ", ""));
-        
+
         String totalFormatado = nf.format(total);
         txtTotal.setText(totalFormatado.replace("R$ ", ""));
     }
@@ -682,6 +735,7 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -694,7 +748,8 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTextField txtContatoCliente;
     private javax.swing.JFormattedTextField txtDataPagamento;
     private javax.swing.JTextField txtDataVenda;
-    private javax.swing.JTextField txtDesconto;
+    private javax.swing.JTextField txtDescontoPorcentagem;
+    private javax.swing.JTextField txtDescontoValor;
     private javax.swing.JTextField txtHoraVenda;
     private javax.swing.JTextField txtIdVenda;
     private javax.swing.JTextField txtNomeCliente;
@@ -703,7 +758,17 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorTotalItens;
     // End of variables declaration//GEN-END:variables
 
-public void addCliente (Cliente cli){
-    txtNomeCliente.setText(cli.getNomeCompleto());
-}
+    public void addCliente(Cliente cli) {
+        txtNomeCliente.setText(cli.getNomeCompleto());
+        
+    }
+
+    private boolean validaCamposProduto() {
+        if (txtNomeCliente.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Digite o nome/descrição do produto");
+            
+            return false;
+        }
+        return true;
+    }
 }

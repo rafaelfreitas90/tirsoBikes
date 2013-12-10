@@ -113,6 +113,12 @@ public class Venda implements Serializable {
     public Double getDesconto() {
         return desconto;
     }
+    
+    public String getDescontoView() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(this.desconto);
+        return valor;
+    }
 
     public void setDesconto(Double desconto) {
         this.desconto = desconto;
