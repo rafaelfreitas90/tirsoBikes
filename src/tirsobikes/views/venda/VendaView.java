@@ -8,8 +8,10 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import tirsobikes.DAO.ItensVendaDAO;
 import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.DAO.ServicoDAO;
+import tirsobikes.DAO.VendaDAO;
 import tirsobikes.controllers.*;
 import tirsobikes.entidades.*;
 import tirsobikes.funcoes.Converter;
@@ -75,7 +77,7 @@ public class VendaView extends javax.swing.JFrame {
         bntCancelar = new javax.swing.JButton();
         bntAddServico = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jComboVendedor1 = new javax.swing.JComboBox();
+        jComboFormaPagamento = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtDataPagamento = new javax.swing.JFormattedTextField();
@@ -202,8 +204,7 @@ public class VendaView extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bntBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))))
+                        .addComponent(bntBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,13 +255,15 @@ public class VendaView extends javax.swing.JFrame {
         });
         tabelaVendas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabelaVendas);
-        tabelaVendas.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tabelaVendas.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tabelaVendas.getColumnModel().getColumn(2).setPreferredWidth(30);
-        tabelaVendas.getColumnModel().getColumn(3).setPreferredWidth(350);
-        tabelaVendas.getColumnModel().getColumn(4).setPreferredWidth(50);
-        tabelaVendas.getColumnModel().getColumn(5).setPreferredWidth(90);
-        tabelaVendas.getColumnModel().getColumn(6).setPreferredWidth(150);
+        if (tabelaVendas.getColumnModel().getColumnCount() > 0) {
+            tabelaVendas.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tabelaVendas.getColumnModel().getColumn(1).setPreferredWidth(20);
+            tabelaVendas.getColumnModel().getColumn(2).setPreferredWidth(30);
+            tabelaVendas.getColumnModel().getColumn(3).setPreferredWidth(350);
+            tabelaVendas.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tabelaVendas.getColumnModel().getColumn(5).setPreferredWidth(90);
+            tabelaVendas.getColumnModel().getColumn(6).setPreferredWidth(150);
+        }
 
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
         bntAlterar.setText(" Alterar");
@@ -360,8 +363,8 @@ public class VendaView extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PAGAMENTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 11))); // NOI18N
 
-        jComboVendedor1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jComboVendedor1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A VISTA", "CHEQUE", "A PRAZO" }));
+        jComboFormaPagamento.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jComboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A VISTA", "CHEQUE", "A PRAZO" }));
 
         jLabel13.setText("Forma Pagto.");
 
@@ -377,7 +380,7 @@ public class VendaView extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(jComboVendedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -392,7 +395,7 @@ public class VendaView extends javax.swing.JFrame {
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboVendedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDataPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 10, Short.MAX_VALUE))
         );
@@ -531,9 +534,27 @@ public class VendaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
-        if (!validaCamposProduto()) {
+        if (!validaCampos()) {
             return;
         }
+
+        this.venda.setDataHora(FormatarData.juntaDataHota(txtDataVenda.getText(), txtHoraVenda.getText()));
+        this.venda.setDataPagamento(FormatarData.forDB(txtDataPagamento.getText()));
+        this.venda.setDesconto(Double.parseDouble(txtDescontoValor.getText().replace(".", "").replace(",", ".")));
+        this.venda.setFormaPagamento(jComboFormaPagamento.getSelectedItem().toString());
+        this.venda.setValorTotal(Double.parseDouble(txtTotal.getText().replace(".", "").replace(",", ".")));
+        VendaDAO dao = new VendaDAO(TirsoBikes.getEntityManager());
+        this.venda = dao.salvarVenda(venda);
+
+        ItensVendaDAO daoItem = new ItensVendaDAO(TirsoBikes.getEntityManager());
+
+        for (Itensvenda item : this.itens) {
+            item.setIditensVenda(null);
+            item.setIdvenda(venda);
+            daoItem.salvaritensVenda(item);
+        }
+
+
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
@@ -665,7 +686,9 @@ public class VendaView extends javax.swing.JFrame {
         txtDataVenda.setText(dataFormatada);
         String horaFormatada = FormatarHora.forUser(data);
         txtHoraVenda.setText(horaFormatada);
+        txtDataPagamento.setText(dataFormatada);
     }
+
     int contadorItens = 0;
 
     public void addProdutoServico(Itensvenda item) {
@@ -724,8 +747,8 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JButton bntCancelar;
     private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntSalvar;
+    private javax.swing.JComboBox jComboFormaPagamento;
     private javax.swing.JComboBox jComboVendedor;
-    private javax.swing.JComboBox jComboVendedor1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -758,17 +781,44 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorTotalItens;
     // End of variables declaration//GEN-END:variables
 
-    public void addCliente(Cliente cli) {
-        txtNomeCliente.setText(cli.getNomeCompleto());
-        
+    Venda venda = new Venda();
+
+    public void addCliente(Cliente cliente) {
+        txtNomeCliente.setText(cliente.getNomeCompleto());
+        this.venda.setIdcliente(cliente);
     }
 
-    private boolean validaCamposProduto() {
+    private boolean validaCampos() {
         if (txtNomeCliente.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Digite o nome/descrição do produto");
-            
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Cliente");
+            bntBuscarCliente.doClick();
             return false;
         }
+
+        if (this.itens.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Venda sem itens");
+            return false;
+        }
+
         return true;
+    }
+
+    private void limpaCampos() {
+        txtContatoCliente.setText("");
+        txtNomeCliente.setText("");
+        txtDescontoPorcentagem.setText("");
+        txtDescontoValor.setText("");
+        txtValorTotalItens.setText("");
+        txtTotal.setText("");
+        txtTotalItens.setText("");
+        jComboFormaPagamento.setSelectedIndex(0);
+        
+        preecheDataHora();
+
+        DefaultTableModel dtm = (DefaultTableModel) tabelaVendas.getModel();
+        dtm.setRowCount(0);
+
+        this.itens = null;
+        this.venda = null;
     }
 }

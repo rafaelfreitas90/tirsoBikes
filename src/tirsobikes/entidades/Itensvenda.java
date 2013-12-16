@@ -168,6 +168,8 @@ public class Itensvenda implements Serializable {
 
     @Override
     public String toString() {
-        return "tirsobikes.entidades.Itensvenda[ iditensVenda=" + getQuantidade() +  " ]";
+        return "Itensvenda{" + "iditensVenda=" + iditensVenda + ", precoUnitario=" + precoUnitario + ", quantidade=" + quantidade + ", idservico=" + idservico + ", idvenda=" + idvenda + ", idproduto=" + idproduto + ", tipo=" + tipo + '}';
     }
+
+   
 }
