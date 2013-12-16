@@ -12,8 +12,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "estoque")
 @XmlRootElement
-   
 public class Estoque implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,15 +30,27 @@ public class Estoque implements Serializable {
     @JoinColumn(name = "idproduto", referencedColumnName = "idproduto")
     @ManyToOne(optional = false)
     private Produto idproduto;
+    @JoinColumn(name = "idvenda", referencedColumnName = "idvenda")
+    @ManyToOne
+    private Venda idvenda;
 
     public Estoque() {
     }
+
+    public Venda getIdvenda() {
+        return idvenda;
+    }
+
+    public void setIdvenda(Venda idvenda) {
+        this.idvenda = idvenda;
+    }
+
     
-    public void atualizaEstoque(int quantidade){
+    
+    public void atualizaEstoque(int quantidade) {
         this.quantidade += quantidade;
     }
-    
-    
+
     public Estoque(Integer idestoque) {
         this.idestoque = idestoque;
     }
@@ -105,5 +117,4 @@ public class Estoque implements Serializable {
     public String toString() {
         return "tirsobikes.entidades.Estoque[ idestoque=" + idestoque + " ]";
     }
-
 }

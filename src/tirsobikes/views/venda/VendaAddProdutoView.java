@@ -4,9 +4,14 @@
  */
 package tirsobikes.views.venda;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import tirsobikes.DAO.EstoqueDAO;
+import tirsobikes.entidades.Estoque;
 import tirsobikes.entidades.Itensvenda;
 import tirsobikes.entidades.Produto;
 import tirsobikes.entidades.Servico;
+import tirsobikes.main.TirsoBikes;
 
 /**
  *
@@ -30,14 +35,13 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
         txtProdutoServico.setText(produto.getDescricao());
     }
     Servico servico = null;
+
     public VendaAddProdutoView(Servico servico, VendaView aThis) {
         initComponents();
         this.refVenda = aThis;
         this.servico = servico;
         txtProdutoServico.setText(servico.getDescricao());
     }
-   
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,7 +135,12 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
 
     private void bntOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOKActionPerformed
         Itensvenda item = new Itensvenda();
-        if (produto != null) {            
+        item.setQuantidade(Integer.parseInt(txtQuantidade.getValue().toString()));
+        if (produto != null) {
+            if (!verificaEstoqueProduto(item.getQuantidade())) {
+                return;
+            }
+            
             item.setIdproduto(produto);
             item.setPrecoUnitario(produto.getValorVenda());
             item.setTipo("P");
@@ -141,7 +150,6 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
             item.setTipo("S");
         }
 
-        item.setQuantidade(Integer.parseInt(txtQuantidade.getValue().toString()));
         refVenda.addProdutoServico(item);
         this.dispose();
     }//GEN-LAST:event_bntOKActionPerformed
@@ -156,4 +164,15 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
     private javax.swing.JTextField txtProdutoServico;
     private javax.swing.JSpinner txtQuantidade;
     // End of variables declaration//GEN-END:variables
+
+    private boolean verificaEstoqueProduto(int quantidade) {
+        EstoqueDAO dao = new EstoqueDAO(TirsoBikes.getEntityManager());
+        List<Estoque> estoques = dao.ultimoEstoque(produto.getIdproduto());
+        Estoque estoque = estoques.get(0);
+        if (estoque.getQuantidade() >= quantidade) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(rootPane, "Você possui apenas " +estoque.getQuantidade()+" unid. de " + produto.getDescricao());
+        return false;
+    }
 }

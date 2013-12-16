@@ -8,6 +8,7 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.DAO.ItensVendaDAO;
 import tirsobikes.DAO.ProdutoDAO;
 import tirsobikes.DAO.ServicoDAO;
@@ -540,7 +541,9 @@ public class VendaView extends javax.swing.JFrame {
 
         this.venda.setDataHora(FormatarData.juntaDataHota(txtDataVenda.getText(), txtHoraVenda.getText()));
         this.venda.setDataPagamento(FormatarData.forDB(txtDataPagamento.getText()));
-        this.venda.setDesconto(Double.parseDouble(txtDescontoValor.getText().replace(".", "").replace(",", ".")));
+        if (!txtDescontoValor.getText().isEmpty()) {
+            this.venda.setDesconto(Double.parseDouble(txtDescontoValor.getText().replace(".", "").replace(",", ".")));
+        }
         this.venda.setFormaPagamento(jComboFormaPagamento.getSelectedItem().toString());
         this.venda.setValorTotal(Double.parseDouble(txtTotal.getText().replace(".", "").replace(",", ".")));
         VendaDAO dao = new VendaDAO(TirsoBikes.getEntityManager());
@@ -552,6 +555,9 @@ public class VendaView extends javax.swing.JFrame {
             item.setIditensVenda(null);
             item.setIdvenda(venda);
             daoItem.salvaritensVenda(item);
+            if (item.getTipo().equals("P")) {
+                baixaEstoque(item.getIdproduto(), item.getQuantidade());
+            }
         }
 
 
@@ -688,7 +694,6 @@ public class VendaView extends javax.swing.JFrame {
         txtHoraVenda.setText(horaFormatada);
         txtDataPagamento.setText(dataFormatada);
     }
-
     int contadorItens = 0;
 
     public void addProdutoServico(Itensvenda item) {
@@ -780,7 +785,6 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTextField txtTotalItens;
     private javax.swing.JTextField txtValorTotalItens;
     // End of variables declaration//GEN-END:variables
-
     Venda venda = new Venda();
 
     public void addCliente(Cliente cliente) {
@@ -812,7 +816,7 @@ public class VendaView extends javax.swing.JFrame {
         txtTotal.setText("");
         txtTotalItens.setText("");
         jComboFormaPagamento.setSelectedIndex(0);
-        
+
         preecheDataHora();
 
         DefaultTableModel dtm = (DefaultTableModel) tabelaVendas.getModel();
@@ -820,5 +824,15 @@ public class VendaView extends javax.swing.JFrame {
 
         this.itens = null;
         this.venda = null;
+    }
+
+    private void baixaEstoque(Produto produto, int quantidade) {
+        EstoqueDAO dao = new EstoqueDAO(TirsoBikes.getEntityManager());
+        List<Estoque> estoques = dao.ultimoEstoque(produto.getIdproduto());
+        Estoque estoque = estoques.get(0);
+        estoque.setQuantidade(estoque.getQuantidade() - quantidade);
+        estoque.setData(this.venda.getDataHora());
+        estoque.setIdvenda(venda);
+        dao.salvarEstoque(estoque);
     }
 }
