@@ -34,6 +34,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         btnNovoProduto = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         labelUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -91,6 +92,18 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton1);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/clientes.png"))); // NOI18N
+        jButton2.setText("Cliente");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton2);
+
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/Sair.png"))); // NOI18N
         btnSair.setText("Sair");
         btnSair.setFocusable(false);
@@ -116,7 +129,7 @@ public class PrincipalView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(labelUsuario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,10 +301,15 @@ public class PrincipalView extends javax.swing.JFrame {
         ClienteAlterarController.getInstancia().exibirInterfaceGrafica();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         ClienteAlterarController.getInstancia().exibirInterfaceGrafica();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovoProduto;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

@@ -1,8 +1,8 @@
-# Arquivos de aplicações compiladas
+# Arquivos de aplicaï¿½ï¿½es compiladas
 *.apk
 *.ap_
  
-# Arquivos pra máquina virtual dex
+# Arquivos pra mï¿½quina virtual dex
 *.dex
  
 # Classes java compiladas
@@ -17,3 +17,4 @@ local.properties
  
 # Arquivos gerados em caso de conflito no git
 *.orig
+/dist/
