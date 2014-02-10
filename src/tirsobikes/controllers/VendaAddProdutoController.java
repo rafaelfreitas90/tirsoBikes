@@ -32,8 +32,9 @@ public class VendaAddProdutoController {
     
     public void exibirInterfaceGrafica(Servico servico, VendaView aThis) {
         view = new VendaAddProdutoView(servico, aThis);
+        view.setLocationRelativeTo(aThis);
         view.setModal(true);
-        view.setAlwaysOnTop(true);
+        view.setAlwaysOnTop(true);        
         view.setVisible(true);
     }
 

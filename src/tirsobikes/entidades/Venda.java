@@ -68,7 +68,17 @@ public class Venda implements Serializable {
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente")
     @ManyToOne(optional = false)
     private Cliente idcliente;
-    
+    @Basic(optional = false)
+    @Column(name = "informacoes")
+    private String informacoes;
+
+    public String getInformacoes() {
+        return informacoes;
+    }
+
+    public void setInformacoes(String informacoes) {
+        this.informacoes = informacoes;
+    }
     @OneToMany(mappedBy = "idvenda")
     private List<Itensvenda> itens;
 
@@ -80,8 +90,6 @@ public class Venda implements Serializable {
         this.itens = itens;
     }
 
-    
-    
     public Venda() {
     }
 
@@ -159,6 +167,16 @@ public class Venda implements Serializable {
 
     public char getStatusPagamento() {
         return statusPagamento;
+    }
+
+    public String getStatusPagamentoView() {
+        String status = Character.toString(this.statusPagamento);
+        if (status.equals("1")) {
+            status = "OK";
+        } else {
+            status = "DEVE";
+        }
+        return status;
     }
 
     public void setStatusPagamento(char statusPagamento) {

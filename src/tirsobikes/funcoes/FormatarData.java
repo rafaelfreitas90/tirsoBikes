@@ -56,4 +56,16 @@ public class FormatarData {
         }
         return dataHora;
     }
+
+    // Converte a data do banco para String
+    public static String forUserDataHora(Date data) {
+        if (data == null || data.equals("")) {
+            return null;
+        }
+
+        String date = null;
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy - hh:mm");
+        date = formatter.format(data);
+        return date;
+    }
 }

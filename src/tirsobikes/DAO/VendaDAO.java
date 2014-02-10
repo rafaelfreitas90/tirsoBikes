@@ -4,9 +4,11 @@
  */
 package tirsobikes.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import tirsobikes.entidades.Cliente;
 import tirsobikes.entidades.Venda;
 
 /**
@@ -44,8 +46,24 @@ public class VendaDAO {
         return manager.find(Venda.class, idvenda);
     }
 
+    public Venda procurarVendaCliente(int idcliente) {
+        return manager.find(Venda.class, idcliente);
+    }
+
     public List<Venda> listarVendas() {
         Query query = manager.createQuery("from Venda");
         return query.getResultList();
     }
+
+    public List<Venda> listarVendasClientes(Cliente cliente) {
+        Query query = manager.createQuery("from Venda WHERE idcliente= (:cliente) ORDER BY dataHora");
+        query.setParameter("cliente", cliente);
+        return query.getResultList();
+    }
+    
+//        public List<Produto> procurarProdutoNome (String descricao) {
+//        Query query = manager.createQuery("FROM Produto WHERE descricao LIKE (:searchKeyword) ORDER BY descricao");
+//        query.setParameter("searchKeyword", "%"+descricao+"%");
+//        return query.getResultList();
+//    }
 }

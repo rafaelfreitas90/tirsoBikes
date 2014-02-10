@@ -61,6 +61,7 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Adicionar Quantidade");
+        setResizable(false);
 
         jLabel1.setText("Produto");
 

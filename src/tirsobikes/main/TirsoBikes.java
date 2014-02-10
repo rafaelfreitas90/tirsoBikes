@@ -7,6 +7,7 @@ import javax.persistence.Persistence;
 import tirsobikes.controllers.PrincipalController;
 import tirsobikes.controllers.ProdutoController;
 import tirsobikes.controllers.UsuarioController;
+import tirsobikes.controllers.VendaListaController;
 import tirsobikes.views.PrincipalView;
 
 /**
@@ -45,6 +46,11 @@ public class TirsoBikes {
             java.util.logging.Logger.getLogger(PrincipalView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+<<<<<<< HEAD
+=======
+        VendaListaController.getInstancia().exibirInterfaceGrafica();
+        
+>>>>>>> atualizando venda
 //        PrincipalController.getInstancia().exibirInterfaceGrafica();
 
        UsuarioController.getInstancia().exibirInterfaceGrafica();

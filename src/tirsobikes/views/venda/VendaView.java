@@ -10,8 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.DAO.ItensVendaDAO;
-import tirsobikes.DAO.ProdutoDAO;
-import tirsobikes.DAO.ServicoDAO;
 import tirsobikes.DAO.VendaDAO;
 import tirsobikes.controllers.*;
 import tirsobikes.entidades.*;
@@ -30,11 +28,15 @@ public class VendaView extends javax.swing.JFrame {
     /**
      * Creates new form VendaView
      */
+    char status = 1;
+
     public VendaView() {
         initComponents();
         preecheDataHora();
+        venda.setStatusPagamento(status);
     }
     List<Itensvenda> itens = new ArrayList<Itensvenda>();
+    Venda venda = new Venda();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -256,15 +258,13 @@ public class VendaView extends javax.swing.JFrame {
         });
         tabelaVendas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabelaVendas);
-        if (tabelaVendas.getColumnModel().getColumnCount() > 0) {
-            tabelaVendas.getColumnModel().getColumn(0).setPreferredWidth(20);
-            tabelaVendas.getColumnModel().getColumn(1).setPreferredWidth(20);
-            tabelaVendas.getColumnModel().getColumn(2).setPreferredWidth(30);
-            tabelaVendas.getColumnModel().getColumn(3).setPreferredWidth(350);
-            tabelaVendas.getColumnModel().getColumn(4).setPreferredWidth(50);
-            tabelaVendas.getColumnModel().getColumn(5).setPreferredWidth(90);
-            tabelaVendas.getColumnModel().getColumn(6).setPreferredWidth(150);
-        }
+        tabelaVendas.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tabelaVendas.getColumnModel().getColumn(1).setPreferredWidth(20);
+        tabelaVendas.getColumnModel().getColumn(2).setPreferredWidth(30);
+        tabelaVendas.getColumnModel().getColumn(3).setPreferredWidth(350);
+        tabelaVendas.getColumnModel().getColumn(4).setPreferredWidth(50);
+        tabelaVendas.getColumnModel().getColumn(5).setPreferredWidth(90);
+        tabelaVendas.getColumnModel().getColumn(6).setPreferredWidth(150);
 
         bntAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/alterar.png"))); // NOI18N
         bntAlterar.setText(" Alterar");
@@ -366,6 +366,11 @@ public class VendaView extends javax.swing.JFrame {
 
         jComboFormaPagamento.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jComboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A VISTA", "CHEQUE", "A PRAZO" }));
+        jComboFormaPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboFormaPagamentoActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Forma Pagto.");
 
@@ -382,7 +387,7 @@ public class VendaView extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
                     .addComponent(jComboFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(txtDataPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -432,40 +437,43 @@ public class VendaView extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(bntAddServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(bntAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(85, 85, 85)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGap(8, 8, 8))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtValorTotalItens, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtTotalItens)
-                                .addComponent(txtTotal)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(125, 125, 125)
-                                    .addComponent(jLabel5))
-                                .addComponent(jLabel3))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDescontoValor, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                                .addComponent(txtDescontoPorcentagem))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(bntAddServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(bntAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(85, 85, 85)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addGap(8, 8, 8))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel4)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtValorTotalItens, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtTotalItens)
+                                        .addComponent(txtTotal)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGap(123, 123, 123)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel3))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtDescontoValor, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                                        .addComponent(txtDescontoPorcentagem))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -546,8 +554,13 @@ public class VendaView extends javax.swing.JFrame {
         }
         this.venda.setFormaPagamento(jComboFormaPagamento.getSelectedItem().toString());
         this.venda.setValorTotal(Double.parseDouble(txtTotal.getText().replace(".", "").replace(",", ".")));
+        this.venda.setInformacoes(txtContatoCliente.getText());
+
         VendaDAO dao = new VendaDAO(TirsoBikes.getEntityManager());
+
         this.venda = dao.salvarVenda(venda);
+
+
 
         ItensVendaDAO daoItem = new ItensVendaDAO(TirsoBikes.getEntityManager());
 
@@ -559,7 +572,7 @@ public class VendaView extends javax.swing.JFrame {
                 baixaEstoque(item.getIdproduto(), item.getQuantidade());
             }
         }
-
+        limpaCampos();
 
     }//GEN-LAST:event_bntSalvarActionPerformed
 
@@ -603,7 +616,11 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntBuscarClienteActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
-        // TODO add your handling code here:
+        Integer resposta = JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja sair? \n Todos os dados serão perdidos.");
+        if (resposta == JOptionPane.YES_OPTION) {
+            limpaCampos();
+            this.dispose();
+        }
     }//GEN-LAST:event_bntCancelarActionPerformed
 
     private void bntAddServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddServicoActionPerformed
@@ -611,6 +628,10 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAddServicoActionPerformed
 
     private void txtDescontoValorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoValorKeyReleased
+        if (txtDescontoValor.getText().isEmpty()) {
+            txtDescontoValor.setText("0");
+        }
+
         if (!txtDescontoValor.getText().isEmpty() && Validacoes.validaNumero(txtDescontoValor.getText()) && !txtValorTotalItens.getText().isEmpty()) {
             Venda venda = new Venda();
             venda.setDesconto(Double.parseDouble(Converter.banco(txtDescontoValor.getText())));
@@ -629,6 +650,10 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDescontoValorKeyReleased
 
     private void txtDescontoPorcentagemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoPorcentagemKeyReleased
+        if (txtDescontoPorcentagem.getText().isEmpty()) {
+            txtDescontoPorcentagem.setText("0");
+        }
+
         if (!txtDescontoPorcentagem.getText().isEmpty() && Validacoes.validaNumero(txtDescontoPorcentagem.getText()) && !txtValorTotalItens.getText().isEmpty()) {
             Venda venda = new Venda();
             Double percentual = Double.parseDouble(Converter.banco(txtDescontoPorcentagem.getText()));
@@ -645,6 +670,18 @@ public class VendaView extends javax.swing.JFrame {
             atualizaTabela();
         }
     }//GEN-LAST:event_txtDescontoPorcentagemKeyReleased
+
+    private void jComboFormaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFormaPagamentoActionPerformed
+
+        if (jComboFormaPagamento.getSelectedIndex() == 0) {
+            this.status = 1;
+            this.venda.setStatusPagamento(status);
+        } else {
+            this.status = 0;
+            this.venda.setStatusPagamento(status);
+        }
+
+    }//GEN-LAST:event_jComboFormaPagamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -735,7 +772,7 @@ public class VendaView extends javax.swing.JFrame {
         Double totalValorItens = total;
 
         if (!txtDescontoValor.getText().isEmpty() && Validacoes.validaNumero(txtDescontoValor.getText())) {
-            total -= Double.parseDouble(txtDescontoValor.getText());
+            total -= Double.parseDouble(Converter.banco(txtDescontoValor.getText()));
         }
 
         String totalItensFormatado = nf.format(totalValorItens);
@@ -785,7 +822,6 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTextField txtTotalItens;
     private javax.swing.JTextField txtValorTotalItens;
     // End of variables declaration//GEN-END:variables
-    Venda venda = new Venda();
 
     public void addCliente(Cliente cliente) {
         txtNomeCliente.setText(cliente.getNomeCompleto());
