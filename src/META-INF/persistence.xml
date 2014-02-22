@@ -10,6 +10,8 @@
     <class>tirsobikes.entidades.Venda</class>
     <class>tirsobikes.entidades.Cliente</class>
     <class>tirsobikes.entidades.Itensvenda</class>
+    <class>tirsobikes.entidades.Itensorcamento</class>
+    <class>tirsobikes.entidades.Orcamento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tirsobikes"/>
       <property name="javax.persistence.jdbc.password" value="rsf90"/>
