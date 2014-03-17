@@ -11,6 +11,7 @@ import tirsobikes.controllers.ProdutoController;
 import tirsobikes.controllers.VendaAddProdutoController;
 import tirsobikes.entidades.Produto;
 import tirsobikes.main.TirsoBikes;
+import tirsobikes.views.orcamento.OrcamentoView;
 
 /**
  *
@@ -19,10 +20,16 @@ import tirsobikes.main.TirsoBikes;
 public class ProdutoListaView extends javax.swing.JFrame {
 
     private VendaView refVenda;
+    private OrcamentoView refOrcamento;
 
     public ProdutoListaView(VendaView aThis) {
         initComponents();       
         this.refVenda = aThis;
+    }
+    
+       public ProdutoListaView(OrcamentoView aThis2) {
+        initComponents();       
+        this.refOrcamento = aThis2;
     }
 
 

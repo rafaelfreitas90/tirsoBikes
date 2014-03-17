@@ -1,9 +1,6 @@
 package tirsobikes.controllers;
 
 import tirsobikes.entidades.Itensvenda;
-import tirsobikes.entidades.Produto;
-import tirsobikes.entidades.Servico;
-import tirsobikes.views.venda.VendaAddProdutoView;
 import tirsobikes.views.venda.VendaAlterarProdutoView;
 import tirsobikes.views.venda.VendaView;
 

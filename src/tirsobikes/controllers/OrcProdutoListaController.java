@@ -1,30 +1,28 @@
 package tirsobikes.controllers;
 
 import tirsobikes.views.orcamento.OrcamentoView;
-import tirsobikes.views.produto.ProdutoAlterarView;
 import tirsobikes.views.venda.ProdutoListaView;
-import tirsobikes.views.venda.VendaView;
 
 /**
  *
  * @author Rafael
  */
-public class ProdutoListaController {
+public class OrcProdutoListaController {
     
-    private static ProdutoListaController instancia = new ProdutoListaController();
+    private static OrcProdutoListaController instancia = new OrcProdutoListaController();
     private ProdutoListaView view;
     
-    public ProdutoListaController(){
+    public OrcProdutoListaController(){
         
     }
     
     //Método para instanciar o controller.
-    public static ProdutoListaController getInstancia(){
+    public static OrcProdutoListaController getInstancia(){
         return instancia;
     }
     
     // Método para chamar a interface.
-   public void exibirInterfaceGrafica(VendaView aThis){
+   public void exibirInterfaceGrafica(OrcamentoView aThis){
         if (view == null){
             view = new ProdutoListaView(aThis);
         }
@@ -32,6 +30,7 @@ public class ProdutoListaController {
         view.setVisible(true);
     }
    
+
 
       
 }
