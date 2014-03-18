@@ -46,6 +46,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByCpf", query = "SELECT c FROM Cliente c WHERE c.cpf = :cpf"),
     @NamedQuery(name = "Cliente.findByRg", query = "SELECT c FROM Cliente c WHERE c.rg = :rg")})
 public class Cliente implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
+    private Collection<Orcamento> orcamentoCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -243,6 +245,15 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "tirsobikes.entidades.Cliente[ idcliente=" + idcliente + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Orcamento> getOrcamentoCollection() {
+        return orcamentoCollection;
+    }
+
+    public void setOrcamentoCollection(Collection<Orcamento> orcamentoCollection) {
+        this.orcamentoCollection = orcamentoCollection;
     }
     
 }

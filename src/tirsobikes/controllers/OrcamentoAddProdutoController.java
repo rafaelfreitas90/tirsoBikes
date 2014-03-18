@@ -1,7 +1,6 @@
 package tirsobikes.controllers;
 
 import tirsobikes.entidades.Produto;
-import tirsobikes.entidades.Servico;
 import tirsobikes.views.orcamento.OrcamentoAddProdutoView;
 import tirsobikes.views.orcamento.OrcamentoView;
 
@@ -30,12 +29,6 @@ public class OrcamentoAddProdutoController {
         view.setVisible(true);
     }
     
-    public void exibirInterfaceGrafica(Servico servico, OrcamentoView aThis) {
-        view = new OrcamentoAddProdutoView(servico, aThis);
-        view.setLocationRelativeTo(aThis);
-        view.setModal(true);
-        view.setAlwaysOnTop(true);        
-        view.setVisible(true);
-    }
+  
 
 }

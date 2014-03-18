@@ -1,5 +1,6 @@
 package tirsobikes.controllers;
 
+import tirsobikes.views.orcamento.OrcamentoView;
 import tirsobikes.views.venda.ClienteListaView;
 import tirsobikes.views.venda.VendaView;
 
@@ -22,6 +23,14 @@ public class ClienteListarController {
 
     // Método para chamar a interface.    
     public void exibirInterfaceGrafica(VendaView aThis) {
+         if (view == null){
+            view = new ClienteListaView(aThis);
+        }
+        view.setAlwaysOnTop(true);
+        view.setVisible(true);
+    }
+    
+        public void exibirInterfaceGrafica2(OrcamentoView aThis) {
          if (view == null){
             view = new ClienteListaView(aThis);
         }

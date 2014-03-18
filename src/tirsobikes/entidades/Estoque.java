@@ -33,8 +33,18 @@ public class Estoque implements Serializable {
     @JoinColumn(name = "idvenda", referencedColumnName = "idvenda")
     @ManyToOne
     private Venda idvenda;
+    @ManyToOne
+    private Orcamento idOrcamento;
 
     public Estoque() {
+    }
+
+    public Orcamento getIdOrcamento() {
+        return idOrcamento;
+    }
+
+    public void setIdOrcamento(Orcamento idOrcamento) {
+        this.idOrcamento = idOrcamento;
     }
 
     public Venda getIdvenda() {

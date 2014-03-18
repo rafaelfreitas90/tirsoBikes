@@ -1,6 +1,8 @@
 package tirsobikes.entidades;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,6 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Itensorcamento.findByQuantidade", query = "SELECT i FROM Itensorcamento i WHERE i.quantidade = :quantidade"),
     @NamedQuery(name = "Itensorcamento.findByValorUnitario", query = "SELECT i FROM Itensorcamento i WHERE i.valorUnitario = :valorUnitario")})
 public class Itensorcamento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,6 +90,24 @@ public class Itensorcamento implements Serializable {
 
     public void setIdorcamento(Orcamento idorcamento) {
         this.idorcamento = idorcamento;
+    }
+
+    public String getPrecoUnitarioView() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(this.valorUnitario);
+        return valor;
+    }
+
+    public Double getTotal() {
+        Double total = this.quantidade * this.valorUnitario;
+        return total;
+    }
+    
+        public String getTotalView() {
+        Double total = this.quantidade * this.valorUnitario;
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(total);
+        return valor;
     }
 
     @Override

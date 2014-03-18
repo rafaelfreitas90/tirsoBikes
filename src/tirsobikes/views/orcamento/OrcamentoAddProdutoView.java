@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.entidades.Estoque;
+import tirsobikes.entidades.Itensorcamento;
 import tirsobikes.entidades.Itensvenda;
 import tirsobikes.entidades.Produto;
 import tirsobikes.entidades.Servico;
@@ -31,14 +32,9 @@ public class OrcamentoAddProdutoView extends javax.swing.JDialog {
         this.produto = produto;
         txtProdutoServico.setText(produto.getDescricao());
     }
-    Servico servico = null;
+    
 
-    public OrcamentoAddProdutoView(Servico servico, OrcamentoView aThis) {
-        initComponents();
-        this.refOrcamento = aThis;
-        this.servico = servico;
-        txtProdutoServico.setText(servico.getDescricao());
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,7 +128,7 @@ public class OrcamentoAddProdutoView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOKActionPerformed
-        Itensvenda item = new Itensvenda();
+        Itensorcamento item = new Itensorcamento();
         item.setQuantidade(Integer.parseInt(txtQuantidade.getValue().toString()));
         if (produto != null) {
             if (!verificaEstoqueProduto(item.getQuantidade())) {
@@ -140,13 +136,9 @@ public class OrcamentoAddProdutoView extends javax.swing.JDialog {
             }
             
             item.setIdproduto(produto);
-            item.setPrecoUnitario(produto.getValorVenda());
-            item.setTipo("P");
-        } else {
-            item.setIdservico(servico);
-            item.setPrecoUnitario(servico.getValor());
-            item.setTipo("S");
-        }
+            item.setValorUnitario(produto.getValorVenda());
+            
+        } 
 
         refOrcamento.addProdutoServico(item);
         this.dispose();

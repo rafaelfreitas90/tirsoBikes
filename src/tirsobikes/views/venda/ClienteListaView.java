@@ -6,15 +6,22 @@ import javax.swing.table.DefaultTableModel;
 import tirsobikes.DAO.ClienteDAO;
 import tirsobikes.entidades.Cliente;
 import tirsobikes.main.TirsoBikes;
+import tirsobikes.views.orcamento.OrcamentoView;
 
 
 public class ClienteListaView extends javax.swing.JFrame {
 
     private VendaView refVenda;
-
+    private OrcamentoView refOrcamento;
+    
     public ClienteListaView(VendaView aThis) {
         initComponents();       
         this.refVenda = aThis;
+    }
+    
+        public ClienteListaView(OrcamentoView viewO) {
+        initComponents();       
+        this.refOrcamento = viewO;
     }
 
 

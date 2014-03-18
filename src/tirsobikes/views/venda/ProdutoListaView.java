@@ -200,7 +200,11 @@ public class ProdutoListaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        atualizarTabela();
+        if(refVenda == null){
+                atualizarTabela();
+        } else{
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -258,6 +262,23 @@ public class ProdutoListaView extends javax.swing.JFrame {
         if (!produtos.isEmpty()) {
             for (Produto p : produtos) {
                 dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdmarca().getDescricao(), p.getIdcategoria().getDescricao(), p.getFornecedor(), p.getValorVendaView()});
+            }
+
+        }
+    }
+    
+    private void atualizarTabela2() {
+        List<Produto> produtos = new ArrayList<Produto>();
+        ProdutoDAO dao = new ProdutoDAO(TirsoBikes.getEntityManager());
+
+        produtos = dao.procurarProdutoNome(txtBusca.getText());
+
+        DefaultTableModel dtm = (DefaultTableModel) tabelaProduto.getModel();
+        dtm.setRowCount(0);
+
+        if (!produtos.isEmpty()) {
+            for (Produto p : produtos) {
+                dtm.addRow(new Object[]{p.getIdproduto(), p.getDescricao(), p.getIdmarca().getDescricao(), p.getIdcategoria().getDescricao(), p.getFornecedor(), p.getValorCustoView()});
             }
 
         }

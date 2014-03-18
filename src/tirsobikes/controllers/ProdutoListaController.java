@@ -1,7 +1,5 @@
 package tirsobikes.controllers;
 
-import tirsobikes.views.orcamento.OrcamentoView;
-import tirsobikes.views.produto.ProdutoAlterarView;
 import tirsobikes.views.venda.ProdutoListaView;
 import tirsobikes.views.venda.VendaView;
 

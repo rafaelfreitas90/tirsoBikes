@@ -1,6 +1,5 @@
 package tirsobikes.views.orcamento;
 
-import tirsobikes.views.venda.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,9 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import tirsobikes.DAO.EstoqueDAO;
-import tirsobikes.DAO.ItensVendaDAO;
+import tirsobikes.DAO.ItensOrcamentoDAO;
 import tirsobikes.DAO.OrcamentoDAO;
-import tirsobikes.DAO.VendaDAO;
 import tirsobikes.controllers.*;
 import tirsobikes.entidades.*;
 import tirsobikes.funcoes.Converter;
@@ -27,7 +25,6 @@ import tirsobikes.views.validacoes.Validacoes;
  */
 public class OrcamentoView extends javax.swing.JFrame {
 
-
     char status = 1;
 
     public OrcamentoView() {
@@ -35,7 +32,7 @@ public class OrcamentoView extends javax.swing.JFrame {
         preecheDataHora();
 //        orcamento.(status);
     }
-    List<Itensvenda> itens = new ArrayList<Itensvenda>();
+    List<Itensorcamento> itens = new ArrayList<Itensorcamento>();
     Orcamento orcamento = new Orcamento();
 
     /**
@@ -78,7 +75,6 @@ public class OrcamentoView extends javax.swing.JFrame {
         txtTotal = new javax.swing.JTextField();
         bntSalvar = new javax.swing.JButton();
         bntCancelar = new javax.swing.JButton();
-        bntAddServico = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jComboFormaPagamento = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
@@ -91,7 +87,7 @@ public class OrcamentoView extends javax.swing.JFrame {
         setTitle("PEDIDO DE VENDAS");
         setResizable(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PEDIDO DE VENDA", 0, 0, new java.awt.Font("Calibri", 0, 11))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PEDIDO DE VENDA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 11))); // NOI18N
 
         jLabel7.setText("Nº");
 
@@ -156,7 +152,7 @@ public class OrcamentoView extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DESCRIÇÃO COMPRADOR", 0, 0, new java.awt.Font("Calibri", 0, 11))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DESCRIÇÃO COMPRADOR", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 11))); // NOI18N
 
         jLabel10.setText("Nome");
 
@@ -349,17 +345,7 @@ public class OrcamentoView extends javax.swing.JFrame {
             }
         });
 
-        bntAddServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tirsobikes/imgs/servico.png"))); // NOI18N
-        bntAddServico.setText("     Adicionar Serviço");
-        bntAddServico.setMargin(new java.awt.Insets(2, 2, 2, 14));
-        bntAddServico.setPreferredSize(new java.awt.Dimension(133, 27));
-        bntAddServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntAddServicoActionPerformed(evt);
-            }
-        });
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PAGAMENTO", 0, 0, new java.awt.Font("Calibri", 0, 11))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PAGAMENTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 11))); // NOI18N
 
         jComboFormaPagamento.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jComboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A VISTA", "CHEQUE", "A PRAZO" }));
@@ -437,9 +423,7 @@ public class OrcamentoView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(bntAddServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(bntAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -491,9 +475,7 @@ public class OrcamentoView extends javax.swing.JFrame {
                             .addComponent(bntAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bntAddServico, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bntAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bntAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -556,17 +538,14 @@ public class OrcamentoView extends javax.swing.JFrame {
 
         this.orcamento = dao.salvarOrcamento(orcamento);
 
+        ItensOrcamentoDAO daoItem = new ItensOrcamentoDAO(TirsoBikes.getEntityManager());
 
+        for (Itensorcamento item : this.itens) {
+            item.setIditensOrcamento(null);
+            item.setIdorcamento(orcamento);
+            daoItem.salvarItensOrcamento(item);
+            baixaEstoque(item.getIdproduto(), item.getQuantidade());
 
-        ItensVendaDAO daoItem = new ItensVendaDAO(TirsoBikes.getEntityManager());
-
-        for (Itensvenda item : this.itens) {
-            item.setIditensVenda(null);
-            item.setIdvenda(orcamento);
-            daoItem.salvaritensVenda(item);
-            if (item.getTipo().equals("P")) {
-                baixaEstoque(item.getIdproduto(), item.getQuantidade());
-            }
         }
         limpaCampos();
 
@@ -577,9 +556,9 @@ public class OrcamentoView extends javax.swing.JFrame {
         int linhaTabela = tabelaVendas.getSelectedRow();
         if (linhaTabela > -1) {
             int codigo = Integer.parseInt(tabelaVendas.getValueAt(linhaTabela, 0).toString());
-            Itensvenda itemAux = new Itensvenda();
-            for (Itensvenda item : this.itens) {
-                if (item.getIditensVenda() == codigo) {
+            Itensorcamento itemAux = new Itensorcamento();
+            for (Itensorcamento item : this.itens) {
+                if (item.getIditensOrcamento() == codigo) {
                     itemAux = item;
                 }
             }
@@ -589,7 +568,7 @@ public class OrcamentoView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bntExcluirActionPerformed
     private void bntAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddProdutoActionPerformed
-        ProdutoListaController.getInstancia().exibirInterfaceGrafica(this);
+        OrcProdutoListaController.getInstancia().exibirInterfaceGrafica(this);
     }//GEN-LAST:event_bntAddProdutoActionPerformed
 
     private void bntAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAlterarActionPerformed
@@ -597,9 +576,9 @@ public class OrcamentoView extends javax.swing.JFrame {
 
         if (linhaTabela > -1) {
             int codigo = Integer.parseInt(tabelaVendas.getValueAt(linhaTabela, 0).toString());
-            Itensvenda itemAux = new Itensvenda();
-            for (Itensvenda item : this.itens) {
-                if (item.getIditensVenda() == codigo) {
+            Itensorcamento itemAux = new Itensorcamento();
+            for (Itensorcamento item : this.itens) {
+                if (item.getIditensOrcamento() == codigo) {
                     itemAux = item;
                 }
             }
@@ -608,7 +587,7 @@ public class OrcamentoView extends javax.swing.JFrame {
     }//GEN-LAST:event_bntAlterarActionPerformed
 
     private void bntBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarClienteActionPerformed
-        ClienteListarController.getInstancia().exibirInterfaceGrafica(this);
+        ClienteListarController.getInstancia().exibirInterfaceGrafica2(this);
     }//GEN-LAST:event_bntBuscarClienteActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
@@ -618,10 +597,6 @@ public class OrcamentoView extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_bntCancelarActionPerformed
-
-    private void bntAddServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddServicoActionPerformed
-        ServicoListaController.getInstancia().exibirInterfaceGrafica(this);
-    }//GEN-LAST:event_bntAddServicoActionPerformed
 
     private void txtDescontoValorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescontoValorKeyReleased
         if (txtDescontoValor.getText().isEmpty()) {
@@ -729,11 +704,11 @@ public class OrcamentoView extends javax.swing.JFrame {
     }
     int contadorItens = 0;
 
-    public void addProdutoServico(Itensvenda item) {
+    public void addProdutoServico(Itensorcamento item) {
         //verifica se ja existe o item na lista
-        if (item.getIditensVenda() == null) {
+        if (item.getIditensOrcamento()== null) {
             contadorItens += 1;
-            item.setIditensVenda(contadorItens);
+            item.setIditensOrcamento(contadorItens);
         } else {
             //remove registro anterior, antes de adicionar o atualizado
             this.itens.remove(item);
@@ -749,17 +724,12 @@ public class OrcamentoView extends javax.swing.JFrame {
         Double total = 0.0;
         Integer totalItens = 0;
         if (!this.itens.isEmpty()) {
-            for (Itensvenda i : this.itens) {
-                if (i.getIdproduto() != null) {
-                    dtm.addRow(new Object[]{i.getIditensVenda(), i.getTipo(), i.getIdproduto().getIdproduto(), i.getIdproduto().getDescricao(), i.getQuantidade(), i.getPrecoUnitarioView(), i.getTotalView()});
-                } else {
-                    dtm.addRow(new Object[]{i.getIditensVenda(), i.getTipo(), i.getIdservico().getIdservico(), i.getIdservico().getDescricao(), i.getQuantidade(), i.getPrecoUnitarioView(), i.getTotalView()});
-                }
-                total += i.getTotal();
+            for (Itensorcamento i : this.itens) {
 
-                if (i.getTipo().equals("P")) {
-                    totalItens += i.getQuantidade();
-                }
+                dtm.addRow(new Object[]{i.getIditensOrcamento(), i.getIdproduto().getIdproduto(), i.getIdproduto().getDescricao(), i.getQuantidade(), i.getQuantidade(), i.getPrecoUnitarioView(), i.getTotalView()});
+
+                total += i.getTotal();
+           
             }
         }
 
@@ -779,7 +749,6 @@ public class OrcamentoView extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAddProduto;
-    private javax.swing.JButton bntAddServico;
     private javax.swing.JButton bntAlterar;
     private javax.swing.JButton bntBuscarCliente;
     private javax.swing.JButton bntCancelar;
@@ -821,7 +790,7 @@ public class OrcamentoView extends javax.swing.JFrame {
 
     public void addCliente(Cliente cliente) {
         txtNomeCliente.setText(cliente.getNomeCompleto());
-        this.orcamento.setIdcliente(cliente);
+        this.orcamento.setIdCliente(cliente);
     }
 
     private boolean validaCampos() {
@@ -864,7 +833,8 @@ public class OrcamentoView extends javax.swing.JFrame {
         Estoque estoque = estoques.get(0);
         estoque.setQuantidade(estoque.getQuantidade() - quantidade);
         estoque.setData(this.orcamento.getDataHora());
-        estoque.setIdvenda(orcamento);
+        estoque.setIdOrcamento(orcamento);
         dao.salvarEstoque(estoque);
     }
+    
 }

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -61,6 +63,9 @@ public class Orcamento implements Serializable {
     @Basic(optional = false)
     @Column(name = "statusPagamento")
     private char statusPagamento;
+    @JoinColumn(name = "idCliente", referencedColumnName = "idcliente")
+    @ManyToOne(optional = false)
+    private Cliente idCliente;
 
     public Orcamento() {
     }
@@ -141,6 +146,14 @@ public class Orcamento implements Serializable {
 
     public void setStatusPagamento(char statusPagamento) {
         this.statusPagamento = statusPagamento;
+    }
+
+    public Cliente getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Cliente idCliente) {
+        this.idCliente = idCliente;
     }
 
     @Override

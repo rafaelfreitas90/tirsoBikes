@@ -187,6 +187,13 @@ public class Produto implements Serializable {
         String valor = nf.format(this.valorVenda);        
         return valor;
     }
+    
+        public String getValorCustoView() {
+        
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valor = nf.format(this.valorCusto);        
+        return valor;
+    }
 
     public Marca getIdmarca() {
         return idmarca;
