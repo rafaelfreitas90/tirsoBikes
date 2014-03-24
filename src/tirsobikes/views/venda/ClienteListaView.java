@@ -207,8 +207,12 @@ public class ClienteListaView extends javax.swing.JFrame {
             ClienteDAO dao = new ClienteDAO(TirsoBikes.getEntityManager());
             cliente = dao.procurarCliente(cliente.getIdcliente());
             
-            refVenda.addCliente(cliente);
+            if(refVenda == null){
+                    refOrcamento.addCliente(cliente);
             this.dispose();
+            } else{
+                refVenda.addCliente(cliente);                
+            }
             
         }
     }//GEN-LAST:event_bntAlterarActionPerformed

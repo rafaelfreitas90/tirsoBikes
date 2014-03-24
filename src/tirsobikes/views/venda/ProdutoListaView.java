@@ -221,8 +221,12 @@ public class ProdutoListaView extends javax.swing.JFrame {
 
             ProdutoDAO dao = new ProdutoDAO(TirsoBikes.getEntityManager());
             produto = dao.procurarProduto(produto.getIdproduto());
-
+            
+            if (refOrcamento == null){
             VendaAddProdutoController.getInstancia().exibirInterfaceGrafica(produto, refVenda);
+            } else{
+                 VendaAddProdutoController.getInstancia().exibirInterfaceGrafica2(produto, refOrcamento);
+            }
         }
     }//GEN-LAST:event_bntAlterarActionPerformed
 

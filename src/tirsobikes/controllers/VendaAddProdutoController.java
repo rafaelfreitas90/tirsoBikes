@@ -2,6 +2,7 @@ package tirsobikes.controllers;
 
 import tirsobikes.entidades.Produto;
 import tirsobikes.entidades.Servico;
+import tirsobikes.views.orcamento.OrcamentoView;
 import tirsobikes.views.venda.VendaAddProdutoView;
 import tirsobikes.views.venda.VendaView;
 
@@ -13,6 +14,7 @@ public class VendaAddProdutoController {
 
     private static VendaAddProdutoController instancia = new VendaAddProdutoController();
     private VendaAddProdutoView view;
+  
 
     public VendaAddProdutoController() {
     }
@@ -38,4 +40,11 @@ public class VendaAddProdutoController {
         view.setVisible(true);
     }
 
+      public void exibirInterfaceGrafica2(Produto produto, OrcamentoView refOrcamento) {
+        view = new VendaAddProdutoView(produto, refOrcamento);
+        view.setLocationRelativeTo(refOrcamento);
+        view.setModal(true);
+        view.setAlwaysOnTop(true);        
+        view.setVisible(true);
+    }
 }

@@ -1,21 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tirsobikes.views.venda;
 
 import java.util.List;
 import javax.swing.JOptionPane;
 import tirsobikes.DAO.EstoqueDAO;
 import tirsobikes.entidades.Estoque;
+import tirsobikes.entidades.Itensorcamento;
 import tirsobikes.entidades.Itensvenda;
+import tirsobikes.entidades.Orcamento;
 import tirsobikes.entidades.Produto;
 import tirsobikes.entidades.Servico;
 import tirsobikes.main.TirsoBikes;
+import tirsobikes.views.orcamento.OrcamentoView;
 
 /**
  *
- * @author LuisHenrique
+ * @author LuisHenrique / Rafael
  */
 public class VendaAddProdutoView extends javax.swing.JDialog {
 
@@ -26,7 +25,9 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
         initComponents();
     }
     Produto produto = null;
+    
     private VendaView refVenda;
+    private OrcamentoView refOrc;
 
     public VendaAddProdutoView(Produto produto, VendaView aThis) {
         initComponents();
@@ -41,6 +42,13 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
         this.refVenda = aThis;
         this.servico = servico;
         txtProdutoServico.setText(servico.getDescricao());
+    }
+
+    public VendaAddProdutoView(Produto produto, OrcamentoView orcV) {
+        initComponents();
+        this.refOrc = orcV;
+        this.produto = produto;
+        txtProdutoServico.setText(produto.getDescricao());
     }
 
     /**
@@ -135,24 +143,11 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntOKActionPerformed
-        Itensvenda item = new Itensvenda();
-        item.setQuantidade(Integer.parseInt(txtQuantidade.getValue().toString()));
-        if (produto != null) {
-            if (!verificaEstoqueProduto(item.getQuantidade())) {
-                return;
-            }
-            
-            item.setIdproduto(produto);
-            item.setPrecoUnitario(produto.getValorVenda());
-            item.setTipo("P");
+        if (refVenda == null) {
+            addOrcamento();
         } else {
-            item.setIdservico(servico);
-            item.setPrecoUnitario(servico.getValor());
-            item.setTipo("S");
+            addProdutoServico();
         }
-
-        refVenda.addProdutoServico(item);
-        this.dispose();
     }//GEN-LAST:event_bntOKActionPerformed
     /**
      * @param args the command line arguments
@@ -166,6 +161,44 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
     private javax.swing.JSpinner txtQuantidade;
     // End of variables declaration//GEN-END:variables
 
+    public void addProdutoServico() {
+        Itensvenda item = new Itensvenda();
+        item.setQuantidade(Integer.parseInt(txtQuantidade.getValue().toString()));
+        if (produto != null) {
+            if (!verificaEstoqueProduto(item.getQuantidade())) {
+                return;
+            }
+
+            item.setIdproduto(produto);
+            item.setPrecoUnitario(produto.getValorVenda());
+            item.setTipo("P");
+        } else {
+            item.setIdservico(servico);
+            item.setPrecoUnitario(servico.getValor());
+            item.setTipo("S");
+        }
+
+        refVenda.addProdutoServico(item);
+        this.dispose();
+    }
+
+    public void addOrcamento() {
+        Itensorcamento item = new Itensorcamento();
+        item.setQuantidade(Integer.parseInt(txtQuantidade.getValue().toString()));
+        if (produto != null) {
+            if (!verificaEstoqueProduto(item.getQuantidade())) {
+                return;
+            }
+
+            item.setIdproduto(produto);
+            item.setValorUnitario(produto.getValorVenda());
+
+        }
+
+        refOrc.addProdutoServico(item);
+        this.dispose();
+    }
+
     private boolean verificaEstoqueProduto(int quantidade) {
         EstoqueDAO dao = new EstoqueDAO(TirsoBikes.getEntityManager());
         List<Estoque> estoques = dao.ultimoEstoque(produto.getIdproduto());
@@ -173,7 +206,7 @@ public class VendaAddProdutoView extends javax.swing.JDialog {
         if (estoque.getQuantidade() >= quantidade) {
             return true;
         }
-        JOptionPane.showMessageDialog(rootPane, "Você possui apenas " +estoque.getQuantidade()+" unid. de " + produto.getDescricao());
+        JOptionPane.showMessageDialog(rootPane, "Você possui apenas " + estoque.getQuantidade() + " unid. de " + produto.getDescricao());
         return false;
     }
 }

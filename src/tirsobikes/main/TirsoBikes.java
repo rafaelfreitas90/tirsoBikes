@@ -48,10 +48,10 @@ public class TirsoBikes {
 
 //<<<<<<< HEAD
 //=======
-        VendaListaController.getInstancia().exibirInterfaceGrafica();
+//        VendaListaController.getInstancia().exibirInterfaceGrafica();
 //        
 //>>>>>>> atualizando venda
-//        PrincipalController.getInstancia().exibirInterfaceGrafica();
+        PrincipalController.getInstancia().exibirInterfaceGrafica();
 
 //       UsuarioController.getInstancia().exibirInterfaceGrafica();
     }
